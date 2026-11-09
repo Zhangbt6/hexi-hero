@@ -2,70 +2,1720 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="和熙 · 樱渡蝶姬。以蝶寄梦，踏樱而行。探索和熙的角色风貌、蝶印与五式技能。">
-  <meta name="theme-color" content="#f5f1e9">
-  <title>和熙 · 樱渡蝶姬</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="和熙 · 樱渡蝶姬。敏捷与蝶印驱动的 Warcraft III 定制英雄设计，含五蝶演示、周期樱隐与蝶针先手。">
+  <title>和熙 · 樱渡蝶姬 — 英雄角色设计</title>
+  <meta name="theme-color" content="#f7f3eb">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Ctext y='31' font-size='32'%3E%E8%9D%B6%3C/text%3E%3C/svg%3E">
   <style>
+
 @charset "UTF-8";
-:root { --paper:#f5f1e9; --ink:#293e35; --muted:#73786b; --pink:#ae6d84; --line:#d9d8cc; --serif:"Noto Serif SC","Songti SC","SimSun",serif; --sans:"Microsoft YaHei","PingFang SC",system-ui,sans-serif; }
-* { box-sizing:border-box; }
-html { scroll-behavior:smooth; scroll-padding-top:110px; }
-body { margin:0; color:var(--ink); background:var(--paper); font:14px/1.9 var(--sans); }
-a { color:inherit; text-decoration:none; }
-button { font:inherit; cursor:pointer; }
-svg { display:block; }
-h1,h2,h3,p { margin:0; }
-button:focus-visible,a:focus-visible { outline:2px solid var(--pink); outline-offset:6px; }
-.symbol-library { position:absolute; width:0; height:0; overflow:hidden; }
-.topbar { min-height:82px; padding:0 6%; display:flex; align-items:center; justify-content:space-between; gap:24px; border-bottom:1px solid var(--line); position:sticky; top:0; z-index:10; background:#f5f1e9f2; backdrop-filter:blur(12px); }
-.brand { display:flex; align-items:center; gap:13px; }
-.brand svg { width:32px; height:30px; color:var(--pink); }
-.brand>span { font:25px var(--serif); letter-spacing:4px; }
-.brand small { margin-left:8px; font-size:9px; letter-spacing:3px; color:var(--muted); }
-nav { display:flex; gap:38px; font-size:12px; }
-nav a:hover { color:var(--pink); }
-.header-title { font:13px var(--serif); letter-spacing:4px; color:var(--muted); }
-main { max-width:1600px; margin:auto; }
-.hero { padding:65px 8% 65px; min-height:690px; display:grid; grid-template-columns:1fr 1fr; align-items:center; gap:7%; }
-.eyebrow { color:var(--pink); letter-spacing:2.3px; font-size:9px; font-weight:500; }
-.name-line { display:flex; align-items:flex-end; gap:25px; margin:22px 0 15px; }
-h1 { font:clamp(85px,9vw,132px)/1.2 var(--serif); letter-spacing:12px; font-weight:400; }
-.name-line>span { writing-mode:vertical-rl; font:17px var(--serif); letter-spacing:5px; margin-bottom:12px; color:var(--muted); }
-.hero-verse { font:25px/1.7 var(--serif); margin-bottom:22px; }
-.hero-description { color:var(--muted); font-size:13px; line-height:2.1; }
-.traits { display:flex; flex-wrap:wrap; align-items:center; gap:12px; margin:25px 0 33px; font-size:10px; letter-spacing:1px; }
-.traits i { width:3px; height:3px; border-radius:50%; background:var(--pink); }
-.discover { display:inline-flex; gap:45px; align-items:center; border-bottom:1px solid var(--ink); padding:0 0 7px; font-size:12px; }
-.discover span { font-size:20px; color:var(--pink); }
-.hero-art { position:relative; width:100%; aspect-ratio:1; display:grid; place-items:center; isolation:isolate; background:radial-gradient(ellipse at center,#dfdfcf77 0,transparent 65%); }
-.art-orbit { position:absolute; border:1px solid #bbc3b455; border-radius:50%; }
-.outer { inset:1%; border-style:dashed; animation:turn 100s linear infinite; }
-.middle { inset:9%; border-color:#c58d9b55; }
-.inner { inset:20%; }
-.hero-flower { position:absolute; width:76%; height:76%; color:#d7b0ba; opacity:.32; transform:rotate(-12deg); }
-.art-name { font:clamp(42px,5.5vw,80px)/1.5 var(--serif); letter-spacing:2px; text-align:center; color:#425448; }
-.hero-butterfly { position:absolute; color:var(--pink); animation:float 7s ease-in-out infinite; }
-.first { width:25%; height:20%; left:9%; top:16%; transform:rotate(-24deg); }
-.second { width:16%; height:16%; right:5%; top:48%; color:#728671; animation-delay:-2s; }
-.third { width:10%; height:12%; left:30%; bottom:12%; animation-delay:-4s; }
-.vertical-poem { position:absolute; top:9%; right:0; writing-mode:vertical-rl; font:12px var(--serif); letter-spacing:5px; color:var(--muted); }
-.art-caption { position:absolute; bottom:-21px; left:4%; right:4%; display:flex; justify-content:space-between; font-size:8px; letter-spacing:2px; color:var(--muted); }
-.chapter-divider { margin:0 8%; padding:24px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); display:flex; justify-content:center; align-items:center; gap:45px; color:var(--muted); font:12px var(--serif); letter-spacing:2px; }
-.chapter-divider svg { width:23px; height:20px; color:var(--pink); }
-.abilities,.imagery { padding:95px 8% 85px; }
-.section-heading { display:flex; align-items:flex-end; justify-content:space-between; gap:28px; margin-bottom:38px; }
-h2 { font:clamp(26px,3vw,37px)/1.5 var(--serif); margin-top:12px; font-weight:400; }
-.section-heading>p { font-size:11px; color:var(--muted); line-height:2; }
-.ability-tabs { display:grid; grid-template-columns:repeat(5,1fr); border:1px solid var(--line); border-bottom:none; }
-.ability-tabs button { border:none; border-right:1px solid var(--line); background:transparent; color:var(--muted); padding:19px 8px; display:flex; align-items:center; justify-content:center; gap:12px; transition:background .2s,color .2s; }
-.ability-tabs button:last-child { border-right:none; }
-.ability-tabs button[aria-selected="true"] { background:var(--ink); color:#f8efe4; }
-.ability-tabs button:hover:not([aria-selected="true"]) { background:#e9e5dc; }
-kbd { font:12px var(--sans); opacity:.7; }
-.ability-tabs button span { font:15px var(--serif); }
-.ability-stage { display:grid; grid-template-columns:45% 55%; border:1px solid var(--line); min-height:470px; }
+:root {
+  --paper:#f7f3eb;
+  --paper-alt:#eee8de;
+  --ink:#282f29;
+  --muted:#626b60;
+  --pink:#ae5e78;
+  --pink-soft:#ead2d8;
+  --green:#2c5144;
+  --line:#d9d9cb;
+  --serif:"Noto Serif SC","Songti SC","SimSun",serif;
+  --sans:"Microsoft YaHei","PingFang SC",system-ui,sans-serif
+}
+* {
+  box-sizing:border-box
+}
+html {
+  scroll-behavior:smooth;
+  scroll-padding-top:100px
+}
+body {
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font:15px/1.8 var(--sans)
+}
+button,input,select {
+  font:inherit
+}
+button,a,input,select,summary {
+  -webkit-tap-highlight-color:transparent
+}
+button,a {
+  touch-action:manipulation
+}
+button {
+  cursor:pointer
+}
+a {
+  color:inherit;
+  text-decoration:none
+}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible {
+  outline:3px solid #bd7791;
+  outline-offset:5px
+}
+p,h1,h2,h3 {
+  margin-top:0
+}
+p {
+  margin-bottom:20px
+}
+button {
+  color:inherit
+}
+svg {
+  display:block
+}
+.svg-library {
+  position:absolute;
+  width:0;
+  height:0;
+  overflow:hidden
+}
+.topbar {
+  min-height:82px;
+  padding:0 5%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:25px;
+  border-bottom:1px solid var(--line);
+  background:rgba(247,243,235,.96);
+  position:sticky;
+  top:0;
+  z-index:20;
+  backdrop-filter:blur(15px)
+}
+.brand {
+  display:flex;
+  align-items:center;
+  gap:12px;
+  white-space:nowrap
+}
+.brand svg {
+  width:31px;
+  height:30px;
+  color:var(--pink)
+}
+.brand strong {
+  font:24px var(--serif);
+  letter-spacing:3px
+}
+.brand>span {
+  font:9px/1.5 var(--sans);
+  letter-spacing:2px;
+  max-width:70px;
+  white-space:normal
+}
+.topbar nav {
+  display:flex;
+  gap:25px;
+  font-size:12px
+}
+.topbar nav a:hover {
+  color:var(--pink)
+}
+.version {
+  font-size:10px;
+  letter-spacing:1px;
+  color:var(--muted);
+  border:1px solid var(--line);
+  padding:4px 10px;
+  white-space:nowrap
+}
+main {
+  max-width:1800px;
+  margin:auto
+}
+.hero {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  min-height:640px;
+  padding:75px 8% 65px;
+  gap:6%;
+  align-items:center
+}
+.eyebrow {
+  font-size:10px;
+  letter-spacing:2.3px;
+  font-weight:600;
+  color:var(--pink);
+  margin-bottom:24px
+}
+.hero-title {
+  display:flex;
+  align-items:flex-end;
+  gap:25px
+}
+.hero-title h1 {
+  font:clamp(80px,8vw,128px)/1.18 var(--serif);
+  letter-spacing:12px;
+  margin:0
+}
+.hero-title>span {
+  font:19px/1.5 var(--serif);
+  writing-mode:vertical-rl;
+  letter-spacing:4px;
+  margin-bottom:14px;
+  color:var(--muted)
+}
+.hero-line {
+  font:25px/1.6 var(--serif);
+  margin:23px 0 15px;
+  letter-spacing:1px
+}
+.hero-description {
+  max-width:460px;
+  color:var(--muted);
+  font-size:13px;
+  line-height:2
+}
+.traits {
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin:25px 0 30px
+}
+.traits>span {
+  border:1px solid var(--line);
+  padding:3px 10px;
+  font-size:11px;
+  color:var(--green)
+}
+.hero-actions {
+  display:flex;
+  gap:25px;
+  align-items:center
+}
+.button {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:35px;
+  padding:12px 22px;
+  border:1px solid transparent;
+  font-size:12px;
+  transition:background .2s,transform .2s;
+  line-height:1.7
+}
+.button:hover {
+  transform:translateY(-2px)
+}
+.primary {
+  background:var(--green);
+  color:#fff
+}
+.primary:hover {
+  background:#1e4134
+}
+.secondary {
+  border-color:var(--green);
+  background:transparent;
+  color:var(--green)
+}
+.text-link {
+  font-size:12px;
+  color:var(--green);
+  background:transparent;
+  border:0;
+  padding:0
+}
+.text-link:hover {
+  text-decoration:underline
+}
+.small-note {
+  font-size:11px;
+  color:var(--muted);
+  line-height:1.9;
+  margin:22px 0 0
+}
+.hero-art {
+  position:relative;
+  min-height:470px;
+  background:radial-gradient(ellipse at 50% 50%,#efd8db55,transparent 68%);
+  overflow:hidden
+}
+.art-ring {
+  border:1px solid #b8bbaa70;
+  border-radius:50%;
+  position:absolute;
+  inset:12%
+}
+.ring-two {
+  inset:17%;
+  border-style:dashed;
+  transform:rotate(22deg)
+}
+.ring-three {
+  inset:25%;
+  border-color:#b9788a45
+}
+.art-center {
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  transform:rotate(-8deg);
+  font:100px var(--serif);
+  color:#3651401d
+}
+.art-center span:last-child {
+  margin-top:95px
+}
+.art-flower {
+  position:absolute;
+  width:210px;
+  height:210px;
+  left:24%;
+  top:29%;
+  color:#d7a4b177;
+  transform:rotate(-12deg)
+}
+.art-butterfly {
+  position:absolute;
+  color:var(--green);
+  filter:drop-shadow(0 8px 7px #2c514420)
+}
+.b-one {
+  width:170px;
+  height:130px;
+  right:10%;
+  top:12%;
+  transform:rotate(25deg)
+}
+.b-two {
+  width:90px;
+  height:80px;
+  left:8%;
+  bottom:14%;
+  color:var(--pink);
+  transform:rotate(-20deg)
+}
+.b-three {
+  width:45px;
+  height:40px;
+  right:13%;
+  bottom:20%;
+  color:#758f7a;
+  transform:rotate(15deg)
+}
+.vertical-verse {
+  position:absolute;
+  right:5%;
+  top:40%;
+  writing-mode:vertical-rl;
+  font:13px/2.3 var(--serif);
+  letter-spacing:6px;
+  color:#637360
+}
+.art-caption {
+  position:absolute;
+  bottom:0;
+  left:5%;
+  right:5%;
+  display:flex;
+  justify-content:space-between;
+  border-top:1px solid var(--line);
+  padding-top:14px;
+  font-size:11px;
+  color:var(--muted)
+}
+.art-caption small {
+  font-size:10px
+}
+.direction-strip {
+  border-block:1px solid var(--line);
+  margin:0 8%;
+  padding:16px 0;
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  font-size:11px
+}
+.direction-strip>div {
+  display:flex;
+  flex-wrap:wrap;
+  gap:18px
+}
+.direction-strip b {
+  font-weight:600;
+  color:var(--pink)
+}
+.direction-strip span {
+  color:var(--muted)
+}
+.section {
+  padding:85px 8%
+}
+.section-heading {
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  gap:30px;
+  margin-bottom:35px
+}
+.section-heading .eyebrow {
+  margin-bottom:12px
+}
+.section-heading h2 {
+  font:32px/1.6 var(--serif);
+  letter-spacing:1px;
+  margin:0
+}
+.section-heading>p {
+  font-size:12px;
+  color:var(--muted);
+  line-height:1.9;
+  margin:0;
+  max-width:340px
+}
+.skill-layout {
+  display:grid;
+  grid-template-columns:270px 1fr;
+  border:1px solid var(--line);
+  min-height:410px
+}
+.skill-tabs {
+  display:flex;
+  flex-direction:column;
+  border-right:1px solid var(--line);
+  background:#f2eee5
+}
+.skill-tab {
+  display:flex;
+  align-items:center;
+  gap:17px;
+  padding:22px 20px;
+  border:0;
+  border-bottom:1px solid var(--line);
+  text-align:left;
+  background:transparent;
+  flex:1
+}
+.skill-tab:last-child {
+  border-bottom:0
+}
+.skill-tab kbd {
+  width:34px;
+  height:34px;
+  display:grid;
+  place-items:center;
+  border:1px solid #b8c2b1;
+  color:var(--green);
+  font-size:15px
+}
+.skill-tab span {
+  font:16px var(--serif)
+}
+.skill-tab small {
+  display:block;
+  font:10px/1.5 var(--sans);
+  color:var(--muted);
+  margin-top:5px
+}
+.skill-tab i {
+  margin-left:auto;
+  font-size:15px;
+  color:var(--muted);
+  font-style:normal
+}
+.skill-tab.active {
+  background:var(--green);
+  color:#fff
+}
+.skill-tab.active kbd {
+  border-color:#acc1ad;
+  color:#fff
+}
+.skill-tab.active small,.skill-tab.active i {
+  color:#c0cec0
+}
+.rune-tab kbd {
+  color:var(--pink);
+  border-color:var(--pink)
+}
+.skill-panel {
+  padding:35px 40px;
+  position:relative;
+  overflow:hidden
+}
+.skill-panel .skill-type {
+  font-size:10px;
+  letter-spacing:1px;
+  color:var(--pink)
+}
+.skill-panel h3 {
+  font:29px/1.6 var(--serif);
+  margin:8px 0 15px
+}
+.skill-panel .skill-lead {
+  font-size:13px;
+  color:var(--muted);
+  max-width:620px
+}
+.skill-stat-row {
+  display:flex;
+  gap:23px;
+  flex-wrap:wrap;
+  font-size:11px;
+  border-block:1px solid var(--line);
+  padding:12px 0;
+  margin:20px 0
+}
+.skill-stat-row b {
+  font-weight:500;
+  color:var(--green)
+}
+.skill-panel ul {
+  padding-left:19px;
+  font-size:12px;
+  line-height:2.1;
+  margin:16px 0 0
+}
+.skill-tip {
+  font-size:11px;
+  color:var(--pink);
+  border-left:2px solid var(--pink-soft);
+  padding-left:13px;
+  margin:20px 0 0
+}
+.combat-flow {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-top:25px;
+  padding:20px 6%;
+  background:var(--paper-alt);
+  font-size:13px;
+  color:var(--pink)
+}
+.combat-flow b {
+  font-size:11px;
+  margin-left:9px;
+  font-weight:400;
+  color:var(--green)
+}
+.combat-flow i {
+  font-style:normal;
+  color:#999f8f
+}
+.demo-section {
+  background:#1e332d;
+  color:#f1f1e7;
+  padding:75px 8%
+}
+.light h2 {
+  color:#f1f1e7
+}
+.light>p {
+  color:#adbbb0
+}
+.light .eyebrow {
+  color:#dca2b2
+}
+.demo-grid {
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 285px;
+  gap:30px
+}
+.battle-area {
+  border:1px solid #526359;
+  background:#172a24;
+  min-width:0
+}
+.arena-top {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px;
+  gap:10px;
+  border-bottom:1px solid #3a4e43
+}
+.segmented {
+  display:flex;
+  padding:3px;
+  background:#263f34;
+  gap:3px
+}
+.segmented button {
+  border:0;
+  background:transparent;
+  color:#bdc9bd;
+  padding:7px 12px;
+  font-size:11px
+}
+.segmented button.selected {
+  color:#19382b;
+  background:#d9dfcc
+}
+.ghost-button {
+  border:1px solid #53675a;
+  background:transparent;
+  color:#d4dfd3;
+  padding:6px 13px;
+  font-size:11px
+}
+.ghost-button:hover {
+  background:#ffffff0c
+}
+#arena {
+  display:block;
+  width:100%;
+  height:auto;
+  aspect-ratio:8/5;
+  max-height:510px
+}
+.arena-legend {
+  display:flex;
+  gap:15px;
+  flex-wrap:wrap;
+  padding:0 18px 16px;
+  font-size:10px;
+  color:#a5b8a5
+}
+.arena-legend>span {
+  display:flex;
+  align-items:center;
+  gap:5px
+}
+.arena-legend i {
+  width:6px;
+  height:6px;
+  display:inline-block;
+  border-radius:50%
+}
+.legend-hero {
+  background:#e6efd4
+}
+.legend-enemy {
+  background:#c4868d
+}
+.legend-butterfly {
+  background:#e7b9d0
+}
+.demo-controls {
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  border-top:1px solid #3a4e43;
+  padding:15px
+}
+.demo-controls button {
+  background:#2b493d;
+  color:#e0e7d9;
+  border:1px solid #52705b;
+  padding:7px 9px;
+  font-size:10px
+}
+.demo-controls button:hover {
+  background:#3a5a49
+}
+.demo-controls button:disabled {
+  opacity:.35;
+  cursor:default
+}
+.demo-controls kbd {
+  font-size:10px;
+  color:#f0bed1;
+  margin-right:5px
+}
+.demo-event {
+  font-size:11px;
+  padding:0 17px;
+  color:#d3adba;
+  min-height:24px;
+  margin:0 0 12px
+}
+.demo-aside {
+  padding:4px 0
+}
+.mini-label {
+  font-size:10px;
+  letter-spacing:2px;
+  color:#d7a6b6
+}
+.demo-aside h3 {
+  font:22px/1.6 var(--serif);
+  margin-bottom:12px
+}
+.demo-aside>p {
+  font-size:12px;
+  color:#bac7bc;
+  line-height:1.9
+}
+.metric-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  border-top:1px solid #52675a;
+  border-left:1px solid #52675a;
+  margin:25px 0
+}
+.metric-grid>div {
+  padding:15px 12px;
+  border-right:1px solid #52675a;
+  border-bottom:1px solid #52675a
+}
+.metric-grid span {
+  display:block;
+  font-size:10px;
+  color:#a7b6a9
+}
+.metric-grid b {
+  display:block;
+  font:31px/1.5 var(--serif);
+  color:#e1c2cc
+}
+.metric-grid small {
+  font-size:12px
+}
+.field-label {
+  display:block;
+  font-size:11px;
+  color:#bccabb;
+  margin-bottom:7px
+}
+select {
+  width:100%;
+  background:#284237;
+  border:1px solid #5b6e5c;
+  color:#e0e5d7;
+  font-size:12px;
+  padding:8px
+}
+.toggle-line {
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-size:11px;
+  margin:20px 0;
+  color:#dbe3d2;
+  cursor:pointer
+}
+input[type=checkbox] {
+  accent-color:#b4748b;
+  width:15px;
+  height:15px
+}
+.wide {
+  width:100%
+}
+.demo-aside .demo-footnote {
+  font-size:10px;
+  line-height:1.8;
+  margin:15px 0
+}
+.comparison-table {
+  overflow-x:auto;
+  margin:30px 0 0
+}
+table {
+  border-collapse:collapse;
+  width:100%;
+  font-size:12px;
+  text-align:left
+}
+th,td {
+  padding:13px 16px;
+  border-bottom:1px solid #475d4d
+}
+th {
+  font-weight:500;
+  color:#e2b8c5
+}
+td {
+  color:#becbbf
+}
+td:first-child {
+  color:#e0e6d8;
+  white-space:nowrap
+}
+.on-dark-note {
+  font-size:11px;
+  color:#b7c7b8;
+  margin:20px 0 0
+}
+.growth-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:65px;
+  align-items:start
+}
+.pill {
+  font-size:10px;
+  letter-spacing:.5px;
+  color:var(--green);
+  border:1px solid #acbca5;
+  padding:5px 10px;
+  display:inline-block
+}
+.growth-copy h3 {
+  font:26px/1.7 var(--serif);
+  margin:20px 0 12px
+}
+.growth-copy>p {
+  font-size:13px;
+  color:var(--muted)
+}
+.formula {
+  font:22px/1.7 var(--serif);
+  color:var(--pink);
+  padding:15px 0;
+  border-block:1px solid var(--line);
+  margin:25px 0 12px
+}
+.growth-copy .formula-caption {
+  font-size:10px;
+  line-height:1.9
+}
+.formula-list {
+  font-size:12px;
+  margin-top:25px
+}
+.formula-list>div {
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  padding:9px 0;
+  border-bottom:1px solid var(--line)
+}
+.formula-list dt {
+  color:var(--muted)
+}
+.formula-list dd {
+  margin:0;
+  text-align:right
+}
+.calculator {
+  background:#ede8dc;
+  padding:30px;
+  border:1px solid #d1d3bf
+}
+.calculator-head {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:28px
+}
+.calculator-head h3 {
+  font:24px var(--serif);
+  margin:0
+}
+.calculator-head>span {
+  font-size:10px;
+  color:var(--pink);
+  border:1px solid #ccb8b8;
+  padding:2px 8px
+}
+.calculator label {
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  font-size:12px;
+  margin-bottom:10px
+}
+.calculator output {
+  font-weight:600;
+  color:var(--green);
+  font-variant-numeric:tabular-nums
+}
+.calculator input[type=range] {
+  width:100%;
+  accent-color:var(--green);
+  margin:0 0 28px
+}
+.calc-results {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  margin:5px 0 20px;
+  border-top:1px solid #cbd0bc;
+  border-left:1px solid #cbd0bc
+}
+.calc-results>div {
+  padding:16px;
+  border-right:1px solid #cbd0bc;
+  border-bottom:1px solid #cbd0bc
+}
+.calc-results span {
+  font-size:10px;
+  color:var(--muted);
+  display:block
+}
+.calc-results b {
+  font:28px/1.6 var(--serif);
+  color:var(--green);
+  font-variant-numeric:tabular-nums
+}
+.calculator>p {
+  font-size:10px;
+  color:var(--muted);
+  margin-bottom:15px
+}
+.growth-bars {
+  height:6px;
+  display:flex;
+  background:var(--line)
+}
+.growth-bars span {
+  transition:width .2s
+}
+#attack-bar {
+  background:var(--pink)
+}
+#agility-bar {
+  background:var(--green)
+}
+.bars-caption {
+  display:flex;
+  gap:7px;
+  align-items:center;
+  margin-top:9px
+}
+.bars-caption i,.bars-caption em {
+  height:6px;
+  width:6px;
+  display:inline-block;
+  background:var(--pink)
+}
+.bars-caption em {
+  margin-left:12px;
+  background:var(--green)
+}
+.build-notes {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:28px;
+  border-top:1px solid var(--line);
+  padding-top:30px;
+  margin-top:45px
+}
+.build-notes b {
+  font:17px var(--serif)
+}
+.build-notes p {
+  font-size:12px;
+  color:var(--muted);
+  margin:12px 0 0
+}
+.visual-sequence {
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:35px;
+  padding:25px 0 35px
+}
+.visual-sequence article {
+  border-left:1px solid var(--line);
+  padding-left:20px
+}
+.visual-sequence svg {
+  width:55px;
+  height:55px;
+  color:var(--pink);
+  margin:0 0 20px
+}
+.visual-sequence b {
+  font:17px var(--serif)
+}
+.visual-sequence p {
+  font-size:12px;
+  color:var(--muted);
+  margin:12px 0
+}
+.effect-sources {
+  border-top:1px solid var(--line)
+}
+.effect-source {
+  padding:18px 0;
+  border-bottom:1px solid var(--line);
+  display:grid;
+  grid-template-columns:180px 230px 1fr;
+  gap:20px;
+  align-items:start
+}
+.effect-source a {
+  font-size:12px;
+  color:var(--green);
+  text-decoration:underline;
+  text-underline-offset:4px
+}
+.effect-source span {
+  font-size:11px
+}
+.effect-source p {
+  font-size:10px;
+  margin:0;
+  color:var(--muted)
+}
+.handoff-section {
+  background:#eee8dd;
+  padding:70px 8%
+}
+.handoff-actions {
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap
+}
+.handoff-grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:30px
+}
+.handoff-grid article {
+  border-top:2px solid #869d82;
+  padding-top:18px
+}
+.handoff-grid article:first-child {
+  border-color:var(--pink)
+}
+.handoff-grid article>span {
+  font:18px var(--serif)
+}
+.handoff-grid ul {
+  font-size:12px;
+  line-height:2.15;
+  color:var(--muted);
+  padding-left:17px;
+  margin:15px 0 0
+}
+details {
+  margin-top:30px;
+  border-block:1px solid #cbd0bf;
+  padding:16px 0;
+  font-size:12px
+}
+summary {
+  cursor:pointer;
+  color:var(--green)
+}
+.implementation {
+  padding:20px 0 0;
+  color:var(--muted)
+}
+.implementation p {
+  margin-bottom:13px;
+  font-size:11px;
+  line-height:2
+}
+footer {
+  padding:28px 8%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  border-top:1px solid var(--line);
+  font-size:10px;
+  color:var(--muted)
+}
+footer .brand strong {
+  font-size:19px
+}
+footer .brand svg {
+  width:24px
+}
+.toast {
+  position:fixed;
+  bottom:25px;
+  left:50%;
+  transform:translate(-50%,20px);
+  background:var(--green);
+  color:#fff;
+  padding:10px 20px;
+  font-size:12px;
+  opacity:0;
+  transition:opacity .2s,transform .2s;
+  pointer-events:none;
+  z-index:50
+}
+.toast.show {
+  opacity:1;
+  transform:translate(-50%,0)
+}
+
+@media(min-width:1500px) {
+.hero {
+    min-height:730px
+  }
+.hero-art {
+    min-height:520px
+  }
+.section-heading h2 {
+    font-size:36px
+  }
+}
+
+@media(max-width:1150px) {
+.topbar {
+    padding-inline:4%
+  }
+.topbar nav {
+    gap:15px
+  }
+.brand>span {
+    display:none
+  }
+.hero {
+    padding:55px 6%;
+    gap:3%
+  }
+.section {
+    padding:65px 6%
+  }
+.hero-art {
+    min-height:420px
+  }
+.direction-strip {
+    margin:0 6%;
+    flex-direction:column;
+    gap:10px
+  }
+.demo-section,.handoff-section {
+    padding:60px 6%
+  }
+.demo-grid {
+    grid-template-columns:minmax(0,1fr) 245px;
+    gap:20px
+  }
+.growth-grid {
+    gap:35px
+  }
+.effect-source {
+    grid-template-columns:170px 200px 1fr
+  }
+}
+
+@media(max-width:800px) {
+html {
+    scroll-padding-top:125px
+  }
+.topbar {
+    padding:13px 5%;
+    flex-wrap:wrap;
+    gap:10px
+  }
+.topbar nav {
+    order:3;
+    width:100%;
+    overflow-x:auto;
+    gap:23px;
+    padding:5px 0;
+    font-size:11px;
+    white-space:nowrap
+  }
+.brand strong {
+    font-size:21px
+  }
+.version {
+    font-size:9px
+  }
+.hero {
+    grid-template-columns:1fr 1fr;
+    padding:45px 6% 40px;
+    min-height:auto
+  }
+.hero-title h1 {
+    font-size:85px
+  }
+.hero-title>span {
+    font-size:15px
+  }
+.hero-title {
+    gap:10px
+  }
+.hero-line {
+    font-size:20px
+  }
+.hero-description {
+    font-size:12px
+  }
+.hero-art {
+    min-height:400px
+  }
+.b-one {
+    width:120px
+  }
+.art-center {
+    font-size:70px
+  }
+.art-flower {
+    width:160px;
+    height:160px;
+    left:12%
+  }
+.hero-actions {
+    gap:12px;
+    flex-direction:column;
+    align-items:start
+  }
+.traits {
+    gap:6px;
+    margin:20px 0
+  }
+.hero .eyebrow {
+    font-size:8px;
+    letter-spacing:1.5px
+  }
+.art-caption {
+    flex-direction:column;
+    gap:4px
+  }
+.section-heading {
+    align-items:start;
+    flex-direction:column;
+    gap:15px
+  }
+.section-heading h2 {
+    font-size:28px
+  }
+.section-heading>p br {
+    display:none
+  }
+.skill-layout {
+    grid-template-columns:210px 1fr
+  }
+.skill-tab {
+    padding:19px 14px;
+    gap:12px
+  }
+.skill-tab span {
+    font-size:15px
+  }
+.skill-tab kbd {
+    width:29px;
+    height:29px
+  }
+.skill-tab small {
+    font-size:9px
+  }
+.skill-tab i {
+    display:none
+  }
+.skill-panel {
+    padding:25px
+  }
+.skill-panel h3 {
+    font-size:25px
+  }
+.skill-stat-row {
+    gap:12px
+  }
+.demo-grid {
+    grid-template-columns:1fr
+  }
+.demo-aside {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px 25px
+  }
+.demo-aside .mini-label,.demo-aside h3,.demo-aside>p {
+    grid-column:1/-1
+  }
+.demo-aside h3 {
+    margin:0
+  }
+.demo-aside .mini-label {
+    margin-bottom:0
+  }
+.metric-grid {
+    grid-row:4/9;
+    grid-column:1;
+    margin:8px 0
+  }
+.demo-aside .field-label {
+    margin:5px 0 0
+  }
+.demo-aside .toggle-line {
+    margin:4px 0
+  }
+.demo-aside .demo-footnote {
+    margin:0
+  }
+.growth-grid {
+    grid-template-columns:1fr
+  }
+.build-notes {
+    gap:20px
+  }
+.visual-sequence {
+    gap:20px
+  }
+.visual-sequence article {
+    padding-left:12px
+  }
+.effect-source {
+    grid-template-columns:150px 1fr;
+    gap:8px 20px
+  }
+.effect-source p {
+    grid-column:2
+  }
+.handoff-grid {
+    gap:20px
+  }
+.handoff-grid article>span {
+    font-size:16px
+  }
+.handoff-grid ul {
+    font-size:11px
+  }
+.combat-flow {
+    padding:15px 5%
+  }
+.combat-flow span {
+    display:flex;
+    flex-direction:column
+  }
+.combat-flow b {
+    margin:4px 0 0;
+    font-size:10px
+  }
+footer {
+    padding:25px 6%;
+    flex-wrap:wrap
+  }
+}
+
+@media(max-width:560px) {
+.hero {
+    grid-template-columns:1fr;
+    position:relative;
+    padding-top:35px
+  }
+.hero-text {
+    z-index:1
+  }
+.hero-art {
+    margin-top:15px;
+    min-height:315px
+  }
+.hero-title h1 {
+    font-size:94px
+  }
+.hero-line {
+    font-size:23px
+  }
+.hero-description {
+    max-width:100%
+  }
+.hero-actions {
+    flex-direction:row;
+    align-items:center;
+    gap:20px
+  }
+.hero-art .b-one {
+    width:140px;
+    right:22%;
+    top:8%
+  }
+.hero-art .art-flower {
+    left:30%;
+    width:180px;
+    height:180px
+  }
+.hero-art .ring-one {
+    inset:5% 18%
+  }
+.hero-art .ring-two {
+    inset:10% 23%
+  }
+.hero-art .ring-three {
+    inset:20% 30%
+  }
+.art-caption {
+    flex-direction:row
+  }
+.direction-strip {
+    font-size:10px
+  }
+.direction-strip>div {
+    gap:10px
+  }
+.section {
+    padding:50px 6%
+  }
+.section-heading h2 {
+    font-size:26px
+  }
+.skill-layout {
+    grid-template-columns:1fr
+  }
+.skill-tabs {
+    flex-direction:row;
+    border-right:0;
+    border-bottom:1px solid var(--line)
+  }
+.skill-tab {
+    flex-direction:column;
+    gap:6px;
+    padding:12px 5px;
+    border-right:1px solid var(--line);
+    border-bottom:0
+  }
+.skill-tab span {
+    font-size:12px;
+    text-align:center;
+    line-height:1.6
+  }
+.skill-tab small {
+    display:none
+  }
+.skill-tab:last-child {
+    border-right:0
+  }
+.skill-tab kbd {
+    width:26px;
+    height:26px;
+    font-size:13px
+  }
+.skill-panel {
+    padding:24px;
+    min-height:420px
+  }
+.skill-panel .skill-lead {
+    font-size:12px
+  }
+.skill-panel ul {
+    font-size:11px
+  }
+.combat-flow {
+    padding:15px;
+    font-size:11px
+  }
+.combat-flow b {
+    font-size:9px
+  }
+.combat-flow i {
+    margin:0 5px
+  }
+.demo-section,.handoff-section {
+    padding:50px 5%
+  }
+.arena-top {
+    padding:10px;
+    gap:6px
+  }
+.segmented button {
+    padding:6px;
+    font-size:10px
+  }
+.ghost-button {
+    padding:5px 8px;
+    font-size:10px
+  }
+.demo-controls {
+    padding:10px
+  }
+.demo-controls button {
+    font-size:9px;
+    padding:7px
+  }
+.arena-legend {
+    gap:10px;
+    padding-inline:12px;
+    font-size:9px
+  }
+.demo-aside {
+    display:block
+  }
+.metric-grid {
+    grid-template-columns:repeat(4,1fr);
+    margin:20px 0
+  }
+.metric-grid>div {
+    padding:10px 6px
+  }
+.metric-grid span {
+    font-size:8px;
+    min-height:27px
+  }
+.metric-grid b {
+    font-size:24px
+  }
+.demo-aside .toggle-line {
+    margin:15px 0
+  }
+.demo-aside .demo-footnote {
+    margin-top:12px
+  }
+.demo-aside h3 {
+    margin:10px 0
+  }
+.demo-aside>p {
+    margin-bottom:15px
+  }
+.comparison-table table {
+    font-size:10px;
+    min-width:470px
+  }
+th,td {
+    padding:11px 10px
+  }
+.growth-copy h3 {
+    font-size:24px
+  }
+.calculator {
+    padding:23px
+  }
+.build-notes {
+    grid-template-columns:1fr;
+    gap:23px
+  }
+.visual-sequence {
+    grid-template-columns:1fr 1fr
+  }
+.effect-source {
+    grid-template-columns:1fr;
+    gap:5px
+  }
+.effect-source p {
+    grid-column:1
+  }
+.handoff-grid {
+    grid-template-columns:1fr;
+    gap:25px
+  }
+.handoff-actions .button {
+    font-size:11px;
+    padding:10px 15px
+  }
+.handoff-grid ul {
+    font-size:12px
+  }
+.hero-actions .button {
+    padding:10px 15px;
+    font-size:11px
+  }
+.hero-actions .text-link {
+    font-size:11px
+  }
+footer>span:last-child {
+    margin-left:auto
+  }
+}
+
+@media(prefers-reduced-motion:reduce) {
+html {
+    scroll-behavior:auto
+  }
+*,*::before,*::after {
+    transition:none!important;
+    animation:none!important
+  }
+}
+
+@media print {
+.topbar {
+    position:static
+  }
+.topbar nav,.hero-actions,.demo-controls,.arena-top,.demo-aside select,.toggle-line,#reset-demo,.handoff-actions,#toast {
+    display:none!important
+  }
+body {
+    font-size:11px;
+    background:white
+  }
+.hero {
+    min-height:0;
+    padding:25px 4%
+  }
+.hero-art {
+    min-height:270px
+  }
+.hero-title h1 {
+    font-size:70px
+  }
+.section,.demo-section,.handoff-section {
+    padding:25px 4%
+  }
+.section-heading h2 {
+    font-size:24px
+  }
+.demo-section {
+    background:#1e332d!important;
+    print-color-adjust:exact;
+    -webkit-print-color-adjust:exact
+  }
+.skill-layout {
+    grid-template-columns:180px 1fr
+  }
+.skill-panel {
+    padding:20px
+  }
+.visual-sequence,.build-notes,.handoff-grid {
+    break-inside:avoid
+  }
+.hero-art {
+    print-color-adjust:exact;
+    -webkit-print-color-adjust:exact
+  }
+footer {
+    padding:15px 4%
+  }
+}
+.print-skills {
+  display: none;
+}
+.rune-section {
+  background: #eee8e2;
+}
+.rune-passives {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+}
+.rune-passives article {
+  border-top: 2px solid var(--pink);
+  padding: 22px 0 8px;
+}
+.rune-passives article > span {
+  font-size: 11px;
+  color: var(--pink);
+}
+.rune-passives h3, .active-proposal h3 {
+  font: 24px/1.7 var(--serif);
+  margin: 12px 0;
+}
+.rune-passives p, .active-proposal p {
+  font-size: 12px;
+  color: var(--muted);
+}
+.timing-lab {
+  padding: 25px;
+  background: var(--paper);
+  border: 1px solid #d3c9ca;
+  margin: 25px 0 35px;
+}
+.timing-heading {
+  display: grid;
+  grid-template-columns: 1fr 330px;
+  gap: 25px;
+  align-items: center;
+}
+.timing-heading b {
+  font: 19px var(--serif);
+}
+.timing-heading p, #shroud-timing-note {
+  font-size: 11px;
+  color: var(--muted);
+  margin: 10px 0;
+}
+.timing-heading label {
+  font-size: 10px;
+  color: var(--muted);
+}
+.timing-heading select {
+  background: #f1ebe7;
+  color: var(--ink);
+  border-color: #d1c2c5;
+  margin-top: 6px;
+}
+.shroud-timeline {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 3px;
+  margin: 22px 0 15px;
+}
+.shroud-timeline span {
+  display: block;
+  text-align: center;
+  background: #dfdfd6;
+  padding: 12px 3px;
+  font-size: 10px;
+  color: #576554;
+}
+.shroud-timeline span.shrouded {
+  color: #7d3c57;
+  background: #e9ccd7;
+}
+.shroud-timeline b, .shroud-timeline small {
+  display: block;
+  font-size: 10px;
+  font-weight: 400;
+}
+.active-proposal {
+  padding: 15px 0;
+}
+.proposal-comparison {
+  overflow-x: auto;
+}
+.proposal-comparison th, .proposal-comparison td {
+  color: var(--ink);
+  border-color: #cfc8bd;
+}
+.proposal-comparison tbody tr:first-child {
+  background: #e0e6d8;
+}
+.demo-aside .shroud-status {
+  border-left: 2px solid #d1a0b8;
+  color: #e5c8d6;
+  padding: 7px 10px;
+  font-size: 10px;
+  background: #304939;
+}
+@media (max-width: 800px) {
+.timing-heading {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
+@media (max-width: 560px) {
+.rune-passives {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+.rune-passives h3, .active-proposal h3 {
+    font-size: 21px;
+  }
+.timing-lab {
+    padding: 18px;
+  }
+.shroud-timeline {
+    grid-template-columns: repeat(6, 1fr);
+  }
+.proposal-comparison table {
+    min-width: 470px;
+    font-size: 10px;
+  }
+}
+
+@media print {
+.skill-layout {
+    display: none;
+  }
+.print-skills {
+    display: block;
+  }
+.print-skills .skill-panel {
+    break-inside: avoid;
+    border-bottom: 1px solid var(--line);
+  }
+}
+
+.q-field-design {
+  margin: 32px 0;
+  padding: 28px;
+  border: 1px solid #d5c3c6;
+  background: #f0e4e5;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 30px;
+}
+.q-field-design h3 { font: 23px/1.6 var(--serif); margin: 10px 0; }
+.q-field-design p { font-size: 12px; color: var(--muted); margin-bottom: 10px; }
+.field-parameter-list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.field-parameter-list > div { padding: 12px; background: #f8f1ec; font-size: 11px; }
+.field-parameter-list b { display: block; font-size: 17px; color: var(--pink); }
+.q-field-design .field-design-note { grid-column: 1 / -1; border-top: 1px solid #d5c3c6; padding-top: 15px; margin: 0; }
+.field-demo-line { margin: 16px 0 10px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; }
+.field-demo-line .toggle-line { margin: 0; }
+#field-status { color: #e1bfd0; font-size: 11px; }
+@media (max-width: 700px) {
+  .q-field-design { grid-template-columns: 1fr; padding: 20px; }
+  .field-demo-line { align-items: flex-start; flex-direction: column; }
+}
+
+
 .skill-art { position:relative; min-height:470px; background:#243e35; overflow:hidden; isolation:isolate; }
 .skill-art:before { content:""; position:absolute; inset:0; background:radial-gradient(ellipse,#50665366,transparent 70%); }
 .scene-orbit { position:absolute; width:320px; height:320px; left:50%; top:47%; transform:translate(-50%,-50%); border:1px dashed #a8b59933; border-radius:50%; }
@@ -92,192 +1742,901 @@ kbd { font:12px var(--sans); opacity:.7; }
 [data-art="E"] .scene-sigil { animation:stomp 2s ease-in-out infinite; }
 [data-art="R"] .scene-sigil { opacity:.35; } [data-art="R"] .scene-butterfly { opacity:1; } [data-art="R"] .scene-field { border-color:transparent; background:transparent; }
 [data-art="X"] .scene-needles { display:block; } [data-art="X"] .scene-sigil { opacity:.4; }
-.ability-panel { padding:38px 38px 28px; }
-.skill-category { font-size:10px; letter-spacing:1px; color:var(--pink); }
-.ability-panel h3 { font:31px/1.6 var(--serif); margin:9px 0 3px; }
-.skill-verse { color:var(--muted); font:13px/1.8 var(--serif); margin-bottom:18px; }
-.skill-description { font-size:12px; color:#505f51; line-height:2; min-height:72px; }
-.skill-stats { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin:21px 0; padding:16px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
-.skill-stats dt { font-size:9px; color:var(--muted); }.skill-stats dd { margin:4px 0 0; font:21px/1.5 var(--serif); }
-.skill-details { padding-left:15px; margin:0; font-size:11px; line-height:1.95; color:var(--muted); }.skill-details li+li { margin-top:7px; }.skill-details li::marker { color:var(--pink); }
-.mark-note { display:flex; align-items:center; gap:23px; padding:23px 28px; background:#eae7de; margin-top:17px; }
-.mark-note svg { width:35px; height:28px; flex-shrink:0; color:var(--pink); }.mark-note b { font:15px var(--serif); }.mark-note p { margin-top:4px; font-size:11px; color:var(--muted); }
-.imagery { background:#eee7e2; }
-.signature-grid { display:grid; grid-template-columns:repeat(3,1fr); border:1px solid #d9cbc9; }
-.signature-grid article { position:relative; padding:50px 25px 35px; text-align:center; border-right:1px solid #d9cbc9; }.signature-grid article:last-child { border:none; }
-.signature-number { position:absolute; top:16px; left:20px; font:12px var(--serif); color:#a28d8f; }
-.signature-icon { margin:0 auto 26px; width:100px; height:82px; color:var(--pink); }.blossom { opacity:.7; width:80px; transform:rotate(10deg); }.wing { transform:rotate(-14deg); }
-.signature-grid h3 { font:23px var(--serif); letter-spacing:5px; margin-bottom:15px; }.signature-grid p { color:var(--muted); font-size:11px; line-height:2; }.signature-en { display:block; margin-top:30px; font-size:8px; color:#a28d8f; letter-spacing:3px; }
-.signature-halo { width:82px; height:82px; margin:0 auto 26px; border:1px solid #b890a3; border-radius:50%; display:grid; place-items:center; box-shadow:0 0 0 8px #b890a312,0 0 0 16px #b890a309; }.signature-halo svg { width:45px; height:40px; color:#b28d9f; opacity:.7; }
-.closing { text-align:center; padding:80px 20px 85px; }.closing svg { width:27px; height:24px; color:var(--pink); margin:0 auto 20px; }.closing p { font:clamp(22px,3vw,31px)/1.7 var(--serif); letter-spacing:4px; }.closing>span { display:block; color:var(--muted); font-size:10px; letter-spacing:3px; margin-top:16px; }
-footer { margin:0 6%; padding:25px 0; border-top:1px solid var(--line); display:flex; justify-content:space-between; align-items:center; gap:20px; font-size:9px; color:var(--muted); letter-spacing:1px; }footer>a:first-child { font:20px var(--serif); color:var(--ink); }footer>a>span { font:8px var(--sans); letter-spacing:2px; margin-left:10px; }
-@keyframes turn { to { transform:rotate(360deg); } }
+
 @keyframes float { 0%,100% { translate:0 0; } 50% { translate:0 -13px; } }
 @keyframes bloom { 0%,100% { scale:.93; opacity:.6; } 50% { scale:1.04; opacity:1; } }
 @keyframes vanish { 0%,100% { opacity:1; } 38%,64% { opacity:.05; } }
 @keyframes stomp { 0%,100% { translate:0 0; } 30% { translate:0 -45px; opacity:.2; } 55% { translate:0 7px; opacity:1; } }
 @keyframes needle { 0% { translate:0 -55px; opacity:0; } 25% { opacity:.8; } 70%,100% { translate:-22px 175px; opacity:0; } }
-@media(max-width:1000px) { .hero { min-height:620px; padding-left:6%; padding-right:6%; gap:3%; }.ability-panel { padding:28px 25px; }.ability-stage { grid-template-columns:40% 60%; }.scene-orbit { width:270px; height:270px; }.scene-orbit.small { width:175px; height:175px; }.abilities,.imagery { padding-left:6%; padding-right:6%; } }
-@media(max-width:700px) { html { scroll-padding-top:85px; }.topbar { min-height:70px; padding:0 6%; }.brand { gap:9px; }.brand>span { font-size:22px; }.brand small,.header-title { display:none; }nav { gap:22px; font-size:11px; }.hero { grid-template-columns:1fr; padding:48px 8% 55px; gap:45px; }.hero-copy { padding-left:2%; }.name-line { margin-top:18px; }h1 { font-size:100px; }.hero-verse { font-size:23px; }.hero-art { max-width:410px; justify-self:center; width:95%; }.art-name { font-size:61px; }.hero-description { font-size:12px; }.chapter-divider { gap:20px; margin:0 8%; font-size:10px; letter-spacing:0; }.chapter-divider svg { flex-shrink:0; width:20px; }.abilities,.imagery { padding:60px 6%; }.section-heading { align-items:flex-start; flex-direction:column; gap:14px; margin-bottom:25px; }.section-heading>p br { display:none; }.ability-tabs button { padding:16px 3px; flex-direction:column; gap:5px; }.ability-tabs button span { font-size:12px; }.ability-tabs kbd { font-size:10px; }.ability-stage { grid-template-columns:1fr; }.skill-art { min-height:310px; }.scene-orbit { width:250px; height:250px; }.scene-orbit.small { width:160px; height:160px; }.scene-sigil { width:105px; height:105px; }.scene-sigil span { font-size:38px; }.scene-field { width:180px; height:180px; }[data-art="E"] .scene-field { width:250px; height:250px; }.ability-panel { padding:26px 24px 30px; }.skill-description { min-height:0; }.skill-stats dd { font-size:20px; }.mark-note { padding:20px; gap:17px; align-items:flex-start; }.mark-note svg { width:25px; margin-top:5px; }.signature-grid { grid-template-columns:1fr; }.signature-grid article { border-right:none; border-bottom:1px solid #d9cbc9; padding:36px 20px 30px; }.signature-en { margin-top:20px; }.signature-icon,.signature-halo { margin-bottom:18px; }.closing { padding:60px 20px; }.closing p { letter-spacing:2px; }footer { flex-wrap:wrap; justify-content:space-between; }footer>span { order:3; width:100%; font-size:8px; } }
-@media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto; }*,*:before,*:after { animation:none!important; transition:none!important; } }
-@media print { .topbar { position:static; }.hero { min-height:0; }.ability-tabs { display:none; }.skill-art { print-color-adjust:exact; }.abilities,.imagery { padding-top:30px; padding-bottom:30px; }.ability-stage,.signature-grid { break-inside:avoid; }.closing { padding:35px 0; } }
+
+.hero-signature { color:var(--pink); font-family:var(--serif); letter-spacing:2px; }
+.timing-summary { display:flex; flex-direction:column; align-items:flex-end; color:var(--pink); }
+.timing-summary span { font-size:11px; color:var(--muted); margin-top:8px; }
+.effect-tabs { display:grid; grid-template-columns:repeat(5,1fr); border:1px solid var(--line); border-bottom:0; }
+.effect-tabs button { border:0; border-right:1px solid var(--line); padding:18px 8px; background:transparent; color:var(--muted); font:14px var(--serif); }
+.effect-tabs button:last-child { border-right:0; }
+.effect-tabs button[aria-selected="true"] { background:var(--green); color:var(--paper); }
+.effect-stage { display:grid; grid-template-columns:45% 55%; border:1px solid var(--line); margin-bottom:38px; }
+.effect-copy { padding:40px 35px; }
+.effect-copy h3 { font:29px/1.6 var(--serif); margin:10px 0 18px; }
+.effect-copy>p:not(.eyebrow) { font-size:13px; line-height:2; color:var(--muted); }
+.effect-copy ul { padding:20px 0 0 17px; border-top:1px solid var(--line); font-size:12px; color:var(--muted); line-height:2; }
+.effect-copy li+li { margin-top:8px; }
+.effect-copy li::marker { color:var(--pink); }
+.effect-label { color:var(--pink); display:inline-block; font-size:10px; border:1px solid #d8b8c4; padding:3px 10px; margin-top:12px; }
+.palette-row { display:flex; flex-wrap:wrap; gap:20px 35px; padding:27px 0; border-block:1px solid var(--line); margin:30px 0; }
+.palette-row span { display:flex; align-items:center; gap:10px; font-size:11px; color:var(--muted); }
+.palette-row i { width:14px; height:14px; border-radius:50%; background:var(--swatch); }
+.effect-resources { border-top:0; margin-top:20px; }
+.effect-resources summary { cursor:pointer; color:var(--muted); font-size:12px; padding:12px 0; }
+.art-butterfly { animation:float 8s ease-in-out infinite; }.b-two { animation-delay:-3s; }.b-three { animation-delay:-5s; }
+@media(max-width:800px) { .effect-stage { grid-template-columns:1fr; }.skill-art { min-height:330px; }.effect-copy { padding:30px 25px; }.timing-summary { align-items:flex-start; }.effect-tabs button { font-size:12px; padding:15px 4px; } }
+@media(prefers-reduced-motion:reduce) { *,*:before,*:after { animation:none!important; transition:none!important; } }
 
 </style>
 </head>
 <body>
-  <svg class="symbol-library" aria-hidden="true"><defs>
+  <svg class="svg-library" aria-hidden="true"><defs>
     <symbol id="butterfly" viewBox="-30 -22 60 44"><path d="M-1 1C-34-35-36 10-7 6C-32 28-3 27 0 5C3 27 32 28 7 6C36 10 34-35 1 1Z" fill="currentColor"/><path d="M0-7V13M0-5L-5-13M0-5L5-13" fill="none" stroke="currentColor" stroke-width="1.3"/></symbol>
-    <symbol id="flower" viewBox="-50 -50 100 100"><g fill="currentColor"><path id="petal" d="M0 0C-37-9-20-46-5-41L0-34L5-41C20-46 37-9 0 0Z"/><use href="#petal" transform="rotate(72)"/><use href="#petal" transform="rotate(144)"/><use href="#petal" transform="rotate(216)"/><use href="#petal" transform="rotate(288)"/></g><circle r="4" fill="#f5f1e9"/></symbol>
+    <symbol id="flower" viewBox="-50 -50 100 100"><g fill="currentColor"><path id="petal" d="M0 0C-37-9-20-46-5-41L0-34L5-41C20-46 37-9 0 0Z"/><use href="#petal" transform="rotate(72)"/><use href="#petal" transform="rotate(144)"/><use href="#petal" transform="rotate(216)"/><use href="#petal" transform="rotate(288)"/></g><circle r="4" fill="#fff7ee"/></symbol>
   </defs></svg>
 
   <header class="topbar">
-    <a class="brand" href="#character" aria-label="和熙首页"><svg><use href="#butterfly"/></svg><span>和熙</span><small>HE XI</small></a>
-    <nav aria-label="页面导航"><a href="#character">角色</a><a href="#abilities">技能</a><a href="#imagery">蝶樱</a></nav>
-    <span class="header-title">樱渡蝶姬</span>
+    <a class="brand" href="#top" aria-label="回到和熙设计首页"><svg><use href="#butterfly"/></svg><strong>和熙</strong><span>IP DESIGN ATELIER</span></a>
+    <nav aria-label="页面导航"><a href="#identity">角色</a><a href="#skills">技能</a><a href="#simulation">技能体验</a><a href="#growth">伤害构筑</a><a href="#rune">X 符文</a><a href="#effects">特效设计</a></nav>
+    <span class="version">樱渡蝶姬</span>
   </header>
 
-  <main>
-    <section class="hero" id="character" aria-labelledby="character-name">
-      <div class="hero-copy">
-        <p class="eyebrow">THE BUTTERFLY IN FALLING BLOSSOMS</p>
-        <div class="name-line"><h1 id="character-name">和熙</h1><span>樱渡蝶姬</span></div>
-        <p class="hero-verse">以蝶寄梦，踏樱而行。</p>
-        <p class="hero-description">她将未尽的心愿系在蝶翼之上，<br>行于樱花盛放与凋零之间。<br>身影隐入花间，蝶群替她留下回声。</p>
-        <div class="traits"><span>敏捷</span><i></i><span>远程输出</span><i></i><span>蝶印叠伤</span><i></i><span>隐身瞬闪</span></div>
-        <a class="discover" href="#abilities">五式蝶樱 <span>↓</span></a>
+  <main id="top">
+    <section class="hero" id="identity">
+      <div class="hero-text">
+        <p class="eyebrow">WARCRAFT III · ORIGINAL HERO CONCEPT</p>
+        <div class="hero-title"><h1>和熙</h1><span>樱渡蝶姬</span></div>
+        <p class="hero-line">蝶随身动，樱随步开。</p>
+        <p class="hero-description">将生息寄于蝴蝶、于落樱间来去的渡梦人。以连续蝶击铺下印记，在隐身与位移之间穿梭，踏樱引爆蝶群。</p>
+        <div class="traits"><span>敏捷主属性</span><span>攻速叠层</span><span>远程叠伤</span><span>隐身巡游</span></div>
+        <div class="hero-actions"><a class="button primary" href="#simulation">体验五蝶机制 <span>↗</span></a><a class="text-link" href="#rune">不落之樱 · 专属符文 →</a></div>
+        <p class="small-note hero-signature">以蝶寄梦，踏樱而行。</p>
       </div>
-      <div class="hero-art" role="img" aria-label="落樱花环与三只蝴蝶环绕和熙的名字">
-        <div class="art-orbit outer"></div><div class="art-orbit middle"></div><div class="art-orbit inner"></div>
-        <svg class="hero-flower"><use href="#flower"/></svg>
-        <span class="art-name">和<br>熙</span>
-        <svg class="hero-butterfly first"><use href="#butterfly"/></svg><svg class="hero-butterfly second"><use href="#butterfly"/></svg><svg class="hero-butterfly third"><use href="#butterfly"/></svg>
-        <span class="vertical-poem">樱间生息　蝶中归来</span>
-        <div class="art-caption"><span>蝶 / 樱 / 梦</span><span>HE XI · 01</span></div>
+      <div class="hero-art" aria-label="樱花与蝶的原创图形示意">
+        <div class="art-ring ring-one"></div><div class="art-ring ring-two"></div><div class="art-ring ring-three"></div>
+        <div class="vertical-verse">樱间生息<br>蝶中归来</div>
+        <svg class="art-flower"><use href="#flower"/></svg>
+        <svg class="art-butterfly b-one"><use href="#butterfly"/></svg><svg class="art-butterfly b-two"><use href="#butterfly"/></svg><svg class="art-butterfly b-three"><use href="#butterfly"/></svg>
+        <div class="art-center"><span>和</span><span>熙</span></div>
+        <div class="art-caption"><span>01 / 生息与蝶</span><small>图形意象 · 蝶与樱</small></div>
       </div>
     </section>
 
-    <div class="chapter-divider"><span>轻盈于形，绵长于伤。</span><svg aria-hidden="true"><use href="#butterfly"/></svg><span>花落之处，皆有蝶归。</span></div>
+    <div class="direction-strip"><div><b>蝶樱之术</b><span>E 引爆蝶印</span><span>R 隐身 + 无碰撞</span><span>五蝶自动索敌</span></div><div><b>战斗姿态</b><span>敏捷灵活输出</span><span>远程蝶针先手</span><span>分散巡游五蝶</span></div></div>
 
-    <section class="abilities" id="abilities" aria-labelledby="abilities-title">
-      <div class="section-heading"><div><p class="eyebrow">01 / THE FIVE ARTS</p><h2 id="abilities-title">五式蝶樱</h2></div><p>缠蝶为印，踏樱为刃。<br>聚散之间，进退自如。</p></div>
-      <div class="ability-tabs" role="tablist" aria-label="和熙的技能">
-        <button id="tab-Q" role="tab" aria-selected="true" aria-controls="ability-panel" tabindex="0" data-skill="Q"><kbd>Q</kbd><span>缠蝶</span></button>
-        <button id="tab-W" role="tab" aria-selected="false" aria-controls="ability-panel" tabindex="-1" data-skill="W"><kbd>W</kbd><span>蝶反</span></button>
-        <button id="tab-E" role="tab" aria-selected="false" aria-controls="ability-panel" tabindex="-1" data-skill="E"><kbd>E</kbd><span>踏樱 · 蝶落</span></button>
-        <button id="tab-R" role="tab" aria-selected="false" aria-controls="ability-panel" tabindex="-1" data-skill="R"><kbd>R</kbd><span>万樱蝶梦</span></button>
-        <button id="tab-X" role="tab" aria-selected="false" aria-controls="ability-panel" tabindex="-1" data-skill="X"><kbd>X</kbd><span>不落之樱</span></button>
+    <section class="section" id="skills">
+      <div class="section-heading"><div><p class="eyebrow">01 / COMBAT LANGUAGE</p><h2>蝶印，把整套技能连起来。</h2></div><p>Q 集火叠印，领域缓慢铺场，E 踩爆，R 扩大覆盖。<br>蝶印越深，伤害越盛。</p></div>
+      <div class="skill-layout">
+        <div class="skill-tabs" role="tablist" aria-label="选择技能">
+          <button class="skill-tab active" role="tab" aria-selected="true" aria-controls="skill-panel" id="tab-Q" data-skill="Q"><kbd>Q</kbd><span>缠蝶<small>直击叠印 / 概率领域</small></span><i>↗</i></button>
+          <button class="skill-tab" role="tab" aria-selected="false" aria-controls="skill-panel" id="tab-W" data-skill="W"><kbd>W</kbd><span>蝶反<small>化蝶消失 / 致死保护</small></span><i>↗</i></button>
+          <button class="skill-tab" role="tab" aria-selected="false" aria-controls="skill-panel" id="tab-E" data-skill="E"><kbd>E</kbd><span>踏樱 · 蝶落<small>全图位移 / 蝶印引爆</small></span><i>↗</i></button>
+          <button class="skill-tab" role="tab" aria-selected="false" aria-controls="skill-panel" id="tab-R" data-skill="R"><kbd>R</kbd><span>万樱蝶梦<small>隐身穿行 / 五蝶巡游</small></span><i>↗</i></button>
+          <button class="skill-tab rune-tab" role="tab" aria-selected="false" aria-controls="skill-panel" id="tab-X" data-skill="X"><kbd>X</kbd><span>不落之樱<small>周期樱隐 / 蝶针先手</small></span><i>✧</i></button>
+        </div>
+        <article id="skill-panel" class="skill-panel" role="tabpanel" aria-labelledby="tab-Q"></article>
       </div>
-      <div class="ability-stage" data-art="Q">
+      <div id="print-skills" class="print-skills"></div>
+
+      <div class="q-field-design">
+        <div><span class="pill">Q / 蝶樱领域</span><h3>集火叠得快，周围慢慢染上蝶印。</h3>
+          <p>每次 Q 直击主目标稳定增加 1 层蝶印，樱隐中增加 2 层。命中时有 25% 概率，在目标当时的位置绽放一片固定领域。</p>
+          <p>领域半径 350，持续 4 秒，在生成后的第 1、2、3、4 秒各造成一次 0.25P 范围伤害，并给范围内敌人增加 1 层蝶印。</p></div>
+        <div class="field-parameter-list"><div><span>生成概率</span><b>25% / 合格直击</b></div><div><span>生成内置冷却</span><b>1.5 秒</b></div><div><span>领域数量</span><b>每英雄最多 2 个</b></div><div><span>重叠结算</span><b>每目标每秒最多 1 次</b></div></div>
+        <p class="field-design-note">樱隐双层只强化 Q 直击，领域固定每秒 1 层。领域固定留在地面，敌人离开后停止吃到后续脉冲。新领域超过数量上限时替换最早生成的领域。</p>
+      </div>
+      <div class="combat-flow"><span>Q <b>直击与领域</b></span><i>→</i><span>R <b>巡游铺场</b></span><i>→</i><span>E <b>踏樱引爆</b></span><i>→</i><span>W <b>化蝶返场</b></span></div>
+    </section>
+
+    <section class="demo-section" id="simulation">
+      <div class="section-heading light"><div><p class="eyebrow">02 / INTERACTIVE COMBAT</p><h2>在蝶与樱之间，亲自起舞。</h2></div><p>释放五式技能，观察蝶印与爆发。<br>点选敌人或区域，体验踏樱与落针。</p></div>
+      <div class="demo-grid">
+        <div class="battle-area">
+          <div class="arena-top"><div class="segmented" role="group" aria-label="五蝶飞行展示"><button data-mode="roam" class="selected" aria-pressed="true">分散巡游</button><button data-mode="orbit" aria-pressed="false">近身环绕</button></div><button id="pause" class="ghost-button">暂停演示</button></div>
+          <canvas id="arena" width="960" height="600" aria-label="五蝶自动巡游和命中范围动画。使用旁边按钮切换飞行形态、敌人分布和技能。"></canvas>
+          <div class="arena-legend"><span><i class="legend-hero"></i>和熙</span><span><i class="legend-enemy"></i>敌人 / 数字为蝶印</span><span><i class="legend-butterfly"></i>五蝶</span><span>樱粉圆区为 Q 领域</span><span>虚线圈为索敌边界</span></div>
+          <div class="demo-controls"><button id="demo-Q"><kbd>Q</kbd> 直击 / 概率领域</button><button id="demo-W"><kbd>W</kbd> 化蝶返场</button><button id="demo-E"><kbd>E</kbd> 踩落引爆</button><button id="demo-R" aria-pressed="true"><kbd>R</kbd> 隐身已开启</button><button id="demo-X" disabled aria-pressed="false"><kbd>X</kbd> 蝶针点选区域</button></div>
+          <div class="field-demo-line"><label class="toggle-line"><input type="checkbox" id="auto-q"><span>自动蝶击演示</span></label><span id="field-status">蝶樱领域 0 / 2 · 每秒脉冲 +1 层</span></div><p id="demo-event" class="demo-event" role="status" aria-live="polite">五蝶已出发，自动寻找周围敌人。</p>
+        </div>
+        <aside class="demo-aside">
+          <p class="mini-label">五蝶姿态</p><h3 id="mode-title">分散巡游，命中绽花。</h3><p id="mode-description">五蝶各自寻找边界内的近邻敌人。到达敌人附近后造成小范围伤害，短暂盘旋后再换目标。英雄移动或瞬闪时，超距蝴蝶回巢。</p>
+          <div class="metric-grid"><div><span>固定数量</span><b>5 <small>只</small></b></div><div><span>当前覆盖敌人</span><b id="coverage">0</b></div><div><span>本次演示命中</span><b id="demo-hits">0</b></div><div><span>单目标蝶印上限</span><b id="demo-cap">12</b></div></div>
+          <label class="field-label" for="scenario">敌人分布</label><select id="scenario"><option value="spread">分散怪群</option><option value="dense">密集怪群</option><option value="boss">单个 BOSS</option></select>
+          <label class="toggle-line"><input type="checkbox" id="rune-enabled"><span>装备「不落之樱」· 开启 X</span></label><p id="shroud-status" class="shroud-status" role="status">樱隐未启用 · Q 每次 1 层</p>
+          <button class="ghost-button wide" id="reset-demo">重置本次演示</button>
+          <p class="demo-footnote">X 先点按钮，再点战场区域，三波蝶针会预叠印。点击敌人可设定 Q / E 目标，R 五蝶继续自主索敌。</p>
+        </aside>
+      </div>
+      <p class="on-dark-note">每蝶每秒命中一次，命中绽花半径 220。同一敌人每 0.5 秒最多吃到两次 R 命中。单目标满速上限约四次 / 秒，五蝶同时汇聚时按此上限结算。</p>
+    </section>
+
+    <section class="section growth-section" id="growth">
+      <div class="section-heading"><div><p class="eyebrow">03 / AGILE BUTTERFLY CARRY</p><h2>以敏捷织蝶，以蝶印叠伤。</h2></div><p>连续出手提高叠层速度。<br>走位、蝶反与踏樱决定输出位置。</p></div>
+      <div class="growth-grid">
+        <div class="growth-copy"><span class="pill">敏捷 / 攻速 / 蝶印</span><h3>把操作节奏，变成伤害成长。</h3>
+          <p>Q 依靠连续出手叠印，W 用于规避和返场，E 提供跨场切入，R 让游蝶分散铺场。敏捷与攻速能直接强化这条循环，生命与恢复作为生存选择。</p>
+          <div class="formula">P = 0.6 × A + 3 × G</div>
+          <p class="formula-caption">A 为当前面板攻击力，G 为当前敏捷；Q 出手频率随攻速提升。下列公式为角色设定中的原始伤害，减伤与额外增幅另行结算。</p>
+          <dl class="formula-list"><div><dt>Q 主目标</dt><dd>P × (1 + 0.08 × 蝶印层数)</dd></div><div><dt>E 主目标</dt><dd>P × (2 + 0.25 × 蝶印层数)</dd></div><div><dt>每次 R 命中</dt><dd>0.20P · 命中点 220 范围</dd></div><div><dt>X 每波蝶针</dt><dd>0.20P + 2 层蝶印</dd></div></dl>
+          <p class="small-note">E 范围内其他敌人按各自层数取主公式的 60%。Q 领域每秒造成 0.25P 伤害并增加 1 层。X 共三波，命中全部三波可增加 6 层。魔抗与地图增伤另行结算。</p>
+        </div>
+        <div class="calculator"><div class="calculator-head"><h3>伤害试算</h3><span>蝶印伤害</span></div>
+          <label for="attack">面板攻击 A <output id="attack-value">5,000</output></label><input id="attack" type="range" min="500" max="30000" step="500" value="5000">
+          <label for="agility">敏捷 G <output id="agility-value">1,000</output></label><input id="agility" type="range" min="100" max="6000" step="100" value="1000">
+          <label for="marks">目标蝶印 <output id="marks-value">12 层</output></label><input id="marks" type="range" min="0" max="12" step="1" value="12">
+          <div class="calc-results"><div><span>基础伤害 P</span><b id="base-damage">6,000</b></div><div><span>Q 主目标 / 次</span><b id="q-damage">11,760</b></div><div><span>E 主目标 / 次</span><b id="e-damage">30,000</b></div><div><span>R 每次命中</span><b id="r-damage">1,200</b></div></div>
+          <p id="calc-rune">基础英雄最多 12 层。装备符文后，樱尽被动立即把上限提高到 24 层。</p>
+          <div class="growth-bars" aria-label="基础伤害构成"><span id="attack-bar"></span><span id="agility-bar"></span></div><p class="bars-caption"><i></i>面板攻击贡献 <em></em>敏捷直接贡献</p>
+        </div>
+      </div>
+      <div class="build-notes"><article><b>连续蝶击</b><p>攻速提升直击频率，主目标快速叠印；蝶樱领域每秒铺下一层，让周围敌人持续染上蝶印。</p></article><article><b>踏樱连击</b><p>蝶针远程铺印，E 踩落引爆。保留一半印记后，蝶击与游蝶继续积累下一次爆发。</p></article><article><b>樱尽之境</b><p>不落之樱将上限延展至 24 层。樱隐中的双层直击，让持续交战中的蝶印不断加深。</p></article></div>
+    </section>
+
+    <section class="section rune-section" id="rune">
+      <div class="section-heading"><div><p class="eyebrow">04 / THE EVERLASTING BLOSSOM</p><h2>樱隐守节奏，蝶针开局面。</h2></div><p>专属符文「不落之樱」。<br>樱隐护身，樱尽拓印，蝶针引路。</p></div>
+      <div class="rune-passives"><article><span>被动一 / 樱隐</span><h3>每 3 秒刷新 3 秒樱隐</h3><p>触发时解除已有眩晕，状态中持续隐身并免疫常规控制。攻击与施法维持樱隐，Q 直击在出手时读取状态，每次命中增加 2 层蝶印。</p></article><article><span>被动二 / 樱尽</span><h3>装备后默认 24 层上限</h3><p>上限提升即时生效。普通状态 Q 直击每次增加 1 层，樱隐期间增加 2 层。领域每秒固定增加 1 层。R 与蝶针使用各自固定叠层规则。</p></article></div>
+      <div class="timing-lab"><div class="timing-heading"><div><b>樱隐时序</b><p>首次第 3 秒进入樱隐，此后每 3 秒刷新，持续覆盖隐身与免控。</p></div><div class="timing-summary"><b>每 3 秒刷新</b><span>持续 3 秒 · 连续樱隐</span></div><input id="shroud-period" type="hidden" value="3"></div><div id="shroud-timeline" class="shroud-timeline" aria-label="樱隐开始后十二秒的覆盖时序"></div><p id="shroud-timing-note">3 秒触发 + 3 秒持续在后续周期无缝衔接，长期等效持续隐身、免控与 Q 双层。</p></div>
+      <div class="active-proposal"><span class="pill">主动 / 蝶针 · 樱引</span><h3>先把蝶印种下，再踏樱而来。</h3><p>全图点选己方视野内、允许交战的一片 350 范围区域，落下三波蝶针。每波间隔 0.3 秒，造成 0.20P 伤害并增加 2 层蝶印。命中全部三波合计 6 层，冷却 18 秒。</p><p>技能可直接从零层起手。蝶针覆盖后，E 踩进场引爆，Q 持续叠伤，R 自动巡游。进场与落针时机都由玩家决定。</p></div>
+    </section>
+
+    <section class="section effects-section" id="effects">
+      <div class="section-heading"><div><p class="eyebrow">05 / VISUAL LANGUAGE</p><h2>每一次聚散，都有蝶樱回应。</h2></div><p>细蝶描摹层数，落樱标记归途。<br>以青墨为底，让樱粉与蝶光绽放。</p></div>
+      <div class="effect-tabs" role="tablist" aria-label="技能特效"><button id="effect-tab-Q" data-effect="Q" role="tab" aria-controls="effect-panel" aria-selected="true" tabindex="0">Q · 缠蝶</button><button id="effect-tab-W" data-effect="W" role="tab" aria-controls="effect-panel" aria-selected="false" tabindex="-1">W · 蝶反</button><button id="effect-tab-E" data-effect="E" role="tab" aria-controls="effect-panel" aria-selected="false" tabindex="-1">E · 踏樱</button><button id="effect-tab-R" data-effect="R" role="tab" aria-controls="effect-panel" aria-selected="false" tabindex="-1">R · 蝶梦</button><button id="effect-tab-X" data-effect="X" role="tab" aria-controls="effect-panel" aria-selected="false" tabindex="-1">X · 樱引</button></div>
+      <div class="effect-stage" id="effect-stage" data-art="Q">
         <div class="skill-art" aria-hidden="true">
           <div class="scene-orbit"></div><div class="scene-orbit small"></div>
           <div class="scene-field"><svg><use href="#flower"/></svg></div>
           <div class="scene-sigil"><svg><use href="#flower"/></svg><span>熙</span></div>
           <div class="scene-needles"><i></i><i></i><i></i><i></i><i></i></div>
           <svg class="scene-butterfly butterfly-1"><use href="#butterfly"/></svg><svg class="scene-butterfly butterfly-2"><use href="#butterfly"/></svg><svg class="scene-butterfly butterfly-3"><use href="#butterfly"/></svg><svg class="scene-butterfly butterfly-4"><use href="#butterfly"/></svg><svg class="scene-butterfly butterfly-5"><use href="#butterfly"/></svg>
-          <span class="scene-kanji">蝶</span><div class="scene-caption"><span id="scene-label">缠蝶 / 蝶樱领域</span><span>HE XI</span></div>
+          <span class="scene-kanji">蝶</span><div class="scene-caption"><span id="effect-caption">缠蝶 / 蝶樱领域</span><span>HE XI</span></div>
         </div>
-        <article id="ability-panel" class="ability-panel" role="tabpanel" aria-labelledby="tab-Q">
-          <p class="skill-category" id="skill-category">蝶印 · 持续输出</p><h3 id="skill-name">缠蝶</h3><p class="skill-verse" id="skill-verse">一蝶缠身，千樱渐醒。</p>
-          <p class="skill-description" id="skill-description">放出蝴蝶直击目标，持续累积蝶印；命中时有概率在脚下绽放蝶樱领域，让周围敌人逐渐染上蝶印。</p>
-          <dl class="skill-stats" id="skill-stats"><div><dt>直击叠印</dt><dd>1 层</dd></div><div><dt>领域概率</dt><dd>25%</dd></div><div><dt>脉冲间隔</dt><dd>1 秒</dd></div></dl>
-          <ul class="skill-details" id="skill-details"><li>蝶印越深，直击伤害越高；可自动施放，虚无状态下仍可使用。</li><li>领域半径 350、持续 4 秒，每秒造成范围伤害并叠加 1 层蝶印。</li><li>领域生成间隔至少 1.5 秒，最多同时存在两个；重叠时同目标每秒只结算一次。</li></ul>
-        </article>
+        <article class="effect-copy" id="effect-panel" role="tabpanel" aria-labelledby="effect-tab-Q"><p class="eyebrow">BUTTERFLY / BLOSSOM / VEIL</p><h3 id="effect-name">缠蝶 · 逐层绽放</h3><p id="effect-description"></p><ul id="effect-details"></ul><span class="effect-label">蝶樱动态意象</span></article>
       </div>
-      <div class="mark-note"><svg aria-hidden="true"><use href="#butterfly"/></svg><div><b>蝶印</b><p>蝶翼停驻之处，伤势渐深。印记持续 8 秒，叠加时刷新；基础上限 12 层，不落之樱使其延展至 24 层。</p></div></div>
+      <div class="visual-sequence"><article><svg><use href="#butterfly"/></svg><b>蝶印 / 绕身蝶</b><p>1—4、5—8、9—12 层分别以一、二、三只轻蝶绕身。13—24 层加深蝶翼色泽，浮现细薄樱环。</p></article><article><svg><use href="#flower"/></svg><b>返场 / 聚散</b><p>身体散成樱瓣，回归时逆向聚合。地面留下一枚小花印，标记归来的位置。</p></article><article><svg><use href="#flower"/></svg><b>引爆 / 落脚花</b><p>落点花纹先行亮起，踩落时绽出一圈樱环。蝶印向脚下汇聚，层数越深，花光越盛。</p></article><article><svg><use href="#butterfly"/></svg><b>巡游 / 五蝶出巢</b><p>五只蝶从肩侧依次离身，拖出细短尾迹。隐身本体保留本人和队友可辨的青色轮廓。</p></article></div>
+      <div class="palette-row"><span><i style="--swatch:#2c5144"></i>青墨 · 身影</span><span><i style="--swatch:#ae5e78"></i>樱粉 · 蝶翼</span><span><i style="--swatch:#e8abc1"></i>浅樱 · 绽放</span><span><i style="--swatch:#c7d6b7"></i>青白 · 生息</span></div>
+      <details class="effect-resources"><summary>特效素材参考</summary><div id="effect-sources" class="effect-sources"></div></details>
+      <p class="small-note">动态画面为技能表现示意。</p>
     </section>
 
-    <section class="imagery" id="imagery" aria-labelledby="imagery-title">
-      <div class="section-heading"><div><p class="eyebrow">02 / HER SIGNATURE</p><h2 id="imagery-title">一身蝶影，满径落樱。</h2></div><p>柔粉与青墨相映，<br>轻盈之下，藏着不息的锋芒。</p></div>
-      <div class="signature-grid">
-        <article><span class="signature-number">I</span><svg class="signature-icon wing"><use href="#butterfly"/></svg><h3>蝶影</h3><p>细翼绕身，蝶印渐深。<br>五蝶离巢，自赴敌阵。</p><span class="signature-en">BUTTERFLY</span></article>
-        <article><span class="signature-number">II</span><svg class="signature-icon blossom"><use href="#flower"/></svg><h3>落樱</h3><p>身形散作花瓣，落脚绽开花环。<br>每一次归来，都有樱花回应。</p><span class="signature-en">BLOSSOM</span></article>
-        <article><span class="signature-number">III</span><div class="signature-halo"><svg><use href="#butterfly"/></svg></div><h3>樱隐</h3><p>隐去身形，挣脱束缚。<br>在看不见的花间，自由起舞。</p><span class="signature-en">VEIL</span></article>
-      </div>
-    </section>
-    <section class="closing" aria-label="角色寄语"><svg aria-hidden="true"><use href="#butterfly"/></svg><p>花落未尽，蝶梦不息。</p><span>和熙 · 樱渡蝶姬</span></section>
   </main>
-  <footer><a href="#character">和熙 <span>HE XI</span></a><span>ORIGINAL CHARACTER · WARCRAFT III</span><a href="#character" aria-label="回到顶部">回到花间 ↑</a></footer>
+
+  <footer><a class="brand" href="#top"><svg><use href="#butterfly"/></svg><strong>和熙</strong></a><span>花落未尽，蝶梦不息。</span><a href="#top">回到花间 ↑</a></footer>
 <script>
+/* 和熙 IP 工作稿 v0.6。资源信息取自发布页，数值为原型建议。 */
+window.HexiData = {
+  version: '0.6',
+  date: '2026-11-09',
+  effects: [
+    { name: 'Turmeric Butterfly', use: 'R 的五只独立蝴蝶蝶翼造型参考', source: 'https://www.hiveworkshop.com/threads/turmeric-butterfly.303893/', note: 'Remixer · 有动画的蝴蝶单位，使用游戏内贴图。先测试改色与巡游动作。' },
+    { name: 'Butterfly Barrage', use: 'Q 飞行弹道与命中蝶群参考', source: 'https://www.hiveworkshop.com/threads/butterfly-barrage.221958/', note: '00110000 · 粒子弹道，低粒子档位和多人同屏需实测。需要结合实际粒子数评估负载。' },
+    { name: 'Flower aura / Flower spell', use: '脚下花纹与 E 落地绽花参考', source: 'https://www.hiveworkshop.com/threads/flower-aura.373637/', note: 'judash137 · 有快慢两版。发布说明含 AI 图片项目的使用限制，采用前核对项目是否符合条件。' }
+  ]
+};
+
 'use strict';
 
+const data = window.HexiData;
+const find = (id) => document.getElementById(id);
+const number = (value) => Math.round(value).toLocaleString('zh-CN');
 const skills = {
   Q: {
-    name: '缠蝶', category: '蝶印 · 持续输出', verse: '一蝶缠身，千樱渐醒。', scene: '缠蝶 / 蝶樱领域',
-    description: '放出蝴蝶直击目标，持续累积蝶印；命中时有概率在脚下绽放蝶樱领域，让周围敌人逐渐染上蝶印。',
-    stats: [['直击叠印', '1 层'], ['领域概率', '25%'], ['脉冲间隔', '1 秒']],
-    details: ['蝶印越深，直击伤害越高；可自动施放，虚无状态下仍可使用。', '领域半径 350、持续 4 秒，每秒造成范围伤害并叠加 1 层蝶印。', '领域生成间隔至少 1.5 秒，最多同时存在两个；重叠时同目标每秒只结算一次。']
+    title: '缠蝶', type: '本体技能 / 主目标叠印与概率领域',
+    lead: '每次蝶击稳定给集火目标叠印，并有概率在命中位置绽放蝶樱领域。领域按秒让周围敌人慢慢染上蝶印。',
+    stats: ['直击 <b>每次 1 层 / 樱隐 2 层</b>', '领域 <b>25% / 350 范围</b>', '脉冲 <b>每秒 1 层 / 持续 4 秒</b>'],
+    bullets: ['可手动点放，也可自动施放，虚无状态也能释放。直击伤害为 P × (1 + 0.08 × 主目标蝶印层数)，攻速影响出手频率。', '每次合格直击命中有 25% 概率生成固定领域，生成内置冷却 1.5 秒。每英雄最多 2 个，新领域超过上限时替换最早一个。', '领域在生成后第 1、2、3、4 秒各结算一次，350 范围内敌人受到 0.25P 伤害并增加 1 层蝶印。', '同来源同目标的重叠领域每秒最多结算一次。樱隐强化直击为每次 2 层，领域脉冲固定每次 1 层。印记持续 8 秒，命中时刷新。'],
+    tip: '主目标跟随攻速快速叠层，周围靠固定领域缓慢铺印。领域固定停留在地面，离开区域后不再承受后续脉冲。'
   },
   W: {
-    name: '蝶反', category: '化蝶 · 生存返场', verse: '身散为樱，归来如初。', scene: '蝶反 / 樱瓣归身',
-    description: '身体化作蝶与樱瓣，短暂消失后于原地聚合。可主动避开危险，亦会在濒危与致死时护住生息。',
-    stats: [['主动冷却', '12 秒'], ['短暂消失', '0.65 秒'], ['致死保护冷却', '75 秒']],
-    details: ['主动返回时恢复 20% 已损生命，消失期间不可选取并免疫伤害。', '非致死受击后生命低于 35% 时自动触发，与主动共享冷却；自动触发可开关。', '致死时触发独立保护：消失 1.2 秒，返回时生命至少为 45%。已放出的五蝶继续巡游。']
+    title: '蝶反', type: '本体技能 / 生存与返场',
+    lead: '受到危险伤害时，身体化作蝶与樱瓣短暂消失，随后在原位置重新聚合。主动操作与致死保护有独立用途。',
+    stats: ['主动 <b>12 秒冷却</b>', '消失 <b>0.65 秒</b>', '致死 <b>75 秒独立冷却</b>'],
+    bullets: ['主动使用时短暂不可选取并免疫伤害，返回恢复 20% 已损失生命，清除约定的可解除负面状态。', '普通受击自动触发可开关。非致死伤害后生命低于 35% 时，使用同一份主动冷却。', '致死保护在该次伤害落地前生效，消失 1.2 秒，返回时生命至少 45%，使用独立长冷却。', '消失时暂停本体出手，已有五蝶继续运行。持续时间与其他技能冷却正常推进。'],
+    tip: '短暂化蝶规避危险，归来时恢复生息；普通返场与致死保护各有独立冷却。'
   },
   E: {
-    name: '踏樱 · 蝶落', category: '瞬闪 · 蝶印引爆', verse: '自花间而来，于蝶群中落。', scene: '踏樱 / 蝶印绽爆',
-    description: '锁定远方敌人，身影散入樱间，瞬闪至目标上空。一脚落下，花环绽开，范围内的蝶印随之引爆。',
-    stats: [['施法距离', '全图'], ['落地范围', '450'], ['冷却时间', '10 秒']],
-    details: ['选择己方视野内、可交战的敌人，在其附近落地。', '每个目标按自身蝶印层数承受爆发，主目标受到更高伤害。', '引爆消耗各目标一半蝶印，消耗向上取整，保留其余印记。']
+    title: '踏樱 · 蝶落', type: '本体技能 / 全图位移与层数引爆',
+    lead: '选择视野内可交战的敌人，散成樱瓣瞬闪至其上空，一脚踩开花环，引爆范围内每个敌人自身的蝶印。',
+    stats: ['施法 <b>全图 / 敌方目标</b>', '落地 <b>450 范围</b>', '冷却 <b>10 秒</b>'],
+    bullets: ['主目标伤害为 P × (2 + 0.25 × 自身蝶印层数)。周围敌人按自己的层数使用该公式，再乘 60%。', '结算后每个敌人消耗一半蝶印，向上取整，保留其余层数。', '位移动作约 0.3 秒，随后快速落地。停在目标附近，继续原来的蝶击操作。', '每个敌人在一次 E 中承受一次引爆，层数越深，落地伤害越高。'],
+    tip: '网页中点击敌人可选择 E 的演示落点，R 的五蝶仍按各自规则自动寻找目标。'
   },
   R: {
-    name: '万樱蝶梦', category: '蝶群 · 隐身巡游', verse: '五蝶赴梦，一身无痕。', scene: '蝶梦 / 五蝶巡游',
-    description: '五只蝴蝶离身而出，自主散入敌阵，在命中处绽放范围伤害。和熙隐去身形，轻盈穿行于战场。',
-    stats: [['游蝶数量', '5 只'], ['持续时间', '18 秒'], ['冷却时间', '60 秒']],
-    details: ['持续隐身、无单位碰撞，攻击与施法保持隐身；本体保持正常生命体状态。', '五蝶在 1200 范围内自主索敌，各自在命中处造成 220 范围伤害。', '每蝶每秒尝试命中一次；同目标每 0.5 秒最多承受两次 R 命中，每秒最多由 R 叠加一层蝶印。']
+    title: '万樱蝶梦', type: '本体技能 / 持续隐身与五蝶巡游',
+    lead: '保持正常生命体，进入持续隐身与无单位碰撞状态。五只蝴蝶自动散开，在敌人附近绽放小范围樱蝶伤害。',
+    stats: ['持续 <b>18 秒</b>', '索敌 <b>1200 范围</b>', '冷却 <b>60 秒</b>'],
+    bullets: ['输出、施法期间保持隐身，本人和队友保留清楚的半透明识别轮廓。自由穿过单位间隙。', '固定五蝶，各自自动选取英雄边界内的敌人，到达目标附近造成 220 范围伤害，每次为 0.20P。', '每蝶每秒尝试命中一次。同一敌人每 0.5 秒最多承受两次 R 命中，每秒最多由 R 获得一层蝶印。', '目标死亡或超距时重新分配，英雄移动和 E 瞬移后超距蝴蝶回巢。单 BOSS 时自动汇聚。'],
+    tip: '范围法术、真视、BOSS 机制对隐身英雄的交互按原图约定处理。生命、护甲、走位和 W 组成生存体系。'
   },
   X: {
-    name: '不落之樱', category: '专属符文 · 樱隐与蝶针', verse: '樱不落，梦不醒。', scene: '樱引 / 蝶针落境',
-    description: '樱隐护身，樱尽延展蝶印。主动唤下蝶针，于远方种下蝶印，再循着落樱踏入战场。',
-    stats: [['蝶印上限', '24 层'], ['樱隐刷新 / 持续', '3 秒 / 3 秒'], ['蝶针冷却', '18 秒']],
-    details: ['樱隐：首次第 3 秒触发，此后每 3 秒刷新 3 秒隐身与控制免疫，触发时解除眩晕，后续连续覆盖。', '樱尽：蝶印上限立即提升到 24 层。樱隐期间 Q 直击每次叠加 2 层，领域仍固定每秒 1 层。', '蝶针·樱引：全图选择视野内可交战的 350 范围区域，每隔 0.3 秒落下一波蝶针，共三波，每波叠加 2 层并造成伤害。']
+    title: '不落之樱', type: '专属符文 / 樱隐、樱尽与蝶针',
+    lead: '樱隐整合自动隐身与免控，樱尽被动扩展层数上限。主动「蝶针·樱引」，在进场前为区域敌人铺下蝶印。',
+    stats: ['樱隐 <b>3 秒触发 / 3 秒持续</b>', '樱尽 <b>默认 24 层</b>', '蝶针 <b>18 秒冷却</b>'],
+    bullets: ['被动「樱隐」首次第 3 秒触发，之后每 3 秒刷新，持续 3 秒。触发时解除眩晕，状态内隐身并免疫常规控制。', '被动「樱尽」在装备符文后立即将蝶印上限提高到 24 层。Q 出手时处于樱隐，则直击命中增加 2 层，领域脉冲仍固定 1 层。', '主动「蝶针·樱引」点选全图视野内允许交战的区域，350 范围落三波蝶针，每波增加 2 层、造成 0.20P 伤害。', '三波间隔 0.3 秒，全部命中可从零层预叠到 6 层，再由 E 切入。蝶针固定叠层，Q 双层收益由樱隐状态决定。'],
+    tip: '每 3 秒触发、持续 3 秒会连续覆盖樱隐，长期等效持续隐身、免控与双层 Q。蝶针可从零层起手，为踏樱预先铺印。'
   }
 };
 
-const tabs = [...document.querySelectorAll('[data-skill]')];
-function showSkill(key, focus = false) {
+function skillMarkup(key) {
   const skill = skills[key];
-  tabs.forEach((tab) => {
-    const selected = tab.dataset.skill === key;
-    tab.setAttribute('aria-selected', String(selected));
-    tab.tabIndex = selected ? 0 : -1;
-    if (selected && focus) tab.focus();
-  });
-  document.querySelector('.ability-stage').dataset.art = key;
-  document.getElementById('ability-panel').setAttribute('aria-labelledby', `tab-${key}`);
-  document.getElementById('skill-category').textContent = skill.category;
-  document.getElementById('skill-name').textContent = skill.name;
-  document.getElementById('skill-verse').textContent = skill.verse;
-  document.getElementById('skill-description').textContent = skill.description;
-  document.getElementById('scene-label').textContent = skill.scene;
-  const stats = document.getElementById('skill-stats');
-  stats.replaceChildren(...skill.stats.map(([label, value]) => {
-    const row = document.createElement('div');
-    const term = document.createElement('dt');
-    const detail = document.createElement('dd');
-    term.textContent = label;
-    detail.textContent = value;
-    row.append(term, detail);
-    return row;
-  }));
-  document.getElementById('skill-details').replaceChildren(...skill.details.map((text) => {
-    const item = document.createElement('li');
-    item.textContent = text;
-    return item;
-  }));
+  return `<span class="skill-type">${skill.type}</span>
+    <h3>${key} · ${skill.title}</h3><p class="skill-lead">${skill.lead}</p>
+    <div class="skill-stat-row">${skill.stats.map((stat) => `<span>${stat}</span>`).join('')}</div>
+    <ul>${skill.bullets.map((bullet) => `<li>${bullet}</li>`).join('')}</ul>
+    <p class="skill-tip">${skill.tip}</p>`;
 }
 
-tabs.forEach((tab, index) => {
-  tab.addEventListener('click', () => showSkill(tab.dataset.skill));
-  tab.addEventListener('keydown', (event) => {
-    if (!['ArrowRight', 'ArrowLeft', 'ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) return;
+function showSkill(key, moveFocus = false) {
+  document.querySelectorAll('[data-skill]').forEach((button) => {
+    const selected = button.dataset.skill === key;
+    button.classList.toggle('active', selected);
+    button.setAttribute('aria-selected', String(selected));
+    button.tabIndex = selected ? 0 : -1;
+    if (selected && moveFocus) button.focus();
+  });
+  find('skill-panel').setAttribute('aria-labelledby', `tab-${key}`);
+  find('skill-panel').innerHTML = skillMarkup(key);
+}
+
+document.querySelectorAll('[data-skill]').forEach((button) => {
+  button.addEventListener('click', () => showSkill(button.dataset.skill));
+  button.addEventListener('keydown', (event) => {
+    const keys = Object.keys(skills);
+    const current = keys.indexOf(button.dataset.skill);
+    if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'].includes(event.key)) return;
     event.preventDefault();
-    let next = index;
+    let next = current;
     if (event.key === 'Home') next = 0;
-    else if (event.key === 'End') next = tabs.length - 1;
-    else next = (index + (['ArrowRight', 'ArrowDown'].includes(event.key) ? 1 : -1) + tabs.length) % tabs.length;
-    showSkill(tabs[next].dataset.skill, true);
+    else if (event.key === 'End') next = keys.length - 1;
+    else next = (current + (['ArrowRight', 'ArrowDown'].includes(event.key) ? 1 : -1) + keys.length) % keys.length;
+    showSkill(keys[next], true);
   });
 });
+showSkill('Q');
+find('print-skills').innerHTML = Object.keys(skills).map((key) => `<article class="skill-panel">${skillMarkup(key)}</article>`).join('');
+
+function updateCalculator() {
+  const attack = Number(find('attack').value);
+  const agility = Number(find('agility').value);
+  const cap = find('rune-enabled').checked ? 24 : 12;
+  find('marks').max = cap;
+  const marks = Math.min(Number(find('marks').value), cap);
+  find('marks').value = marks;
+  const base = attack * 0.6 + agility * 3;
+  find('attack-value').textContent = number(attack);
+  find('agility-value').textContent = number(agility);
+  find('marks-value').textContent = `${marks} 层`;
+  find('base-damage').textContent = number(base);
+  find('q-damage').textContent = number(base * (1 + 0.08 * marks));
+  find('e-damage').textContent = number(base * (2 + 0.25 * marks));
+  find('r-damage').textContent = number(base * 0.20);
+  find('attack-bar').style.width = `${attack * 0.6 / base * 100}%`;
+  find('agility-bar').style.width = `${agility * 3 / base * 100}%`;
+  find('calc-rune').textContent = cap === 24 ? '符文已开启，可以试算 24 层。数值为进入地图减伤前的原始伤害。' : '基础英雄最多 12 层。装备符文后，樱尽被动立即提高到 24 层。';
+  return { attack, agility, marks, base, cap };
+}
+['attack', 'agility', 'marks'].forEach((id) => find(id).addEventListener('input', updateCalculator));
+updateCalculator();
+
+find('effect-sources').innerHTML = data.effects.map((effect) => `<div class="effect-source"><a href="${effect.source}" target="_blank" rel="noopener noreferrer">${effect.name} ↗</a><span>${effect.use}</span><p>${effect.note}</p></div>`).join('');
+
+/* Shared animation loop. The animation illustrates delivery and marks, not Warcraft's engine. */
+const canvas = find('arena');
+const context = canvas.getContext('2d');
+const width = 960;
+const height = 600;
+const scale = 0.2;
+const searchRadius = 1200 * scale;
+const hitRadius = 220 * scale;
+const fieldRules = { chance: 0.25, radius: 350, duration: 4, interval: 1, cooldown: 1.5, maximum: 2, damageFactor: 0.25 };
+let fields = [];
+let fieldRandom = randomGenerator(7431);
+let lastFieldProcAt = -Infinity;
+let nextAutoQ = 0;
+let mode = 'roam';
+let paused = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+let time = 0;
+let lastFrame = 0;
+let nextAssignment = 0;
+let hitCount = 0;
+let selectedEnemy = 0;
+let rActive = true;
+let runeEquippedAt = 0;
+let needleAiming = false;
+let pendingNeedles = [];
+let hero = { x: width / 2, y: height / 2, hp: 0.35, phaseUntil: 0 };
+let enemies = [];
+let butterflies = [];
+let pulses = [];
+let projectiles = [];
+let pendingLanding = null;
+
+function shroudAt(elapsed, period = 3) {
+  if (elapsed < 3) return false;
+  return (elapsed - 3) % period < 3;
+}
+
+function isShrouded() {
+  return find('rune-enabled').checked && shroudAt(time - runeEquippedAt, Number(find('shroud-period').value));
+}
+
+function updateShroudStatus() {
+  if (!find('rune-enabled').checked) {
+    find('shroud-status').textContent = '樱隐未启用 · Q 每次 1 层';
+    return;
+  }
+  find('shroud-status').textContent = isShrouded() ? '樱隐中 · 免控 / Q 每次 2 层' : '等待樱隐 · Q 每次 1 层';
+}
+
+function renderShroudTimeline() {
+  const period = Number(find('shroud-period').value);
+  find('shroud-timeline').innerHTML = Array.from({ length: 12 }, (_, index) => {
+    const active = shroudAt(index, period);
+    return `<span class="${active ? 'shrouded' : ''}"><b>${index}—${index + 1}s</b><small>${active ? '樱隐' : '显形'}</small></span>`;
+  }).join('');
+  find('shroud-timing-note').textContent = period === 3 ? '3 秒触发 + 3 秒持续在后续周期无缝衔接，长期等效持续隐身、免控与 Q 双层。' : '首次第 3 秒触发，此后持续维持樱隐。';
+}
+
+find('shroud-period').addEventListener('change', () => {
+  runeEquippedAt = time;
+  renderShroudTimeline();
+  updateShroudStatus();
+});
+renderShroudTimeline();
+
+function randomGenerator(seed) {
+  return () => {
+    seed = (seed * 1664525 + 1013904223) >>> 0;
+    return seed / 4294967296;
+  };
+}
+
+function distance(first, second) {
+  return Math.hypot(first.x - second.x, first.y - second.y);
+}
+
+function resetDemo() {
+  const random = randomGenerator(5311);
+  const scenario = find('scenario').value;
+  const count = scenario === 'boss' ? 1 : 18;
+  time = 0;
+  nextAssignment = 0;
+  hitCount = 0;
+  selectedEnemy = 0;
+  runeEquippedAt = 0;
+  needleAiming = false;
+  pendingNeedles = [];
+  updateNeedleButton();
+  hero = { x: width / 2, y: height / 2, hp: 0.35, phaseUntil: 0 };
+  pendingLanding = null;
+  pulses = [];
+  projectiles = [];
+  fields = [];
+  fieldRandom = randomGenerator(7431);
+  lastFieldProcAt = -Infinity;
+  nextAutoQ = 0;
+  find('auto-q').checked = false;
+  enemies = Array.from({ length: count }, (_, index) => {
+    const angle = index / count * Math.PI * 2 + random() * 0.3;
+    let radius = scenario === 'dense' ? 25 + random() * 50 : 130 + random() * 95;
+    if (scenario === 'boss') radius = 130;
+    const centerX = scenario === 'dense' ? hero.x + 95 : hero.x;
+    return { id: index, x: centerX + Math.cos(angle) * radius, y: hero.y + Math.sin(angle) * radius, marks: 0, expires: 0, lastMark: -2, lastFieldHitAt: -Infinity, windowStart: -1, windowHits: 0, flashUntil: 0, damage: 0 };
+  });
+  butterflies = Array.from({ length: 5 }, (_, index) => ({ id: index, x: hero.x, y: hero.y, target: -1, nextHit: index * 0.2 + 0.3, retargetAt: 0, trail: [] }));
+  find('demo-event').textContent = '点击敌人设定 E 落点，五蝶会继续自动索敌。';
+  updateDemoMetrics();
+  drawScene();
+}
+
+function addMark(enemy, amount = 1) {
+  const cap = find('rune-enabled').checked ? 24 : 12;
+  enemy.marks = Math.min(cap, enemy.marks + amount);
+  enemy.expires = time + 8;
+}
+
+function damage(enemy, amount, fromR = false) {
+  if (fromR) {
+    if (time - enemy.windowStart >= 0.5) {
+      enemy.windowStart = time;
+      enemy.windowHits = 0;
+    }
+    if (enemy.windowHits >= 2) return false;
+    enemy.windowHits += 1;
+    if (time - enemy.lastMark >= 1) {
+      addMark(enemy);
+      enemy.lastMark = time;
+    }
+  }
+  enemy.damage += amount;
+  enemy.flashUntil = time + 0.2;
+  hitCount += 1;
+  return true;
+}
+
+function pulse(x, y, radius, style = 'pink') {
+  pulses.push({ x, y, radius, start: time, duration: 0.65, style });
+}
+
+function assignTargets() {
+  const available = enemies.filter((enemy) => distance(hero, enemy) <= searchRadius);
+  const allocations = new Map();
+  butterflies.forEach((butterfly) => {
+    const current = available.find((enemy) => enemy.id === butterfly.target);
+    if (current && time < butterfly.retargetAt) {
+      allocations.set(current.id, (allocations.get(current.id) || 0) + 1);
+      return;
+    }
+    let target;
+    let bestScore = Infinity;
+    available.forEach((enemy) => {
+      const repeatPenalty = enemy.id === butterfly.target && available.length > 1 ? 220 : 0;
+      const score = distance(butterfly, enemy) + (allocations.get(enemy.id) || 0) * 150 + repeatPenalty;
+      if (score < bestScore) {
+        target = enemy;
+        bestScore = score;
+      }
+    });
+    butterfly.target = target ? target.id : -1;
+    butterfly.retargetAt = time + 2.5;
+    if (target) allocations.set(target.id, (allocations.get(target.id) || 0) + 1);
+  });
+}
+
+function updateDemoMetrics() {
+  const covered = new Set();
+  if (rActive) enemies.forEach((enemy) => {
+    if (butterflies.some((butterfly) => distance(butterfly, enemy) <= hitRadius)) covered.add(enemy.id);
+  });
+  find('coverage').textContent = covered.size;
+  find('demo-hits').textContent = number(hitCount);
+  find('demo-cap').textContent = find('rune-enabled').checked ? 24 : 12;
+  updateShroudStatus();
+  find('field-status').textContent = `蝶樱领域 ${fields.length} / ${fieldRules.maximum} · 每秒脉冲 +1 层`;
+}
+
+function updateScene(delta) {
+  time += delta;
+  if (find('auto-q').checked && time >= nextAutoQ) {
+    nextAutoQ = time + 0.35;
+    fireQ(false);
+  }
+  enemies.forEach((enemy) => {
+    if (enemy.marks && time > enemy.expires) enemy.marks = 0;
+  });
+  if (time >= nextAssignment) {
+    assignTargets();
+    nextAssignment = time + 0.4;
+    updateDemoMetrics();
+  }
+  if (pendingLanding && time >= pendingLanding.at) {
+    const { target, base } = pendingLanding;
+    hero.x = target.x - 25;
+    hero.y = target.y + 18;
+    enemies.forEach((enemy) => {
+      if (distance(target, enemy) > 450 * scale) return;
+      damage(enemy, base * (2 + 0.25 * enemy.marks) * (enemy.id === target.id ? 1 : 0.6));
+      enemy.marks = Math.floor(enemy.marks / 2);
+    });
+    butterflies.forEach((butterfly) => {
+      if (distance(butterfly, hero) > searchRadius) {
+        butterfly.x = hero.x;
+        butterfly.y = hero.y;
+        butterfly.trail = [];
+      }
+    });
+    pulse(target.x, target.y, 450 * scale, 'flower');
+    pendingLanding = null;
+    nextAssignment = 0;
+    updateDemoMetrics();
+  }
+  if (hero.phaseUntil && time >= hero.phaseUntil) {
+    hero.phaseUntil = 0;
+    hero.hp += (1 - hero.hp) * 0.2;
+    pulse(hero.x, hero.y, 35, 'green');
+  }
+  projectiles = projectiles.filter((projectile) => {
+    if (time - projectile.start < 0.38) return true;
+    const { target, base, marks } = projectile;
+    const mainDamage = base * (1 + 0.08 * target.marks);
+    damage(target, mainDamage);
+    addMark(target, marks);
+    maybeCreateField(target, base);
+    pulse(target.x, target.y, 18);
+    updateDemoMetrics();
+    return false;
+  });
+  pendingNeedles = pendingNeedles.filter((wave) => {
+    if (time < wave.at) return true;
+    enemies.forEach((enemy) => {
+      if (distance(enemy, wave.position) > 350 * scale) return;
+      damage(enemy, wave.base * 0.20);
+      addMark(enemy, 2);
+    });
+    pulse(wave.position.x, wave.position.y, 350 * scale, 'needle');
+    updateDemoMetrics();
+    return false;
+  });
+  processFieldTicks();
+  if (!rActive) return;
+  const base = Number(find('attack').value) * 0.6 + Number(find('agility').value) * 3;
+  butterflies.forEach((butterfly, index) => {
+    const angle = time * 0.7 + index / 5 * Math.PI * 2;
+    let destination = { x: hero.x + Math.cos(angle) * 65, y: hero.y + Math.sin(angle) * 65 };
+    if (mode === 'roam' && butterfly.target >= 0) {
+      const target = enemies[butterfly.target];
+      destination = { x: target.x + Math.cos(angle * 2) * 16, y: target.y + Math.sin(angle * 2) * 16 };
+    }
+    const length = distance(butterfly, destination);
+    const step = Math.min(length, delta * 150);
+    if (length > 0.1) {
+      butterfly.x += (destination.x - butterfly.x) / length * step;
+      butterfly.y += (destination.y - butterfly.y) / length * step;
+    }
+    butterfly.trail.push({ x: butterfly.x, y: butterfly.y });
+    if (butterfly.trail.length > 20) butterfly.trail.shift();
+    if (time < butterfly.nextHit) return;
+    butterfly.nextHit = time + 1;
+    let anyHit = false;
+    enemies.forEach((enemy) => {
+      if (distance(enemy, butterfly) <= hitRadius && damage(enemy, base * 0.2, true)) anyHit = true;
+    });
+    if (anyHit) pulse(butterfly.x, butterfly.y, hitRadius);
+  });
+}
+
+function maybeCreateField(position, base) {
+  if (time - lastFieldProcAt < fieldRules.cooldown - 1e-7) return;
+  if (fieldRandom() >= fieldRules.chance) return;
+  lastFieldProcAt = time;
+  if (fields.length >= fieldRules.maximum) fields.shift();
+  fields.push({ x: position.x, y: position.y, base, created: time, expires: time + fieldRules.duration, nextTick: time + fieldRules.interval });
+  find('demo-event').textContent = 'Q 触发蝶樱领域，下一秒开始每秒造成范围伤害并叠 1 层。';
+}
+
+function processFieldTicks() {
+  const ticks = [];
+  fields.forEach((field) => {
+    while (field.nextTick <= time + 1e-7 && field.nextTick <= field.expires + 1e-7) {
+      ticks.push({ field, at: field.nextTick });
+      field.nextTick += fieldRules.interval;
+    }
+  });
+  ticks.sort((first, second) => first.at - second.at);
+  ticks.forEach(({ field, at }) => {
+    enemies.forEach((enemy) => {
+      if (distance(field, enemy) > fieldRules.radius * scale) return;
+      if (at - enemy.lastFieldHitAt < fieldRules.interval - 1e-7) return;
+      enemy.lastFieldHitAt = at;
+      damage(enemy, field.base * fieldRules.damageFactor);
+      addMark(enemy, 1);
+    });
+    pulse(field.x, field.y, fieldRules.radius * scale, 'flower');
+  });
+  fields = fields.filter((field) => time < field.expires);
+  if (ticks.length) updateDemoMetrics();
+}
+
+function drawButterfly(x, y, angle, size, color, wingScale = 1) {
+  context.save();
+  context.translate(x, y);
+  context.rotate(angle);
+  context.scale(size * wingScale, size);
+  context.fillStyle = color;
+  context.beginPath();
+  context.moveTo(0, 0);
+  context.bezierCurveTo(-17, -22, -20, 7, -3, 3);
+  context.bezierCurveTo(-17, 17, -1, 18, 0, 2);
+  context.bezierCurveTo(1, 18, 17, 17, 3, 3);
+  context.bezierCurveTo(20, 7, 17, -22, 0, 0);
+  context.fill();
+  context.strokeStyle = color;
+  context.lineWidth = 1.2;
+  context.beginPath();
+  context.moveTo(0, -4);
+  context.lineTo(0, 9);
+  context.stroke();
+  context.restore();
+}
+
+function drawFlower(x, y, radius, opacity) {
+  context.save();
+  context.translate(x, y);
+  context.globalAlpha = opacity;
+  context.fillStyle = '#e8abc1';
+  for (let petal = 0; petal < 5; petal += 1) {
+    context.rotate(Math.PI * 2 / 5);
+    context.beginPath();
+    context.ellipse(0, -radius * 0.42, radius * 0.26, radius * 0.48, 0, 0, Math.PI * 2);
+    context.fill();
+  }
+  context.restore();
+}
+
+function drawScene() {
+  if (!context) return;
+  context.clearRect(0, 0, width, height);
+  context.fillStyle = '#172a24';
+  context.fillRect(0, 0, width, height);
+  context.strokeStyle = '#3b584039';
+  context.lineWidth = 1;
+  for (let x = 0; x < width; x += 48) {
+    context.beginPath(); context.moveTo(x, 0); context.lineTo(x, height); context.stroke();
+  }
+  for (let y = 0; y < height; y += 48) {
+    context.beginPath(); context.moveTo(0, y); context.lineTo(width, y); context.stroke();
+  }
+  context.save();
+  context.setLineDash([5, 8]);
+  context.strokeStyle = '#71896860';
+  context.beginPath(); context.arc(hero.x, hero.y, searchRadius, 0, Math.PI * 2); context.stroke();
+  context.restore();
+  context.fillStyle = '#98b19a';
+  context.font = '14px "Microsoft YaHei", sans-serif';
+  context.fillText('索敌边界 1200', 25, 32);
+  context.fillStyle = '#92a58e';
+  context.font = '12px "Microsoft YaHei", sans-serif';
+  context.fillText('R 演示持续运行，按钮可重复体验。正式冷却见技能图鉴', 25, height - 18);
+  fields.forEach((field) => {
+    const radius = fieldRules.radius * scale;
+    drawFlower(field.x, field.y, radius, 0.10);
+    context.fillStyle = '#d4a7be15';
+    context.strokeStyle = '#cd8dac88';
+    context.lineWidth = 1;
+    context.beginPath(); context.arc(field.x, field.y, radius, 0, Math.PI * 2); context.fill(); context.stroke();
+    context.fillStyle = '#d8b0c5';
+    context.textAlign = 'center';
+    context.font = '11px "Microsoft YaHei", sans-serif';
+    context.fillText(`蝶樱 ${Math.max(0, field.expires - time).toFixed(1)}s`, field.x, field.y + radius + 13);
+    context.textAlign = 'left';
+  });
+  pulses = pulses.filter((item) => time - item.start < item.duration);
+  pulses.forEach((item) => {
+    const progress = Math.max(0, (time - item.start) / item.duration);
+    if (item.style === 'needle') {
+      context.save();
+      context.globalAlpha = (1 - progress) * 0.8;
+      context.strokeStyle = '#efb8d0';
+      for (let index = -2; index <= 2; index += 1) {
+        const x = item.x + index * item.radius * 0.32;
+        context.beginPath();
+        context.moveTo(x - 8, item.y - 60 * (1 - progress));
+        context.lineTo(x, item.y + 8);
+        context.stroke();
+      }
+      context.restore();
+    }
+    if (item.style === 'flower') drawFlower(item.x, item.y, item.radius * (0.5 + progress * 0.5), (1 - progress) * 0.45);
+    context.save();
+    context.globalAlpha = (1 - progress) * 0.65;
+    context.strokeStyle = item.style === 'green' ? '#b5d1a7' : '#dc9ab7';
+    context.lineWidth = 1.5;
+    context.beginPath(); context.arc(item.x, item.y, item.radius * (0.4 + progress * 0.6), 0, Math.PI * 2); context.stroke();
+    context.restore();
+  });
+  enemies.forEach((enemy) => {
+    const selected = enemy.id === selectedEnemy;
+    context.fillStyle = time < enemy.flashUntil ? '#f0c8d4' : '#a26376';
+    context.beginPath(); context.arc(enemy.x, enemy.y, find('scenario').value === 'boss' ? 19 : 9, 0, Math.PI * 2); context.fill();
+    if (selected) {
+      context.strokeStyle = '#d6cc9b';
+      context.lineWidth = 1;
+      context.beginPath(); context.arc(enemy.x, enemy.y, find('scenario').value === 'boss' ? 25 : 15, 0, Math.PI * 2); context.stroke();
+    }
+    context.fillStyle = '#f1ddce';
+    context.textAlign = 'center';
+    context.font = '14px "Microsoft YaHei", sans-serif';
+    context.fillText(String(enemy.marks), enemy.x, enemy.y - 20);
+    if (find('scenario').value === 'boss') {
+      context.fillStyle = '#c8b6b7';
+      context.font = '12px "Microsoft YaHei", sans-serif';
+      context.fillText('BOSS', enemy.x, enemy.y + 42);
+    }
+  });
+  context.textAlign = 'left';
+  if (!hero.phaseUntil && !pendingLanding) {
+    context.save();
+    context.globalAlpha = rActive || isShrouded() ? 0.6 : 1;
+    drawFlower(hero.x, hero.y, 26, 0.35);
+    context.fillStyle = '#dce7c4';
+    context.beginPath(); context.arc(hero.x, hero.y - 8, 6, 0, Math.PI * 2); context.fill();
+    context.beginPath(); context.moveTo(hero.x, hero.y - 1); context.lineTo(hero.x - 11, hero.y + 16); context.lineTo(hero.x + 11, hero.y + 16); context.closePath(); context.fill();
+    context.restore();
+  } else {
+    drawButterfly(hero.x, hero.y - Math.sin(time * 3) * 15, 0, 1.2, '#c7d6b7', 0.7);
+  }
+  context.fillStyle = '#e6e9d2';
+  context.textAlign = 'center';
+  context.font = '14px "Microsoft YaHei", sans-serif';
+  context.fillText(hero.phaseUntil ? '蝶反 · 归来中' : isShrouded() ? '和熙 · 樱隐免控' : rActive ? '和熙 · R 隐身' : '和熙', hero.x, hero.y + 43);
+  context.fillStyle = '#54725c'; context.fillRect(hero.x - 28, hero.y + 50, 56, 4);
+  context.fillStyle = '#bdcfa7'; context.fillRect(hero.x - 28, hero.y + 50, 56 * hero.hp, 4);
+  context.textAlign = 'left';
+  if (rActive) butterflies.forEach((butterfly) => {
+    context.beginPath();
+    butterfly.trail.forEach((point, index) => {
+      if (index === 0) context.moveTo(point.x, point.y);
+      else context.lineTo(point.x, point.y);
+    });
+    context.strokeStyle = '#d4a0bd4a'; context.lineWidth = 1.5; context.stroke();
+    drawButterfly(butterfly.x, butterfly.y, Math.sin(time + butterfly.id) * 0.6, 0.8, '#e7b9cf', 0.5 + Math.abs(Math.sin(time * 7 + butterfly.id)) * 0.5);
+  });
+  projectiles.forEach((item) => {
+    const progress = Math.min(1, (time - item.start) / 0.38);
+    drawButterfly(item.from.x + (item.target.x - item.from.x) * progress, item.from.y + (item.target.y - item.from.y) * progress - Math.sin(progress * Math.PI) * 25, 0.5, 0.8, '#f6d5e0');
+  });
+}
+
+function runFrame(timestamp) {
+  const delta = lastFrame ? Math.min((timestamp - lastFrame) / 1000, 0.05) : 0;
+  lastFrame = timestamp;
+  if (!paused && !document.hidden) updateScene(delta);
+  drawScene();
+  window.requestAnimationFrame(runFrame);
+}
+
+function updatePauseButton() {
+  find('pause').textContent = paused ? '继续演示' : '暂停演示';
+}
+updatePauseButton();
+find('pause').addEventListener('click', () => { paused = !paused; updatePauseButton(); });
+
+document.querySelectorAll('[data-mode]').forEach((button) => button.addEventListener('click', () => {
+  mode = button.dataset.mode;
+  document.querySelectorAll('[data-mode]').forEach((item) => {
+    const selected = item.dataset.mode === mode;
+    item.classList.toggle('selected', selected);
+    item.setAttribute('aria-pressed', String(selected));
+  });
+  find('mode-title').textContent = mode === 'roam' ? '分散巡游，命中绽花。' : '近身环绕，靠走位扫场。';
+  find('mode-description').textContent = mode === 'roam' ? '五蝶各自寻找边界内的近邻敌人。到达敌人附近后造成小范围伤害，短暂盘旋后再换目标。英雄移动或瞬闪时，超距蝴蝶回巢。' : '五蝶绕英雄转动，在蝶所在位置造成小范围伤害。贴近怪群时覆盖稳定，分散敌人需要英雄主动走近。';
+  resetDemo();
+}));
+
+find('scenario').addEventListener('change', resetDemo);
+find('reset-demo').addEventListener('click', resetDemo);
+find('rune-enabled').addEventListener('change', () => {
+  const enabled = find('rune-enabled').checked;
+  runeEquippedAt = time;
+  needleAiming = false;
+  if (!enabled) pendingNeedles = [];
+  updateNeedleButton();
+  const cap = enabled ? 24 : 12;
+  enemies.forEach((enemy) => { enemy.marks = Math.min(enemy.marks, cap); });
+  updateCalculator();
+  updateDemoMetrics();
+  find('demo-event').textContent = enabled ? '符文已开启，上限立即 24 层，3 秒后进入樱隐。X 可点选区域落蝶针。' : '已切回基础英雄，蝶印上限为 12 层。';
+});
+
+function prepareAction() {
+  if (!paused) return;
+  paused = false;
+  updatePauseButton();
+}
+
+function fireQ(announce = true) {
+  if (hero.phaseUntil || pendingLanding) return;
+  const { base } = updateCalculator();
+  projectiles.push({ from: { x: hero.x, y: hero.y }, target: enemies[selectedEnemy], start: time, base, marks: isShrouded() ? 2 : 1 });
+  if (announce) find('demo-event').textContent = 'Q 直击主目标稳定叠印，命中有 25% 概率生成蝶樱领域。';
+}
+
+find('demo-Q').addEventListener('click', () => {
+  prepareAction();
+  fireQ();
+});
+find('auto-q').addEventListener('change', () => {
+  prepareAction();
+  nextAutoQ = time;
+  find('demo-event').textContent = find('auto-q').checked ? '自动蝶击开启，观察主目标直击与周围领域的叠层差别。' : '自动蝶击已关闭，已有领域会完成剩余脉冲。';
+});
+
+find('demo-W').addEventListener('click', () => {
+  if (hero.phaseUntil || pendingLanding) return;
+  prepareAction();
+  hero.phaseUntil = time + 0.65;
+  pulse(hero.x, hero.y, 36, 'green');
+  find('demo-event').textContent = 'W 化蝶 0.65 秒后返场，恢复 20% 已损生命，五蝶继续巡游。';
+});
+
+find('demo-E').addEventListener('click', () => {
+  if (hero.phaseUntil || pendingLanding) return;
+  prepareAction();
+  const { base } = updateCalculator();
+  pendingLanding = { target: enemies[selectedEnemy], at: time + 0.4, base };
+  pulse(pendingLanding.target.x, pendingLanding.target.y, 50, 'green');
+  find('demo-event').textContent = 'E 锁定落点，按每个敌人自己的蝶印引爆，保留一半层数。';
+});
+
+find('demo-R').addEventListener('click', () => {
+  rActive = !rActive;
+  find('demo-R').setAttribute('aria-pressed', String(rActive));
+  find('demo-R').innerHTML = `<kbd>R</kbd> ${rActive ? '隐身已开启' : '开启五蝶与隐身'}`;
+  find('demo-event').textContent = rActive ? 'R 开启，五蝶自动索敌，本体持续隐身并可穿过单位。' : 'R 演示结束，五蝶退场。';
+  updateDemoMetrics();
+});
+
+function updateNeedleButton() {
+  find('demo-X').disabled = !find('rune-enabled').checked;
+  find('demo-X').setAttribute('aria-pressed', String(needleAiming));
+  find('demo-X').innerHTML = `<kbd>X</kbd> ${needleAiming ? '点选区域 / 再按取消' : '蝶针点选区域'}`;
+  canvas.style.cursor = needleAiming ? 'crosshair' : 'default';
+}
+
+find('demo-X').addEventListener('click', () => {
+  if (!find('rune-enabled').checked || hero.phaseUntil || pendingLanding) return;
+  prepareAction();
+  needleAiming = !needleAiming;
+  updateNeedleButton();
+  find('demo-event').textContent = needleAiming ? '请点战场任意区域，三波蝶针从零层铺印，然后可接 E。' : '已取消蝶针区域选择。';
+});
+
+function castNeedles(position) {
+  const { base } = updateCalculator();
+  for (let wave = 0; wave < 3; wave += 1) {
+    pendingNeedles.push({ position: { ...position }, base, at: time + 0.25 + wave * 0.3 });
+  }
+  needleAiming = false;
+  updateNeedleButton();
+  pulse(position.x, position.y, 350 * scale, 'green');
+  find('demo-event').textContent = '蝶针已锁定区域，三波各 +2 层，全部命中共 +6 层，可接 E 踏樱。';
+}
+
+canvas.addEventListener('click', (event) => {
+  const bounds = canvas.getBoundingClientRect();
+  const position = { x: (event.clientX - bounds.left) / bounds.width * width, y: (event.clientY - bounds.top) / bounds.height * height };
+  if (needleAiming) {
+    castNeedles(position);
+    return;
+  }
+  const closest = enemies.reduce((best, enemy) => distance(enemy, position) < distance(best, position) ? enemy : best);
+  if (distance(closest, position) > 35) return;
+  selectedEnemy = closest.id;
+  find('demo-event').textContent = `已选择 E / Q 演示目标 ${closest.id + 1}。R 五蝶继续自主索敌。`;
+});
+
+resetDemo();
+window.requestAnimationFrame(runFrame);
+
+const effectDesigns = {
+  Q: { title: '缠蝶 · 逐层绽放', caption: '缠蝶 / 蝶樱领域', description: '一只轻蝶划出弧线，停驻于目标身侧。命中时，脚下的蝶樱领域缓缓盛开。', details: ['直击：细蝶弹道，命中后留下绕身蝶印。', '领域：固定樱纹圆区，每秒向外泛起一层淡粉波纹。', '叠层：以蝶的数量、翼色与樱环呈现印记深度。'] },
+  W: { title: '蝶反 · 樱瓣归身', caption: '蝶反 / 聚散与归来', description: '身体从轮廓开始散成樱瓣与蝶光，短暂隐去，再由花瓣逆向聚合归来。', details: ['消失：花瓣自衣摆向上散开，身影淡出。', '留痕：原地保留微亮返场花印。', '归来：樱瓣回流成形，青白微光沿轮廓散去。'] },
+  E: { title: '踏樱 · 蝶印绽爆', caption: '踏樱 / 落脚花环', description: '落点先亮起樱纹，身影自上空踩落。蝶印汇向脚下，在一瞬间绽出完整花环。', details: ['预兆：落点花纹与一道短促下落光迹。', '引爆：蝶群向内汇聚，樱环向外舒展。', '余韵：花瓣贴地飘散，保留下来的蝶印继续绕身。'] },
+  R: { title: '蝶梦 · 五蝶赴阵', caption: '蝶梦 / 五蝶巡游', description: '五只游蝶依次离巢，向敌人散开。每次命中都绽出一小簇樱光，本体隐于蝶梦之中。', details: ['出巢：固定五蝶，依次从肩侧展开。', '巡游：短尾迹描出路径，命中处亮起小花。', '樱隐：本体半透明，青色轮廓保留识别。'] },
+  X: { title: '樱引 · 蝶针落境', caption: '樱引 / 三波蝶针', description: '细长蝶针穿过花间，自空中落入选定区域。三波樱纹逐次亮起，为远方敌人种下蝶印。', details: ['落针：轻细光线由高处坠落，针尾带一瓣樱。', '铺印：每波命中，目标身侧多出新的蝶光。', '樱尽：高层蝶印呈现更深的樱色与完整细环。'] }
+};
+function showEffect(key, focus = false) {
+  const design = effectDesigns[key];
+  find('effect-stage').setAttribute('data-art', key);
+  find('effect-name').textContent = design.title;
+  find('effect-caption').textContent = design.caption;
+  find('effect-description').textContent = design.description;
+  find('effect-details').innerHTML = design.details.map((detail) => `<li>${detail}</li>`).join('');
+  find('effect-panel').setAttribute('aria-labelledby', `effect-tab-${key}`);
+  document.querySelectorAll('[data-effect]').forEach((button) => {
+    const selected = button.dataset.effect === key;
+    button.setAttribute('aria-selected', String(selected));
+    button.tabIndex = selected ? 0 : -1;
+    if (selected && focus) button.focus();
+  });
+}
+document.querySelectorAll('[data-effect]').forEach((button, index) => {
+  button.addEventListener('click', () => showEffect(button.dataset.effect));
+  button.addEventListener('keydown', (event) => {
+    const keys = Object.keys(effectDesigns);
+    if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+    event.preventDefault();
+    const next = event.key === 'Home' ? 0 : event.key === 'End' ? keys.length - 1 : (index + (event.key === 'ArrowRight' ? 1 : -1) + keys.length) % keys.length;
+    showEffect(keys[next], true);
+  });
+});
+showEffect('Q');
 
 </script>
 </body>
