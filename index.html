@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="和熙 · 樱渡蝶姬。敏捷与蝶印驱动的 Warcraft III 定制英雄设计，含五蝶演示、周期樱隐与蝶针先手。">
+  <meta name="description" content="和熙 · 樱渡蝶姬。敏捷与蝶印驱动的 Warcraft III 定制英雄设计，含五蝶演示、周期樱隐与蝶引先手。">
   <title>和熙 · 樱渡蝶姬 — 英雄角色设计</title>
   <meta name="theme-color" content="#f7f3eb">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Ctext y='31' font-size='32'%3E%E8%9D%B6%3C/text%3E%3C/svg%3E">
@@ -1733,21 +1733,32 @@ footer {
 .butterfly-5 { left:47%; top:16%; width:32px; opacity:0; animation-delay:-4s; }
 .scene-kanji { position:absolute; bottom:30px; right:22px; color:#d3ddc70b; font:200px var(--serif); line-height:1; z-index:-1; }
 .scene-caption { position:absolute; bottom:24px; left:26px; right:26px; display:flex; justify-content:space-between; color:#b7c1ab; font-size:9px; letter-spacing:1px; }
-.scene-needles { display:none; position:absolute; inset:10% 17% 25%; }
-.scene-needles i { position:absolute; width:1px; height:80px; background:linear-gradient(transparent,#f0c2d3); left:15%; top:0; transform:rotate(12deg); animation:needle 2.4s ease-out infinite; }
-.scene-needles i:nth-child(2) { left:32%; animation-delay:-.5s; }.scene-needles i:nth-child(3) { left:50%; animation-delay:-1s; }.scene-needles i:nth-child(4) { left:68%; animation-delay:-1.5s; }.scene-needles i:nth-child(5) { left:85%; animation-delay:-2s; }
+.scene-petals { display:none; position:absolute; inset:0; }
+.scene-petals i { position:absolute; left:50%; top:47%; width:31px; height:23px; margin:-12px 0 0 -15px; animation:petalDrift 2.4s ease-out infinite; }
+.scene-petals i:before { content:""; position:absolute; inset:2px 7px; background:#e5a7be; border-radius:80% 10% 80% 10%; animation:petalFade 2.4s ease-out infinite; animation-delay:inherit; }
+.scene-petals svg { width:100%; height:100%; color:#f0c1d3; animation:petalWing 2.4s ease-out infinite; animation-delay:inherit; }
+.scene-petals i:nth-child(1) { --dx:-108px; --dy:-80px; --angle:-25deg; }
+.scene-petals i:nth-child(2) { --dx:110px; --dy:-64px; --angle:25deg; animation-delay:-.3s; }
+.scene-petals i:nth-child(3) { --dx:90px; --dy:95px; --angle:-15deg; animation-delay:-.6s; }
+.scene-petals i:nth-child(4) { --dx:-94px; --dy:92px; --angle:20deg; animation-delay:-.9s; }
+.scene-petals i:nth-child(5) { --dx:8px; --dy:-118px; --angle:10deg; animation-delay:-1.2s; }
 [data-art="W"] .scene-sigil { animation:vanish 4s ease-in-out infinite; } [data-art="W"] .scene-field { opacity:.3; }
 [data-art="W"] .scene-butterfly { color:#e2c1ca; }
 [data-art="E"] .scene-field { width:300px; height:300px; animation:bloom 2s ease-out infinite; }
 [data-art="E"] .scene-sigil { animation:stomp 2s ease-in-out infinite; }
 [data-art="R"] .scene-sigil { opacity:.35; } [data-art="R"] .scene-butterfly { opacity:1; } [data-art="R"] .scene-field { border-color:transparent; background:transparent; }
-[data-art="X"] .scene-needles { display:block; } [data-art="X"] .scene-sigil { opacity:.4; }
+[data-art="X"] .scene-petals { display:block; } [data-art="X"] .scene-sigil { opacity:.18; }
+[data-art="X"] .scene-butterfly { opacity:0; }
+[data-art="X"] .scene-field { width:260px; height:260px; border-color:transparent; animation:lureBloom 2.4s ease-out infinite; }
 
 @keyframes float { 0%,100% { translate:0 0; } 50% { translate:0 -13px; } }
 @keyframes bloom { 0%,100% { scale:.93; opacity:.6; } 50% { scale:1.04; opacity:1; } }
 @keyframes vanish { 0%,100% { opacity:1; } 38%,64% { opacity:.05; } }
 @keyframes stomp { 0%,100% { translate:0 0; } 30% { translate:0 -45px; opacity:.2; } 55% { translate:0 7px; opacity:1; } }
-@keyframes needle { 0% { translate:0 -55px; opacity:0; } 25% { opacity:.8; } 70%,100% { translate:-22px 175px; opacity:0; } }
+@keyframes petalDrift { 0% { transform:translate(0,0) rotate(-20deg); opacity:0; } 15% { opacity:.9; } 75% { opacity:.85; } 100% { transform:translate(var(--dx),var(--dy)) rotate(var(--angle)); opacity:0; } }
+@keyframes petalFade { 0%,25% { opacity:1; } 55%,100% { opacity:0; } }
+@keyframes petalWing { 0%,25% { opacity:0; } 55%,85% { opacity:1; } 100% { opacity:0; } }
+@keyframes lureBloom { 0%,32%,64% { scale:.35; opacity:.15; } 15%,47%,79% { scale:1; opacity:.85; } 31%,63%,100% { scale:1.08; opacity:0; } }
 
 .hero-signature { color:var(--pink); font-family:var(--serif); letter-spacing:2px; }
 .timing-summary { display:flex; flex-direction:column; align-items:flex-end; color:var(--pink); }
@@ -1808,7 +1819,7 @@ footer {
       </div>
     </section>
 
-    <div class="direction-strip"><div><b>蝶樱之术</b><span>E 引爆蝶印</span><span>R 隐身 + 无碰撞</span><span>五蝶自动索敌</span></div><div><b>战斗姿态</b><span>敏捷灵活输出</span><span>远程蝶针先手</span><span>分散巡游五蝶</span></div></div>
+    <div class="direction-strip"><div><b>蝶樱之术</b><span>E 引爆蝶印</span><span>R 隐身 + 无碰撞</span><span>五蝶自动索敌</span></div><div><b>战斗姿态</b><span>敏捷灵活输出</span><span>远程蝶引先手</span><span>分散巡游五蝶</span></div></div>
 
     <section class="section" id="skills">
       <div class="section-heading"><div><p class="eyebrow">01 / COMBAT LANGUAGE</p><h2>蝶印，把整套技能连起来。</h2></div><p>Q 集火叠印，领域缓慢铺场，E 踩爆，R 扩大覆盖。<br>蝶印越深，伤害越盛。</p></div>
@@ -1818,7 +1829,7 @@ footer {
           <button class="skill-tab" role="tab" aria-selected="false" aria-controls="skill-panel" id="tab-W" data-skill="W"><kbd>W</kbd><span>蝶反<small>化蝶消失 / 致死保护</small></span><i>↗</i></button>
           <button class="skill-tab" role="tab" aria-selected="false" aria-controls="skill-panel" id="tab-E" data-skill="E"><kbd>E</kbd><span>踏樱 · 蝶落<small>全图位移 / 蝶印引爆</small></span><i>↗</i></button>
           <button class="skill-tab" role="tab" aria-selected="false" aria-controls="skill-panel" id="tab-R" data-skill="R"><kbd>R</kbd><span>万樱蝶梦<small>隐身穿行 / 五蝶巡游</small></span><i>↗</i></button>
-          <button class="skill-tab rune-tab" role="tab" aria-selected="false" aria-controls="skill-panel" id="tab-X" data-skill="X"><kbd>X</kbd><span>不落之樱<small>周期樱隐 / 蝶针先手</small></span><i>✧</i></button>
+          <button class="skill-tab rune-tab" role="tab" aria-selected="false" aria-controls="skill-panel" id="tab-X" data-skill="X"><kbd>X</kbd><span>不落之樱<small>周期樱隐 / 蝶引先手</small></span><i>✧</i></button>
         </div>
         <article id="skill-panel" class="skill-panel" role="tabpanel" aria-labelledby="tab-Q"></article>
       </div>
@@ -1835,13 +1846,13 @@ footer {
     </section>
 
     <section class="demo-section" id="simulation">
-      <div class="section-heading light"><div><p class="eyebrow">02 / INTERACTIVE COMBAT</p><h2>在蝶与樱之间，亲自起舞。</h2></div><p>释放五式技能，观察蝶印与爆发。<br>点选敌人或区域，体验踏樱与落针。</p></div>
+      <div class="section-heading light"><div><p class="eyebrow">02 / INTERACTIVE COMBAT</p><h2>在蝶与樱之间，亲自起舞。</h2></div><p>释放五式技能，观察蝶印与爆发。<br>点选敌人或区域，体验踏樱与引蝶。</p></div>
       <div class="demo-grid">
         <div class="battle-area">
           <div class="arena-top"><div class="segmented" role="group" aria-label="五蝶飞行展示"><button data-mode="roam" class="selected" aria-pressed="true">分散巡游</button><button data-mode="orbit" aria-pressed="false">近身环绕</button></div><button id="pause" class="ghost-button">暂停演示</button></div>
           <canvas id="arena" width="960" height="600" aria-label="五蝶自动巡游和命中范围动画。使用旁边按钮切换飞行形态、敌人分布和技能。"></canvas>
           <div class="arena-legend"><span><i class="legend-hero"></i>和熙</span><span><i class="legend-enemy"></i>敌人 / 数字为蝶印</span><span><i class="legend-butterfly"></i>五蝶</span><span>樱粉圆区为 Q 领域</span><span>虚线圈为索敌边界</span></div>
-          <div class="demo-controls"><button id="demo-Q"><kbd>Q</kbd> 直击 / 概率领域</button><button id="demo-W"><kbd>W</kbd> 化蝶返场</button><button id="demo-E"><kbd>E</kbd> 踩落引爆</button><button id="demo-R" aria-pressed="true"><kbd>R</kbd> 隐身已开启</button><button id="demo-X" disabled aria-pressed="false"><kbd>X</kbd> 蝶针点选区域</button></div>
+          <div class="demo-controls"><button id="demo-Q"><kbd>Q</kbd> 直击 / 概率领域</button><button id="demo-W"><kbd>W</kbd> 化蝶返场</button><button id="demo-E"><kbd>E</kbd> 踩落引爆</button><button id="demo-R" aria-pressed="true"><kbd>R</kbd> 隐身已开启</button><button id="demo-X" disabled aria-pressed="false"><kbd>X</kbd> 蝶引点选区域</button></div>
           <div class="field-demo-line"><label class="toggle-line"><input type="checkbox" id="auto-q"><span>自动蝶击演示</span></label><span id="field-status">蝶樱领域 0 / 2 · 每秒脉冲 +1 层</span></div><p id="demo-event" class="demo-event" role="status" aria-live="polite">五蝶已出发，自动寻找周围敌人。</p>
         </div>
         <aside class="demo-aside">
@@ -1850,7 +1861,7 @@ footer {
           <label class="field-label" for="scenario">敌人分布</label><select id="scenario"><option value="spread">分散怪群</option><option value="dense">密集怪群</option><option value="boss">单个 BOSS</option></select>
           <label class="toggle-line"><input type="checkbox" id="rune-enabled"><span>装备「不落之樱」· 开启 X</span></label><p id="shroud-status" class="shroud-status" role="status">樱隐未启用 · Q 每次 1 层</p>
           <button class="ghost-button wide" id="reset-demo">重置本次演示</button>
-          <p class="demo-footnote">X 先点按钮，再点战场区域，三波蝶针会预叠印。点击敌人可设定 Q / E 目标，R 五蝶继续自主索敌。</p>
+          <p class="demo-footnote">X 先点按钮，再点战场区域，幻樱三次绽放，花瓣化蝶预叠印。点击敌人可设定 Q / E 目标，R 五蝶继续自主索敌。</p>
         </aside>
       </div>
       <p class="on-dark-note">每蝶每秒命中一次，命中绽花半径 220。同一敌人每 0.5 秒最多吃到两次 R 命中。单目标满速上限约四次 / 秒，五蝶同时汇聚时按此上限结算。</p>
@@ -1863,7 +1874,7 @@ footer {
           <p>Q 依靠连续出手叠印，W 用于规避和返场，E 提供跨场切入，R 让游蝶分散铺场。敏捷与攻速能直接强化这条循环，生命与恢复作为生存选择。</p>
           <div class="formula">P = 0.6 × A + 3 × G</div>
           <p class="formula-caption">A 为当前面板攻击力，G 为当前敏捷；Q 出手频率随攻速提升。下列公式为角色设定中的原始伤害，减伤与额外增幅另行结算。</p>
-          <dl class="formula-list"><div><dt>Q 主目标</dt><dd>P × (1 + 0.08 × 蝶印层数)</dd></div><div><dt>E 主目标</dt><dd>P × (2 + 0.25 × 蝶印层数)</dd></div><div><dt>每次 R 命中</dt><dd>0.20P · 命中点 220 范围</dd></div><div><dt>X 每波蝶针</dt><dd>0.20P + 2 层蝶印</dd></div></dl>
+          <dl class="formula-list"><div><dt>Q 主目标</dt><dd>P × (1 + 0.08 × 蝶印层数)</dd></div><div><dt>E 主目标</dt><dd>P × (2 + 0.25 × 蝶印层数)</dd></div><div><dt>每次 R 命中</dt><dd>0.20P · 命中点 220 范围</dd></div><div><dt>X 蝶引 / 每波</dt><dd>0.20P + 2 层蝶印</dd></div></dl>
           <p class="small-note">E 范围内其他敌人按各自层数取主公式的 60%。Q 领域每秒造成 0.25P 伤害并增加 1 层。X 共三波，命中全部三波可增加 6 层。魔抗与地图增伤另行结算。</p>
         </div>
         <div class="calculator"><div class="calculator-head"><h3>伤害试算</h3><span>蝶印伤害</span></div>
@@ -1875,25 +1886,25 @@ footer {
           <div class="growth-bars" aria-label="基础伤害构成"><span id="attack-bar"></span><span id="agility-bar"></span></div><p class="bars-caption"><i></i>面板攻击贡献 <em></em>敏捷直接贡献</p>
         </div>
       </div>
-      <div class="build-notes"><article><b>连续蝶击</b><p>攻速提升直击频率，主目标快速叠印；蝶樱领域每秒铺下一层，让周围敌人持续染上蝶印。</p></article><article><b>踏樱连击</b><p>蝶针远程铺印，E 踩落引爆。保留一半印记后，蝶击与游蝶继续积累下一次爆发。</p></article><article><b>樱尽之境</b><p>不落之樱将上限延展至 24 层。樱隐中的双层直击，让持续交战中的蝶印不断加深。</p></article></div>
+      <div class="build-notes"><article><b>连续蝶击</b><p>攻速提升直击频率，主目标快速叠印；蝶樱领域每秒铺下一层，让周围敌人持续染上蝶印。</p></article><article><b>踏樱连击</b><p>蝶引远程铺印，E 踩落引爆。保留一半印记后，蝶击与游蝶继续积累下一次爆发。</p></article><article><b>樱尽之境</b><p>不落之樱将上限延展至 24 层。樱隐中的双层直击，让持续交战中的蝶印不断加深。</p></article></div>
     </section>
 
     <section class="section rune-section" id="rune">
-      <div class="section-heading"><div><p class="eyebrow">04 / THE EVERLASTING BLOSSOM</p><h2>樱隐守节奏，蝶针开局面。</h2></div><p>专属符文「不落之樱」。<br>樱隐护身，樱尽拓印，蝶针引路。</p></div>
-      <div class="rune-passives"><article><span>被动一 / 樱隐</span><h3>每 3 秒刷新 3 秒樱隐</h3><p>触发时解除已有眩晕，状态中持续隐身并免疫常规控制。攻击与施法维持樱隐，Q 直击在出手时读取状态，每次命中增加 2 层蝶印。</p></article><article><span>被动二 / 樱尽</span><h3>装备后默认 24 层上限</h3><p>上限提升即时生效。普通状态 Q 直击每次增加 1 层，樱隐期间增加 2 层。领域每秒固定增加 1 层。R 与蝶针使用各自固定叠层规则。</p></article></div>
+      <div class="section-heading"><div><p class="eyebrow">04 / THE EVERLASTING BLOSSOM</p><h2>樱隐护身，蝶引唤花。</h2></div><p>专属符文「不落之樱」。<br>樱隐护身，樱尽拓印，蝶引唤花。</p></div>
+      <div class="rune-passives"><article><span>被动一 / 樱隐</span><h3>每 3 秒刷新 3 秒樱隐</h3><p>触发时解除已有眩晕，状态中持续隐身并免疫常规控制。攻击与施法维持樱隐，Q 直击在出手时读取状态，每次命中增加 2 层蝶印。</p></article><article><span>被动二 / 樱尽</span><h3>装备后默认 24 层上限</h3><p>上限提升即时生效。普通状态 Q 直击每次增加 1 层，樱隐期间增加 2 层。领域每秒固定增加 1 层。R 与蝶引使用各自固定叠层规则。</p></article></div>
       <div class="timing-lab"><div class="timing-heading"><div><b>樱隐时序</b><p>首次第 3 秒进入樱隐，此后每 3 秒刷新，持续覆盖隐身与免控。</p></div><div class="timing-summary"><b>每 3 秒刷新</b><span>持续 3 秒 · 连续樱隐</span></div><input id="shroud-period" type="hidden" value="3"></div><div id="shroud-timeline" class="shroud-timeline" aria-label="樱隐开始后十二秒的覆盖时序"></div><p id="shroud-timing-note">3 秒触发 + 3 秒持续在后续周期无缝衔接，长期等效持续隐身、免控与 Q 双层。</p></div>
-      <div class="active-proposal"><span class="pill">主动 / 蝶针 · 樱引</span><h3>先把蝶印种下，再踏樱而来。</h3><p>全图点选己方视野内、允许交战的一片 350 范围区域，落下三波蝶针。每波间隔 0.3 秒，造成 0.20P 伤害并增加 2 层蝶印。命中全部三波合计 6 层，冷却 18 秒。</p><p>技能可直接从零层起手。蝶针覆盖后，E 踩进场引爆，Q 持续叠伤，R 自动巡游。进场与落针时机都由玩家决定。</p></div>
+      <div class="active-proposal"><span class="pill">主动 / 蝶引</span><h3>樱花引蝶，蝶栖成印。</h3><p>全图点选己方视野内、允许交战的一片 350 范围区域，唤起一朵幻樱，连续三次绽放。花瓣触敌化蝶，施加蝶印。每波间隔 0.3 秒，造成 0.20P 伤害并增加 2 层蝶印。命中全部三波合计 6 层，冷却 18 秒。</p><p>技能可直接从零层起手。蝶引覆盖后，E 踩进场引爆，Q 持续叠伤，R 自动巡游。进场与引蝶时机都由玩家决定。</p></div>
     </section>
 
     <section class="section effects-section" id="effects">
       <div class="section-heading"><div><p class="eyebrow">05 / VISUAL LANGUAGE</p><h2>每一次聚散，都有蝶樱回应。</h2></div><p>细蝶描摹层数，落樱标记归途。<br>以青墨为底，让樱粉与蝶光绽放。</p></div>
-      <div class="effect-tabs" role="tablist" aria-label="技能特效"><button id="effect-tab-Q" data-effect="Q" role="tab" aria-controls="effect-panel" aria-selected="true" tabindex="0">Q · 缠蝶</button><button id="effect-tab-W" data-effect="W" role="tab" aria-controls="effect-panel" aria-selected="false" tabindex="-1">W · 蝶反</button><button id="effect-tab-E" data-effect="E" role="tab" aria-controls="effect-panel" aria-selected="false" tabindex="-1">E · 踏樱</button><button id="effect-tab-R" data-effect="R" role="tab" aria-controls="effect-panel" aria-selected="false" tabindex="-1">R · 蝶梦</button><button id="effect-tab-X" data-effect="X" role="tab" aria-controls="effect-panel" aria-selected="false" tabindex="-1">X · 樱引</button></div>
+      <div class="effect-tabs" role="tablist" aria-label="技能特效"><button id="effect-tab-Q" data-effect="Q" role="tab" aria-controls="effect-panel" aria-selected="true" tabindex="0">Q · 缠蝶</button><button id="effect-tab-W" data-effect="W" role="tab" aria-controls="effect-panel" aria-selected="false" tabindex="-1">W · 蝶反</button><button id="effect-tab-E" data-effect="E" role="tab" aria-controls="effect-panel" aria-selected="false" tabindex="-1">E · 踏樱</button><button id="effect-tab-R" data-effect="R" role="tab" aria-controls="effect-panel" aria-selected="false" tabindex="-1">R · 蝶梦</button><button id="effect-tab-X" data-effect="X" role="tab" aria-controls="effect-panel" aria-selected="false" tabindex="-1">X · 蝶引</button></div>
       <div class="effect-stage" id="effect-stage" data-art="Q">
         <div class="skill-art" aria-hidden="true">
           <div class="scene-orbit"></div><div class="scene-orbit small"></div>
           <div class="scene-field"><svg><use href="#flower"/></svg></div>
           <div class="scene-sigil"><svg><use href="#flower"/></svg><span>熙</span></div>
-          <div class="scene-needles"><i></i><i></i><i></i><i></i><i></i></div>
+          <div class="scene-petals"><i><svg><use href="#butterfly"/></svg></i><i><svg><use href="#butterfly"/></svg></i><i><svg><use href="#butterfly"/></svg></i><i><svg><use href="#butterfly"/></svg></i><i><svg><use href="#butterfly"/></svg></i></div>
           <svg class="scene-butterfly butterfly-1"><use href="#butterfly"/></svg><svg class="scene-butterfly butterfly-2"><use href="#butterfly"/></svg><svg class="scene-butterfly butterfly-3"><use href="#butterfly"/></svg><svg class="scene-butterfly butterfly-4"><use href="#butterfly"/></svg><svg class="scene-butterfly butterfly-5"><use href="#butterfly"/></svg>
           <span class="scene-kanji">蝶</span><div class="scene-caption"><span id="effect-caption">缠蝶 / 蝶樱领域</span><span>HE XI</span></div>
         </div>
@@ -1909,9 +1920,9 @@ footer {
 
   <footer><a class="brand" href="#top"><svg><use href="#butterfly"/></svg><strong>和熙</strong></a><span>花落未尽，蝶梦不息。</span><a href="#top">回到花间 ↑</a></footer>
 <script>
-/* 和熙 IP 工作稿 v0.6。资源信息取自发布页，数值为原型建议。 */
+/* 和熙 IP 工作稿 v0.7。资源信息取自发布页，数值为原型建议。 */
 window.HexiData = {
-  version: '0.6',
+  version: '0.7',
   date: '2026-11-09',
   effects: [
     { name: 'Turmeric Butterfly', use: 'R 的五只独立蝴蝶蝶翼造型参考', source: 'https://www.hiveworkshop.com/threads/turmeric-butterfly.303893/', note: 'Remixer · 有动画的蝴蝶单位，使用游戏内贴图。先测试改色与巡游动作。' },
@@ -1955,11 +1966,11 @@ const skills = {
     tip: '范围法术、真视、BOSS 机制对隐身英雄的交互按原图约定处理。生命、护甲、走位和 W 组成生存体系。'
   },
   X: {
-    title: '不落之樱', type: '专属符文 / 樱隐、樱尽与蝶针',
-    lead: '樱隐整合自动隐身与免控，樱尽被动扩展层数上限。主动「蝶针·樱引」，在进场前为区域敌人铺下蝶印。',
-    stats: ['樱隐 <b>3 秒触发 / 3 秒持续</b>', '樱尽 <b>默认 24 层</b>', '蝶针 <b>18 秒冷却</b>'],
-    bullets: ['被动「樱隐」首次第 3 秒触发，之后每 3 秒刷新，持续 3 秒。触发时解除眩晕，状态内隐身并免疫常规控制。', '被动「樱尽」在装备符文后立即将蝶印上限提高到 24 层。Q 出手时处于樱隐，则直击命中增加 2 层，领域脉冲仍固定 1 层。', '主动「蝶针·樱引」点选全图视野内允许交战的区域，350 范围落三波蝶针，每波增加 2 层、造成 0.20P 伤害。', '三波间隔 0.3 秒，全部命中可从零层预叠到 6 层，再由 E 切入。蝶针固定叠层，Q 双层收益由樱隐状态决定。'],
-    tip: '每 3 秒触发、持续 3 秒会连续覆盖樱隐，长期等效持续隐身、免控与双层 Q。蝶针可从零层起手，为踏樱预先铺印。'
+    title: '不落之樱', type: '专属符文 / 樱隐、樱尽与蝶引',
+    lead: '樱隐整合自动隐身与免控，樱尽被动扩展层数上限。主动「蝶引」，在进场前为区域敌人铺下蝶印。',
+    stats: ['樱隐 <b>3 秒触发 / 3 秒持续</b>', '樱尽 <b>默认 24 层</b>', '蝶引 <b>18 秒冷却</b>'],
+    bullets: ['被动「樱隐」首次第 3 秒触发，之后每 3 秒刷新，持续 3 秒。触发时解除眩晕，状态内隐身并免疫常规控制。', '被动「樱尽」在装备符文后立即将蝶印上限提高到 24 层。Q 出手时处于樱隐，则直击命中增加 2 层，领域脉冲仍固定 1 层。', '主动「蝶引」点选全图视野内允许交战的区域，350 范围幻樱连续绽放三次，花瓣触敌化蝶，每波增加 2 层、造成 0.20P 伤害。', '三波间隔 0.3 秒，全部命中可从零层预叠到 6 层，再由 E 切入。蝶引固定叠层，Q 双层收益由樱隐状态决定。'],
+    tip: '每 3 秒触发、持续 3 秒会连续覆盖樱隐，长期等效持续隐身、免控与双层 Q。蝶引可从零层起手，为踏樱预先铺印。'
   }
 };
 
@@ -2048,8 +2059,8 @@ let hitCount = 0;
 let selectedEnemy = 0;
 let rActive = true;
 let runeEquippedAt = 0;
-let needleAiming = false;
-let pendingNeedles = [];
+let lureAiming = false;
+let pendingLures = [];
 let hero = { x: width / 2, y: height / 2, hp: 0.35, phaseUntil: 0 };
 let enemies = [];
 let butterflies = [];
@@ -2110,9 +2121,9 @@ function resetDemo() {
   hitCount = 0;
   selectedEnemy = 0;
   runeEquippedAt = 0;
-  needleAiming = false;
-  pendingNeedles = [];
-  updateNeedleButton();
+  lureAiming = false;
+  pendingLures = [];
+  updateLureButton();
   hero = { x: width / 2, y: height / 2, hp: 0.35, phaseUntil: 0 };
   pendingLanding = null;
   pulses = [];
@@ -2252,14 +2263,15 @@ function updateScene(delta) {
     updateDemoMetrics();
     return false;
   });
-  pendingNeedles = pendingNeedles.filter((wave) => {
+  pendingLures = pendingLures.filter((wave) => {
     if (time < wave.at) return true;
     enemies.forEach((enemy) => {
       if (distance(enemy, wave.position) > 350 * scale) return;
       damage(enemy, wave.base * 0.20);
       addMark(enemy, 2);
+      pulse(enemy.x, enemy.y, 15, 'lure-mark');
     });
-    pulse(wave.position.x, wave.position.y, 350 * scale, 'needle');
+    pulse(wave.position.x, wave.position.y, 350 * scale, 'lure');
     updateDemoMetrics();
     return false;
   });
@@ -2399,19 +2411,29 @@ function drawScene() {
   pulses = pulses.filter((item) => time - item.start < item.duration);
   pulses.forEach((item) => {
     const progress = Math.max(0, (time - item.start) / item.duration);
-    if (item.style === 'needle') {
+    if (item.style === 'lure') {
+      drawFlower(item.x, item.y, item.radius * (0.25 + progress * 0.75), (1 - progress) * 0.4);
+      for (let petal = 0; petal < 5; petal += 1) {
+        const angle = petal / 5 * Math.PI * 2 + 0.2;
+        const spread = item.radius * (0.2 + progress * 0.7);
+        const x = item.x + Math.cos(angle) * spread;
+        const y = item.y + Math.sin(angle) * spread;
+        if (progress < 0.35) drawFlower(x, y, 6, (1 - progress) * 0.5);
+        else {
+          context.save();
+          context.globalAlpha = (1 - progress) * 0.9;
+          drawButterfly(x, y, angle, 0.45, '#efb8d0');
+          context.restore();
+        }
+      }
+    }
+    if (item.style === 'lure-mark') {
       context.save();
       context.globalAlpha = (1 - progress) * 0.8;
-      context.strokeStyle = '#efb8d0';
-      for (let index = -2; index <= 2; index += 1) {
-        const x = item.x + index * item.radius * 0.32;
-        context.beginPath();
-        context.moveTo(x - 8, item.y - 60 * (1 - progress));
-        context.lineTo(x, item.y + 8);
-        context.stroke();
-      }
+      drawButterfly(item.x + Math.cos(progress * Math.PI * 2) * 12, item.y - 14 - Math.sin(progress * Math.PI) * 8, 0.2, 0.45, '#f1c5d7');
       context.restore();
     }
+    if (item.style === 'lure-bud') drawFlower(item.x, item.y, 14 + progress * 12, (1 - progress) * 0.7);
     if (item.style === 'flower') drawFlower(item.x, item.y, item.radius * (0.5 + progress * 0.5), (1 - progress) * 0.45);
     context.save();
     context.globalAlpha = (1 - progress) * 0.65;
@@ -2504,14 +2526,14 @@ find('reset-demo').addEventListener('click', resetDemo);
 find('rune-enabled').addEventListener('change', () => {
   const enabled = find('rune-enabled').checked;
   runeEquippedAt = time;
-  needleAiming = false;
-  if (!enabled) pendingNeedles = [];
-  updateNeedleButton();
+  lureAiming = false;
+  if (!enabled) pendingLures = [];
+  updateLureButton();
   const cap = enabled ? 24 : 12;
   enemies.forEach((enemy) => { enemy.marks = Math.min(enemy.marks, cap); });
   updateCalculator();
   updateDemoMetrics();
-  find('demo-event').textContent = enabled ? '符文已开启，上限立即 24 层，3 秒后进入樱隐。X 可点选区域落蝶针。' : '已切回基础英雄，蝶印上限为 12 层。';
+  find('demo-event').textContent = enabled ? '符文已开启，上限立即 24 层，3 秒后进入樱隐。X 可点选区域施放蝶引。' : '已切回基础英雄，蝶印上限为 12 层。';
 });
 
 function prepareAction() {
@@ -2562,37 +2584,37 @@ find('demo-R').addEventListener('click', () => {
   updateDemoMetrics();
 });
 
-function updateNeedleButton() {
+function updateLureButton() {
   find('demo-X').disabled = !find('rune-enabled').checked;
-  find('demo-X').setAttribute('aria-pressed', String(needleAiming));
-  find('demo-X').innerHTML = `<kbd>X</kbd> ${needleAiming ? '点选区域 / 再按取消' : '蝶针点选区域'}`;
-  canvas.style.cursor = needleAiming ? 'crosshair' : 'default';
+  find('demo-X').setAttribute('aria-pressed', String(lureAiming));
+  find('demo-X').innerHTML = `<kbd>X</kbd> ${lureAiming ? '点选区域 / 再按取消' : '蝶引点选区域'}`;
+  canvas.style.cursor = lureAiming ? 'crosshair' : 'default';
 }
 
 find('demo-X').addEventListener('click', () => {
   if (!find('rune-enabled').checked || hero.phaseUntil || pendingLanding) return;
   prepareAction();
-  needleAiming = !needleAiming;
-  updateNeedleButton();
-  find('demo-event').textContent = needleAiming ? '请点战场任意区域，三波蝶针从零层铺印，然后可接 E。' : '已取消蝶针区域选择。';
+  lureAiming = !lureAiming;
+  updateLureButton();
+  find('demo-event').textContent = lureAiming ? '请点战场任意区域，幻樱三次绽放，从零层铺下蝶印，然后可接 E。' : '已取消蝶引区域选择。';
 });
 
-function castNeedles(position) {
+function castLure(position) {
   const { base } = updateCalculator();
   for (let wave = 0; wave < 3; wave += 1) {
-    pendingNeedles.push({ position: { ...position }, base, at: time + 0.25 + wave * 0.3 });
+    pendingLures.push({ position: { ...position }, base, at: time + 0.25 + wave * 0.3 });
   }
-  needleAiming = false;
-  updateNeedleButton();
-  pulse(position.x, position.y, 350 * scale, 'green');
-  find('demo-event').textContent = '蝶针已锁定区域，三波各 +2 层，全部命中共 +6 层，可接 E 踏樱。';
+  lureAiming = false;
+  updateLureButton();
+  pulse(position.x, position.y, 350 * scale, 'lure-bud');
+  find('demo-event').textContent = '蝶引唤起幻樱，花瓣三次绽放化蝶：每波 +2 层，全部命中共 +6 层，可接 E 踏樱。';
 }
 
 canvas.addEventListener('click', (event) => {
   const bounds = canvas.getBoundingClientRect();
   const position = { x: (event.clientX - bounds.left) / bounds.width * width, y: (event.clientY - bounds.top) / bounds.height * height };
-  if (needleAiming) {
-    castNeedles(position);
+  if (lureAiming) {
+    castLure(position);
     return;
   }
   const closest = enemies.reduce((best, enemy) => distance(enemy, position) < distance(best, position) ? enemy : best);
@@ -2609,7 +2631,7 @@ const effectDesigns = {
   W: { title: '蝶反 · 樱瓣归身', caption: '蝶反 / 聚散与归来', description: '身体从轮廓开始散成樱瓣与蝶光，短暂隐去，再由花瓣逆向聚合归来。', details: ['消失：花瓣自衣摆向上散开，身影淡出。', '留痕：原地保留微亮返场花印。', '归来：樱瓣回流成形，青白微光沿轮廓散去。'] },
   E: { title: '踏樱 · 蝶印绽爆', caption: '踏樱 / 落脚花环', description: '落点先亮起樱纹，身影自上空踩落。蝶印汇向脚下，在一瞬间绽出完整花环。', details: ['预兆：落点花纹与一道短促下落光迹。', '引爆：蝶群向内汇聚，樱环向外舒展。', '余韵：花瓣贴地飘散，保留下来的蝶印继续绕身。'] },
   R: { title: '蝶梦 · 五蝶赴阵', caption: '蝶梦 / 五蝶巡游', description: '五只游蝶依次离巢，向敌人散开。每次命中都绽出一小簇樱光，本体隐于蝶梦之中。', details: ['出巢：固定五蝶，依次从肩侧展开。', '巡游：短尾迹描出路径，命中处亮起小花。', '樱隐：本体半透明，青色轮廓保留识别。'] },
-  X: { title: '樱引 · 蝶针落境', caption: '樱引 / 三波蝶针', description: '细长蝶针穿过花间，自空中落入选定区域。三波樱纹逐次亮起，为远方敌人种下蝶印。', details: ['落针：轻细光线由高处坠落，针尾带一瓣樱。', '铺印：每波命中，目标身侧多出新的蝶光。', '樱尽：高层蝶印呈现更深的樱色与完整细环。'] }
+  X: { title: '蝶引', caption: '蝶引 / 花开蝶栖', description: '在指定区域唤醒一朵幻樱，连续三次舒展花瓣。花瓣触敌化蝶，停驻身侧，种下蝶印。', details: ['唤花：落点浮现淡粉花苞，细蝶环绕。', '绽放：每隔 0.3 秒舒展一波花瓣，触敌化蝶，每波叠加 2 层。', '蝶栖：三波全部命中共 6 层；花纹随后消散，可接踏樱引爆。'] }
 };
 function showEffect(key, focus = false) {
   const design = effectDesigns[key];
