@@ -1784,6 +1784,16 @@ footer {
 @media(max-width:800px) { .effect-stage { grid-template-columns:1fr; }.skill-art { min-height:330px; }.effect-copy { padding:30px 25px; }.timing-summary { align-items:flex-start; }.effect-tabs button { font-size:12px; padding:15px 4px; } }
 @media(prefers-reduced-motion:reduce) { *,*:before,*:after { animation:none!important; transition:none!important; } }
 
+.combo-demo { display:flex; align-items:center; gap:18px; margin:0 18px 15px; padding:14px; background:#294638; border:1px solid #71866d; }
+.combo-demo button { flex-shrink:0; background:#dce3cc; border:0; color:#203d2f; padding:10px 15px; font-size:11px; }
+.combo-demo kbd { margin-right:8px; }
+.combo-demo p { color:#c2d3b9; font-size:10px; line-height:1.8; margin:0; }
+.calculator .e-stack-note { border-left:2px solid var(--pink); padding-left:10px; color:var(--pink); }
+@media(max-width:700px) { .combo-demo { flex-direction:column; align-items:stretch; gap:10px; }.combo-demo button { text-align:left; } }
+
+.rune-passives { grid-template-columns:repeat(3,1fr); }
+@media(max-width:800px) { .rune-passives { grid-template-columns:1fr; } }
+
 </style>
 </head>
 <body>
@@ -1819,15 +1829,15 @@ footer {
       </div>
     </section>
 
-    <div class="direction-strip"><div><b>蝶樱之术</b><span>E 引爆蝶印</span><span>R 隐身 + 无碰撞</span><span>五蝶自动索敌</span></div><div><b>战斗姿态</b><span>敏捷灵活输出</span><span>远程蝶引先手</span><span>分散巡游五蝶</span></div></div>
+    <div class="direction-strip"><div><b>蝶樱之术</b><span>E 先叠 3 层再引爆</span><span>R 隐身 + 无碰撞</span><span>五蝶自动索敌</span></div><div><b>战斗姿态</b><span>敏捷灵活输出</span><span>远程蝶引先手</span><span>分散巡游五蝶</span></div></div>
 
     <section class="section" id="skills">
       <div class="section-heading"><div><p class="eyebrow">01 / COMBAT LANGUAGE</p><h2>蝶印，把整套技能连起来。</h2></div><p>Q 集火叠印，领域缓慢铺场，E 踩爆，R 扩大覆盖。<br>蝶印越深，伤害越盛。</p></div>
       <div class="skill-layout">
         <div class="skill-tabs" role="tablist" aria-label="选择技能">
           <button class="skill-tab active" role="tab" aria-selected="true" aria-controls="skill-panel" id="tab-Q" data-skill="Q"><kbd>Q</kbd><span>缠蝶<small>直击叠印 / 概率领域</small></span><i>↗</i></button>
-          <button class="skill-tab" role="tab" aria-selected="false" aria-controls="skill-panel" id="tab-W" data-skill="W"><kbd>W</kbd><span>蝶反<small>化蝶消失 / 致死保护</small></span><i>↗</i></button>
-          <button class="skill-tab" role="tab" aria-selected="false" aria-controls="skill-panel" id="tab-E" data-skill="E"><kbd>E</kbd><span>踏樱 · 蝶落<small>全图位移 / 蝶印引爆</small></span><i>↗</i></button>
+          <button class="skill-tab" role="tab" aria-selected="false" aria-controls="skill-panel" id="tab-W" data-skill="W"><kbd>W</kbd><span>蝶反<small>固定蝶影 / 化蝶返场</small></span><i>↗</i></button>
+          <button class="skill-tab" role="tab" aria-selected="false" aria-controls="skill-panel" id="tab-E" data-skill="E"><kbd>E</kbd><span>踏樱 · 蝶落<small>落地 +3 层 / 蝶印引爆</small></span><i>↗</i></button>
           <button class="skill-tab" role="tab" aria-selected="false" aria-controls="skill-panel" id="tab-R" data-skill="R"><kbd>R</kbd><span>万樱蝶梦<small>隐身穿行 / 五蝶巡游</small></span><i>↗</i></button>
           <button class="skill-tab rune-tab" role="tab" aria-selected="false" aria-controls="skill-panel" id="tab-X" data-skill="X"><kbd>X</kbd><span>不落之樱<small>周期樱隐 / 蝶引先手</small></span><i>✧</i></button>
         </div>
@@ -1842,7 +1852,7 @@ footer {
         <div class="field-parameter-list"><div><span>生成概率</span><b>25% / 合格直击</b></div><div><span>生成内置冷却</span><b>1.5 秒</b></div><div><span>领域数量</span><b>每英雄最多 2 个</b></div><div><span>重叠结算</span><b>每目标每秒最多 1 次</b></div></div>
         <p class="field-design-note">樱隐双层只强化 Q 直击，领域固定每秒 1 层。领域固定留在地面，敌人离开后停止吃到后续脉冲。新领域超过数量上限时替换最早生成的领域。</p>
       </div>
-      <div class="combat-flow"><span>Q <b>直击与领域</b></span><i>→</i><span>R <b>巡游铺场</b></span><i>→</i><span>E <b>踏樱引爆</b></span><i>→</i><span>W <b>化蝶返场</b></span></div>
+      <div class="combat-flow"><span>Q <b>直击与领域</b></span><i>→</i><span>R <b>巡游铺场</b></span><i>→</i><span>E <b>踏樱引爆</b></span><i>→</i><span>W <b>循蝶影返回</b></span></div>
     </section>
 
     <section class="demo-section" id="simulation">
@@ -1853,6 +1863,7 @@ footer {
           <canvas id="arena" width="960" height="600" aria-label="五蝶自动巡游和命中范围动画。使用旁边按钮切换飞行形态、敌人分布和技能。"></canvas>
           <div class="arena-legend"><span><i class="legend-hero"></i>和熙</span><span><i class="legend-enemy"></i>敌人 / 数字为蝶印</span><span><i class="legend-butterfly"></i>五蝶</span><span>樱粉圆区为 Q 领域</span><span>虚线圈为索敌边界</span></div>
           <div class="demo-controls"><button id="demo-Q"><kbd>Q</kbd> 直击 / 概率领域</button><button id="demo-W"><kbd>W</kbd> 化蝶返场</button><button id="demo-E"><kbd>E</kbd> 踩落引爆</button><button id="demo-R" aria-pressed="true"><kbd>R</kbd> 隐身已开启</button><button id="demo-X" disabled aria-pressed="false"><kbd>X</kbd> 蝶引点选区域</button></div>
+          <div class="combo-demo"><button id="demo-EW"><kbd>E → W</kbd> 踩入与返回</button><p id="echo-status" role="status">唯一蝶影持续保留 · W 返回 · E 更新记录</p></div>
           <div class="field-demo-line"><label class="toggle-line"><input type="checkbox" id="auto-q"><span>自动蝶击演示</span></label><span id="field-status">蝶樱领域 0 / 2 · 每秒脉冲 +1 层</span></div><p id="demo-event" class="demo-event" role="status" aria-live="polite">五蝶已出发，自动寻找周围敌人。</p>
         </div>
         <aside class="demo-aside">
@@ -1861,7 +1872,7 @@ footer {
           <label class="field-label" for="scenario">敌人分布</label><select id="scenario"><option value="spread">分散怪群</option><option value="dense">密集怪群</option><option value="boss">单个 BOSS</option></select>
           <label class="toggle-line"><input type="checkbox" id="rune-enabled"><span>装备「不落之樱」· 开启 X</span></label><p id="shroud-status" class="shroud-status" role="status">樱隐未启用 · Q 每次 1 层</p>
           <button class="ghost-button wide" id="reset-demo">重置本次演示</button>
-          <p class="demo-footnote">X 先点按钮，再点战场区域，幻樱三次绽放，花瓣化蝶预叠印。点击敌人可设定 Q / E 目标，R 五蝶继续自主索敌。</p>
+          <p class="demo-footnote">X 先点按钮，再点战场区域，幻樱三次绽放，花瓣化蝶预叠印。点击敌人可设定 Q / E 目标，点击空地可移动，W 返回固定蝶影；每次 E 起跳更新蝶影位置。R 五蝶继续自主索敌。</p>
         </aside>
       </div>
       <p class="on-dark-note">每蝶每秒命中一次，命中绽花半径 220。同一敌人每 0.5 秒最多吃到两次 R 命中。单目标满速上限约四次 / 秒，五蝶同时汇聚时按此上限结算。</p>
@@ -1874,24 +1885,26 @@ footer {
           <p>Q 依靠连续出手叠印，W 用于规避和返场，E 提供跨场切入，R 让游蝶分散铺场。敏捷与攻速能直接强化这条循环，生命与恢复作为生存选择。</p>
           <div class="formula">P = 0.6 × A + 3 × G</div>
           <p class="formula-caption">A 为当前面板攻击力，G 为当前敏捷；Q 出手频率随攻速提升。下列公式为角色设定中的原始伤害，减伤与额外增幅另行结算。</p>
-          <dl class="formula-list"><div><dt>Q 主目标</dt><dd>P × (1 + 0.08 × 蝶印层数)</dd></div><div><dt>E 主目标</dt><dd>P × (2 + 0.25 × 蝶印层数)</dd></div><div><dt>每次 R 命中</dt><dd>0.20P · 命中点 220 范围</dd></div><div><dt>X 蝶引 / 每波</dt><dd>0.20P + 2 层蝶印</dd></div></dl>
-          <p class="small-note">E 范围内其他敌人按各自层数取主公式的 60%。Q 领域每秒造成 0.25P 伤害并增加 1 层。X 共三波，命中全部三波可增加 6 层。魔抗与地图增伤另行结算。</p>
+          <dl class="formula-list"><div><dt>Q 主目标</dt><dd>P × (1 + 0.08 × 蝶印层数)</dd></div><div><dt>E 主目标</dt><dd>n′ = min(上限, 蝶印 + 3)<br>P × (2 + 0.25 × n′)</dd></div><div><dt>每次 R 命中</dt><dd>0.20P · 命中点 220 范围</dd></div><div><dt>X 蝶引 / 每波</dt><dd>0.20P + 2 层蝶印</dd></div><div><dt>符文 / 蝶影回响</dt><dd>0.40P + 2 层蝶印</dd></div></dl>
+          <p class="small-note">E 落地先为范围目标增加 3 层，再按各自新层数引爆；周围敌人取主公式的 60%。Q 领域每秒造成 0.25P 伤害并增加 1 层。X 共三波，命中全部三波可增加 6 层。魔抗与地图增伤另行结算。</p>
         </div>
         <div class="calculator"><div class="calculator-head"><h3>伤害试算</h3><span>蝶印伤害</span></div>
           <label for="attack">面板攻击 A <output id="attack-value">5,000</output></label><input id="attack" type="range" min="500" max="30000" step="500" value="5000">
           <label for="agility">敏捷 G <output id="agility-value">1,000</output></label><input id="agility" type="range" min="100" max="6000" step="100" value="1000">
-          <label for="marks">目标蝶印 <output id="marks-value">12 层</output></label><input id="marks" type="range" min="0" max="12" step="1" value="12">
+          <label for="marks">落地前蝶印 <output id="marks-value">12 层</output></label><input id="marks" type="range" min="0" max="12" step="1" value="12">
           <div class="calc-results"><div><span>基础伤害 P</span><b id="base-damage">6,000</b></div><div><span>Q 主目标 / 次</span><b id="q-damage">11,760</b></div><div><span>E 主目标 / 次</span><b id="e-damage">30,000</b></div><div><span>R 每次命中</span><b id="r-damage">1,200</b></div></div>
+          <p id="e-stack-note" class="e-stack-note">E 落地 12 → 12 层后引爆，保留 6 层。</p>
+          <p id="echo-damage-note" class="e-stack-note">装备不落之樱后，W 返回蝶影可触发回响。</p>
           <p id="calc-rune">基础英雄最多 12 层。装备符文后，樱尽被动立即把上限提高到 24 层。</p>
           <div class="growth-bars" aria-label="基础伤害构成"><span id="attack-bar"></span><span id="agility-bar"></span></div><p class="bars-caption"><i></i>面板攻击贡献 <em></em>敏捷直接贡献</p>
         </div>
       </div>
-      <div class="build-notes"><article><b>连续蝶击</b><p>攻速提升直击频率，主目标快速叠印；蝶樱领域每秒铺下一层，让周围敌人持续染上蝶印。</p></article><article><b>踏樱连击</b><p>蝶引远程铺印，E 踩落引爆。保留一半印记后，蝶击与游蝶继续积累下一次爆发。</p></article><article><b>樱尽之境</b><p>不落之樱将上限延展至 24 层。樱隐中的双层直击，让持续交战中的蝶印不断加深。</p></article></div>
+      <div class="build-notes"><article><b>连续蝶击</b><p>攻速提升直击频率，主目标快速叠印；蝶樱领域每秒铺下一层，让周围敌人持续染上蝶印。</p></article><article><b>踏樱连击</b><p>蝶引远程铺印，E 踩落先加 3 层再引爆；按 W 返回固定蝶影，五蝶继续巡游；装备符文后，离开点绽放蝶影回响。</p></article><article><b>樱尽之境</b><p>不落之樱将上限延展至 24 层。樱隐中的双层直击，让持续交战中的蝶印不断加深。</p></article></div>
     </section>
 
     <section class="section rune-section" id="rune">
       <div class="section-heading"><div><p class="eyebrow">04 / THE EVERLASTING BLOSSOM</p><h2>樱隐护身，蝶引唤花。</h2></div><p>专属符文「不落之樱」。<br>樱隐护身，樱尽拓印，蝶引唤花。</p></div>
-      <div class="rune-passives"><article><span>被动一 / 樱隐</span><h3>每 3 秒刷新 3 秒樱隐</h3><p>触发时解除已有眩晕，状态中持续隐身并免疫常规控制。攻击与施法维持樱隐，Q 直击在出手时读取状态，每次命中增加 2 层蝶印。</p></article><article><span>被动二 / 樱尽</span><h3>装备后默认 24 层上限</h3><p>上限提升即时生效。普通状态 Q 直击每次增加 1 层，樱隐期间增加 2 层。领域每秒固定增加 1 层。R 与蝶引使用各自固定叠层规则。</p></article></div>
+      <div class="rune-passives"><article><span>被动一 / 樱隐</span><h3>每 3 秒刷新 3 秒樱隐</h3><p>触发时解除已有眩晕，状态中持续隐身并免疫常规控制。攻击与施法维持樱隐，Q 直击在出手时读取状态，每次命中增加 2 层蝶印。</p></article><article><span>被动二 / 樱尽</span><h3>装备后默认 24 层上限</h3><p>上限提升即时生效。普通状态 Q 直击每次增加 1 层，樱隐期间增加 2 层。领域每秒固定增加 1 层。R 与蝶引使用各自固定叠层规则。</p></article><article><span>被动三 / 蝶影回响</span><h3>归影时，离开点绽花</h3><p>W 成功返回固定蝶影时，在刚离开的位置触发一次 350 范围蝶樱绽放，造成 0.40P 伤害并固定增加 2 层蝶印。蝶影保持原位，等待下一次踏樱更新。</p></article></div>
       <div class="timing-lab"><div class="timing-heading"><div><b>樱隐时序</b><p>首次第 3 秒进入樱隐，此后每 3 秒刷新，持续覆盖隐身与免控。</p></div><div class="timing-summary"><b>每 3 秒刷新</b><span>持续 3 秒 · 连续樱隐</span></div><input id="shroud-period" type="hidden" value="3"></div><div id="shroud-timeline" class="shroud-timeline" aria-label="樱隐开始后十二秒的覆盖时序"></div><p id="shroud-timing-note">3 秒触发 + 3 秒持续在后续周期无缝衔接，长期等效持续隐身、免控与 Q 双层。</p></div>
       <div class="active-proposal"><span class="pill">主动 / 蝶引</span><h3>樱花引蝶，蝶栖成印。</h3><p>全图点选己方视野内、允许交战的一片 350 范围区域，唤起一朵幻樱，连续三次绽放。花瓣触敌化蝶，施加蝶印。每波间隔 0.3 秒，造成 0.20P 伤害并增加 2 层蝶印。命中全部三波合计 6 层，冷却 18 秒。</p><p>技能可直接从零层起手。蝶引覆盖后，E 踩进场引爆，Q 持续叠伤，R 自动巡游。进场与引蝶时机都由玩家决定。</p></div>
     </section>
@@ -1910,7 +1923,7 @@ footer {
         </div>
         <article class="effect-copy" id="effect-panel" role="tabpanel" aria-labelledby="effect-tab-Q"><p class="eyebrow">BUTTERFLY / BLOSSOM / VEIL</p><h3 id="effect-name">缠蝶 · 逐层绽放</h3><p id="effect-description"></p><ul id="effect-details"></ul><span class="effect-label">蝶樱动态意象</span></article>
       </div>
-      <div class="visual-sequence"><article><svg><use href="#butterfly"/></svg><b>蝶印 / 绕身蝶</b><p>1—4、5—8、9—12 层分别以一、二、三只轻蝶绕身。13—24 层加深蝶翼色泽，浮现细薄樱环。</p></article><article><svg><use href="#flower"/></svg><b>返场 / 聚散</b><p>身体散成樱瓣，回归时逆向聚合。地面留下一枚小花印，标记归来的位置。</p></article><article><svg><use href="#flower"/></svg><b>引爆 / 落脚花</b><p>落点花纹先行亮起，踩落时绽出一圈樱环。蝶印向脚下汇聚，层数越深，花光越盛。</p></article><article><svg><use href="#butterfly"/></svg><b>巡游 / 五蝶出巢</b><p>五只蝶从肩侧依次离身，拖出细短尾迹。隐身本体保留本人和队友可辨的青色轮廓。</p></article></div>
+      <div class="visual-sequence"><article><svg><use href="#butterfly"/></svg><b>蝶印 / 绕身蝶</b><p>1—4、5—8、9—12 层分别以一、二、三只轻蝶绕身。13—24 层加深蝶翼色泽，浮现细薄樱环。</p></article><article><svg><use href="#flower"/></svg><b>返场 / 聚散</b><p>身体散成樱瓣，回归时逆向聚合。唯一蝶影持续保留，E 更新其位置，W 循花印返回；符文让离开点绽出回响。</p></article><article><svg><use href="#flower"/></svg><b>引爆 / 落脚花</b><p>踩落瞬间三瓣蝶光亮起，范围内先增加 3 层蝶印，再汇聚为绽开的樱环。</p></article><article><svg><use href="#butterfly"/></svg><b>巡游 / 五蝶出巢</b><p>五只蝶从肩侧依次离身，拖出细短尾迹。隐身本体保留本人和队友可辨的青色轮廓。</p></article></div>
       <div class="palette-row"><span><i style="--swatch:#2c5144"></i>青墨 · 身影</span><span><i style="--swatch:#ae5e78"></i>樱粉 · 蝶翼</span><span><i style="--swatch:#e8abc1"></i>浅樱 · 绽放</span><span><i style="--swatch:#c7d6b7"></i>青白 · 生息</span></div>
       <details class="effect-resources"><summary>特效素材参考</summary><div id="effect-sources" class="effect-sources"></div></details>
       <p class="small-note">动态画面为技能表现示意。</p>
@@ -1920,9 +1933,9 @@ footer {
 
   <footer><a class="brand" href="#top"><svg><use href="#butterfly"/></svg><strong>和熙</strong></a><span>花落未尽，蝶梦不息。</span><a href="#top">回到花间 ↑</a></footer>
 <script>
-/* 和熙 IP 工作稿 v0.7。资源信息取自发布页，数值为原型建议。 */
+/* 和熙 IP 工作稿 v0.9。资源信息取自发布页，数值为原型建议。 */
 window.HexiData = {
-  version: '0.7',
+  version: '0.9',
   date: '2026-11-09',
   effects: [
     { name: 'Turmeric Butterfly', use: 'R 的五只独立蝴蝶蝶翼造型参考', source: 'https://www.hiveworkshop.com/threads/turmeric-butterfly.303893/', note: 'Remixer · 有动画的蝴蝶单位，使用游戏内贴图。先测试改色与巡游动作。' },
@@ -1945,18 +1958,18 @@ const skills = {
     tip: '主目标跟随攻速快速叠层，周围靠固定领域缓慢铺印。领域固定停留在地面，离开区域后不再承受后续脉冲。'
   },
   W: {
-    title: '蝶反', type: '本体技能 / 生存与返场',
-    lead: '受到危险伤害时，身体化作蝶与樱瓣短暂消失，随后在原位置重新聚合。主动操作与致死保护有独立用途。',
-    stats: ['主动 <b>12 秒冷却</b>', '消失 <b>0.65 秒</b>', '致死 <b>75 秒独立冷却</b>'],
-    bullets: ['主动使用时短暂不可选取并免疫伤害，返回恢复 20% 已损失生命，清除约定的可解除负面状态。', '普通受击自动触发可开关。非致死伤害后生命低于 35% 时，使用同一份主动冷却。', '致死保护在该次伤害落地前生效，消失 1.2 秒，返回时生命至少 45%，使用独立长冷却。', '消失时暂停本体出手，已有五蝶继续运行。持续时间与其他技能冷却正常推进。'],
-    tip: '短暂化蝶规避危险，归来时恢复生息；普通返场与致死保护各有独立冷却。'
+    title: '蝶反', type: '本体技能 / 固定蝶影与生存返场',
+    lead: '将归处寄于一枚蝶影。化作樱瓣短暂消失，再于蝶影处聚合；每次踏樱起跳，都会把新的出发点留作归途。',
+    stats: ['蝶影 <b>固定位置 / 持续保留</b>', '消失 <b>0.65 秒</b>', '主动 <b>12 秒冷却</b>'],
+    bullets: ['始终保留一枚蝶影，初次登场时位于自身脚下；每次 E 起跳时，更新为该次 E 的出发点。', 'W 触发时锁定蝶影位置，消失 0.65 秒后返回，恢复 20% 已损生命；消失期间不可选取并免疫伤害。返回不消耗蝶影，下一次 E 才会更新其位置。', '非致死受击后生命低于 35% 时可自动触发，与主动共享冷却，自动触发可开关。致死保护为独立 75 秒冷却，消失 1.2 秒，返回时生命至少 45%。', '返回只改变位置，已结算的伤害、蝶印、资源与技能冷却继续保留。化蝶期间暂停本体出手，已有五蝶继续巡游。'],
+    tip: '复活时蝶影重置在脚下；跨阶段导致原点不可达时，迁至当前合法战斗位置。装备不落之樱后，返回可触发蝶影回响。'
   },
   E: {
-    title: '踏樱 · 蝶落', type: '本体技能 / 全图位移与层数引爆',
-    lead: '选择视野内可交战的敌人，散成樱瓣瞬闪至其上空，一脚踩开花环，引爆范围内每个敌人自身的蝶印。',
-    stats: ['施法 <b>全图 / 敌方目标</b>', '落地 <b>450 范围</b>', '冷却 <b>10 秒</b>'],
-    bullets: ['主目标伤害为 P × (2 + 0.25 × 自身蝶印层数)。周围敌人按自己的层数使用该公式，再乘 60%。', '结算后每个敌人消耗一半蝶印，向上取整，保留其余层数。', '位移动作约 0.3 秒，随后快速落地。停在目标附近，继续原来的蝶击操作。', '每个敌人在一次 E 中承受一次引爆，层数越深，落地伤害越高。'],
-    tip: '网页中点击敌人可选择 E 的演示落点，R 的五蝶仍按各自规则自动寻找目标。'
+    title: '踏樱 · 蝶落', type: '本体技能 / 全图位移、落地叠印与引爆',
+    lead: '瞬闪至目标上空，踩落瞬间先为脚下范围敌人增加 3 层蝶印，再以新的层数绽开爆发。出发点留下常驻蝶影，供蝶反返回。',
+    stats: ['落地 <b>450 范围 / 先 +3 层</b>', '蝶影 <b>记录本次出发点</b>', '冷却 <b>10 秒</b>'],
+    bullets: ['全图选择己方视野内可交战的敌人。落地时，范围内每个敌人先增加 3 层蝶印，遵守 12 / 24 层上限。', '以加层后的 n′ 结算主目标伤害 P × (2 + 0.25 × n′)。周围敌人按各自新层数使用该式，再乘 60%。', '结算后每个敌人消耗一半蝶印，消耗向上取整。例如零层目标先到 3 层，引爆后保留 1 层。', '起跳时将唯一蝶影更新到出发点，持续保留至下一次 E 更新；W 可循蝶影返回。每个敌人在一次 E 中只承受一次引爆。'],
+    tip: 'E 踩入叠印爆发，W 循固定蝶影撤回。蝶引可在进场前铺印，五蝶持续自主索敌。'
   },
   R: {
     title: '万樱蝶梦', type: '本体技能 / 持续隐身与五蝶巡游',
@@ -1966,11 +1979,11 @@ const skills = {
     tip: '范围法术、真视、BOSS 机制对隐身英雄的交互按原图约定处理。生命、护甲、走位和 W 组成生存体系。'
   },
   X: {
-    title: '不落之樱', type: '专属符文 / 樱隐、樱尽与蝶引',
-    lead: '樱隐整合自动隐身与免控，樱尽被动扩展层数上限。主动「蝶引」，在进场前为区域敌人铺下蝶印。',
+    title: '不落之樱', type: '专属符文 / 樱隐、樱尽、蝶影回响与蝶引',
+    lead: '樱隐整合自动隐身与免控，樱尽被动扩展层数上限。蝶影回响强化蝶反撤离，主动「蝶引」在进场前为区域敌人铺下蝶印。',
     stats: ['樱隐 <b>3 秒触发 / 3 秒持续</b>', '樱尽 <b>默认 24 层</b>', '蝶引 <b>18 秒冷却</b>'],
-    bullets: ['被动「樱隐」首次第 3 秒触发，之后每 3 秒刷新，持续 3 秒。触发时解除眩晕，状态内隐身并免疫常规控制。', '被动「樱尽」在装备符文后立即将蝶印上限提高到 24 层。Q 出手时处于樱隐，则直击命中增加 2 层，领域脉冲仍固定 1 层。', '主动「蝶引」点选全图视野内允许交战的区域，350 范围幻樱连续绽放三次，花瓣触敌化蝶，每波增加 2 层、造成 0.20P 伤害。', '三波间隔 0.3 秒，全部命中可从零层预叠到 6 层，再由 E 切入。蝶引固定叠层，Q 双层收益由樱隐状态决定。'],
-    tip: '每 3 秒触发、持续 3 秒会连续覆盖樱隐，长期等效持续隐身、免控与双层 Q。蝶引可从零层起手，为踏樱预先铺印。'
+    bullets: ['被动「樱隐」首次第 3 秒触发，之后每 3 秒刷新，持续 3 秒。触发时解除眩晕，状态内隐身并免疫常规控制。', '被动「樱尽」在装备符文后立即将蝶印上限提高到 24 层。Q 出手时处于樱隐，则直击命中增加 2 层，领域脉冲仍固定 1 层。', '主动「蝶引」点选全图视野内允许交战的区域，350 范围幻樱连续绽放三次，花瓣触敌化蝶，每波增加 2 层、造成 0.20P 伤害。', '三波间隔 0.3 秒，全部命中可从零层预叠到 6 层。W 返回蝶影时，在离开位置触发一次蝶影回响：350 范围、0.40P 伤害并固定增加 2 层蝶印。'],
+    tip: '每 3 秒触发、持续 3 秒会连续覆盖樱隐，长期等效持续隐身、免控与双层 Q。蝶影回响在 W 成功返回时触发一次，使用 W 出手时的基础伤害，遵守蝶印上限。'
   }
 };
 
@@ -2025,7 +2038,10 @@ function updateCalculator() {
   find('marks-value').textContent = `${marks} 层`;
   find('base-damage').textContent = number(base);
   find('q-damage').textContent = number(base * (1 + 0.08 * marks));
-  find('e-damage').textContent = number(base * (2 + 0.25 * marks));
+  const landingMarks = Math.min(cap, marks + 3);
+  find('e-damage').textContent = number(base * (2 + 0.25 * landingMarks));
+  find('e-stack-note').textContent = `E 落地 ${marks} → ${landingMarks} 层后引爆，保留 ${Math.floor(landingMarks / 2)} 层。`;
+  find('echo-damage-note').textContent = find('rune-enabled').checked ? `蝶影回响：W 返回后，离开位置造成 ${number(base * 0.4)} 范围伤害并增加 2 层。` : '装备不落之樱后，W 返回蝶影可在离开位置触发 0.40P 伤害与 2 层蝶印。';
   find('r-damage').textContent = number(base * 0.20);
   find('attack-bar').style.width = `${attack * 0.6 / base * 100}%`;
   find('agility-bar').style.width = `${agility * 3 / base * 100}%`;
@@ -2061,12 +2077,15 @@ let rActive = true;
 let runeEquippedAt = 0;
 let lureAiming = false;
 let pendingLures = [];
-let hero = { x: width / 2, y: height / 2, hp: 0.35, phaseUntil: 0 };
+let hero = { x: width / 2, y: height / 2, hp: 0.35, phaseUntil: 0, moveTarget: null };
 let enemies = [];
 let butterflies = [];
 let pulses = [];
 let projectiles = [];
 let pendingLanding = null;
+let echoAnchor = null;
+let pendingReturn = null;
+let comboReturnAt = null;
 
 function shroudAt(elapsed, period = 3) {
   if (elapsed < 3) return false;
@@ -2124,8 +2143,11 @@ function resetDemo() {
   lureAiming = false;
   pendingLures = [];
   updateLureButton();
-  hero = { x: width / 2, y: height / 2, hp: 0.35, phaseUntil: 0 };
+  hero = { x: width / 2, y: height / 2, hp: 0.35, phaseUntil: 0, moveTarget: null };
   pendingLanding = null;
+  echoAnchor = { x: hero.x, y: hero.y, source: 'initial' };
+  pendingReturn = null;
+  comboReturnAt = null;
   pulses = [];
   projectiles = [];
   fields = [];
@@ -2141,8 +2163,9 @@ function resetDemo() {
     return { id: index, x: centerX + Math.cos(angle) * radius, y: hero.y + Math.sin(angle) * radius, marks: 0, expires: 0, lastMark: -2, lastFieldHitAt: -Infinity, windowStart: -1, windowHits: 0, flashUntil: 0, damage: 0 };
   });
   butterflies = Array.from({ length: 5 }, (_, index) => ({ id: index, x: hero.x, y: hero.y, target: -1, nextHit: index * 0.2 + 0.3, retargetAt: 0, trail: [] }));
-  find('demo-event').textContent = '点击敌人设定 E 落点，五蝶会继续自动索敌。';
+  find('demo-event').textContent = '点击敌人选择 Q / E 目标，点击空地移动；可用 EW 连招体验踩入与返回。';
   updateDemoMetrics();
+  updateEchoStatus();
   drawScene();
 }
 
@@ -2212,8 +2235,74 @@ function updateDemoMetrics() {
   find('field-status').textContent = `蝶樱领域 ${fields.length} / ${fieldRules.maximum} · 每秒脉冲 +1 层`;
 }
 
+function updateEchoStatus() {
+  const source = echoAnchor && echoAnchor.source === 'E' ? '上一次 E 出发点' : '初始位置';
+  const text = pendingReturn ? '蝶反归途已锁定 · 正在返回固定蝶影' : `蝶影常驻于${source} · W 返回后保留 · 下次 E 更新位置`;
+  if (find('echo-status').textContent !== text) find('echo-status').textContent = text;
+}
+
+function bloomEcho(position, base) {
+  enemies.forEach((enemy) => {
+    if (distance(enemy, position) > 350 * scale) return;
+    damage(enemy, base * 0.4);
+    addMark(enemy, 2);
+    pulse(enemy.x, enemy.y, 15, 'lure-mark');
+  });
+  pulse(position.x, position.y, 350 * scale, 'lure');
+  updateDemoMetrics();
+}
+
+function recallButterflies() {
+  butterflies.forEach((butterfly) => {
+    if (distance(butterfly, hero) > searchRadius) {
+      butterfly.x = hero.x;
+      butterfly.y = hero.y;
+      butterfly.trail = [];
+    }
+  });
+  nextAssignment = 0;
+}
+
+function beginReversal() {
+  if (hero.phaseUntil || pendingLanding) return false;
+  prepareAction();
+  const point = echoAnchor || hero;
+  const { base } = updateCalculator();
+  pendingReturn = { x: point.x, y: point.y, departure: { x: hero.x, y: hero.y }, echoEnabled: find('rune-enabled').checked, base };
+  comboReturnAt = null;
+  hero.moveTarget = null;
+  hero.phaseUntil = time + 0.65;
+  pulse(hero.x, hero.y, 36, 'green');
+  pulse(point.x, point.y, 25, 'flower');
+  find('demo-event').textContent = 'W 锁定固定蝶影，化蝶 0.65 秒后返回；蝶影继续保留。';
+  updateEchoStatus();
+  return true;
+}
+
+function beginLeap(combo = false) {
+  if (hero.phaseUntil || pendingLanding) return false;
+  prepareAction();
+  const { base } = updateCalculator();
+  echoAnchor = { x: hero.x, y: hero.y, source: 'E' };
+  comboReturnAt = null;
+  hero.moveTarget = null;
+  pendingLanding = { target: enemies[selectedEnemy], at: time + 0.4, base, origin: { x: hero.x, y: hero.y }, combo };
+  pulse(pendingLanding.target.x, pendingLanding.target.y, 50, 'green');
+  find('demo-event').textContent = 'E 起跳留蝶影：落地先为 450 范围敌人 +3 层，再按新层数引爆。';
+  return true;
+}
+
 function updateScene(delta) {
   time += delta;
+  if (hero.moveTarget && !hero.phaseUntil && !pendingLanding) {
+    const length = distance(hero, hero.moveTarget);
+    const step = Math.min(length, delta * 140);
+    if (length > 0.1) {
+      hero.x += (hero.moveTarget.x - hero.x) / length * step;
+      hero.y += (hero.moveTarget.y - hero.y) / length * step;
+    }
+    if (length <= step + 0.1) hero.moveTarget = null;
+  }
   if (find('auto-q').checked && time >= nextAutoQ) {
     nextAutoQ = time + 0.35;
     fireQ(false);
@@ -2227,21 +2316,18 @@ function updateScene(delta) {
     updateDemoMetrics();
   }
   if (pendingLanding && time >= pendingLanding.at) {
-    const { target, base } = pendingLanding;
+    const { target, base, origin, combo } = pendingLanding;
     hero.x = target.x - 25;
     hero.y = target.y + 18;
     enemies.forEach((enemy) => {
       if (distance(target, enemy) > 450 * scale) return;
+      addMark(enemy, 3);
       damage(enemy, base * (2 + 0.25 * enemy.marks) * (enemy.id === target.id ? 1 : 0.6));
       enemy.marks = Math.floor(enemy.marks / 2);
     });
-    butterflies.forEach((butterfly) => {
-      if (distance(butterfly, hero) > searchRadius) {
-        butterfly.x = hero.x;
-        butterfly.y = hero.y;
-        butterfly.trail = [];
-      }
-    });
+    recallButterflies();
+    if (combo) comboReturnAt = time + 0.45;
+    find('demo-event').textContent = 'E 已落地：先 +3 层后引爆，消耗一半蝶印。出发点蝶影持续保留，可用 W 返回。';
     pulse(target.x, target.y, 450 * scale, 'flower');
     pendingLanding = null;
     nextAssignment = 0;
@@ -2249,9 +2335,20 @@ function updateScene(delta) {
   }
   if (hero.phaseUntil && time >= hero.phaseUntil) {
     hero.phaseUntil = 0;
+    if (pendingReturn) {
+      hero.x = Math.max(20, Math.min(width - 20, pendingReturn.x));
+      hero.y = Math.max(20, Math.min(height - 20, pendingReturn.y));
+      const echoTriggered = pendingReturn.echoEnabled && find('rune-enabled').checked;
+      if (echoTriggered) bloomEcho(pendingReturn.departure, pendingReturn.base);
+      find('demo-event').textContent = echoTriggered ? '蝶反已返回固定蝶影；离开的位置触发蝶影回响：350 范围 0.40P 伤害与 +2 层。' : '蝶反已返回固定蝶影，恢复 20% 已损生命；蝶影继续保留。';
+      pendingReturn = null;
+      recallButterflies();
+    }
     hero.hp += (1 - hero.hp) * 0.2;
     pulse(hero.x, hero.y, 35, 'green');
   }
+  if (comboReturnAt !== null && time >= comboReturnAt) beginReversal();
+  updateEchoStatus();
   projectiles = projectiles.filter((projectile) => {
     if (time - projectile.start < 0.38) return true;
     const { target, base, marks } = projectile;
@@ -2395,6 +2492,17 @@ function drawScene() {
   context.fillStyle = '#92a58e';
   context.font = '12px "Microsoft YaHei", sans-serif';
   context.fillText('R 演示持续运行，按钮可重复体验。正式冷却见技能图鉴', 25, height - 18);
+  const returnMarker = pendingReturn || echoAnchor;
+  if (returnMarker) {
+    drawFlower(returnMarker.x, returnMarker.y, 25, 0.32);
+    context.save();
+    context.setLineDash([3, 5]);
+    context.strokeStyle = '#b9d1aa99';
+    context.beginPath(); context.arc(returnMarker.x, returnMarker.y, 27, 0, Math.PI * 2); context.stroke();
+    context.fillStyle = '#c8dab8'; context.textAlign = 'center'; context.font = '12px "Microsoft YaHei", sans-serif';
+    context.fillText('蝶影 · 归处', returnMarker.x, returnMarker.y - 38);
+    context.restore();
+  }
   fields.forEach((field) => {
     const radius = fieldRules.radius * scale;
     drawFlower(field.x, field.y, radius, 0.10);
@@ -2559,22 +2667,9 @@ find('auto-q').addEventListener('change', () => {
   find('demo-event').textContent = find('auto-q').checked ? '自动蝶击开启，观察主目标直击与周围领域的叠层差别。' : '自动蝶击已关闭，已有领域会完成剩余脉冲。';
 });
 
-find('demo-W').addEventListener('click', () => {
-  if (hero.phaseUntil || pendingLanding) return;
-  prepareAction();
-  hero.phaseUntil = time + 0.65;
-  pulse(hero.x, hero.y, 36, 'green');
-  find('demo-event').textContent = 'W 化蝶 0.65 秒后返场，恢复 20% 已损生命，五蝶继续巡游。';
-});
-
-find('demo-E').addEventListener('click', () => {
-  if (hero.phaseUntil || pendingLanding) return;
-  prepareAction();
-  const { base } = updateCalculator();
-  pendingLanding = { target: enemies[selectedEnemy], at: time + 0.4, base };
-  pulse(pendingLanding.target.x, pendingLanding.target.y, 50, 'green');
-  find('demo-event').textContent = 'E 锁定落点，按每个敌人自己的蝶印引爆，保留一半层数。';
-});
+find('demo-W').addEventListener('click', beginReversal);
+find('demo-E').addEventListener('click', () => beginLeap(false));
+find('demo-EW').addEventListener('click', () => beginLeap(true));
 
 find('demo-R').addEventListener('click', () => {
   rActive = !rActive;
@@ -2618,7 +2713,13 @@ canvas.addEventListener('click', (event) => {
     return;
   }
   const closest = enemies.reduce((best, enemy) => distance(enemy, position) < distance(best, position) ? enemy : best);
-  if (distance(closest, position) > 35) return;
+  if (distance(closest, position) > 35) {
+    if (hero.phaseUntil || pendingLanding) return;
+    prepareAction();
+    hero.moveTarget = { x: Math.max(20, Math.min(width - 20, position.x)), y: Math.max(20, Math.min(height - 20, position.y)) };
+    find('demo-event').textContent = '正在移动，固定蝶影保持原位。按 W 可返回蝶影，下一次 E 会更新记录。';
+    return;
+  }
   selectedEnemy = closest.id;
   find('demo-event').textContent = `已选择 E / Q 演示目标 ${closest.id + 1}。R 五蝶继续自主索敌。`;
 });
@@ -2628,8 +2729,8 @@ window.requestAnimationFrame(runFrame);
 
 const effectDesigns = {
   Q: { title: '缠蝶 · 逐层绽放', caption: '缠蝶 / 蝶樱领域', description: '一只轻蝶划出弧线，停驻于目标身侧。命中时，脚下的蝶樱领域缓缓盛开。', details: ['直击：细蝶弹道，命中后留下绕身蝶印。', '领域：固定樱纹圆区，每秒向外泛起一层淡粉波纹。', '叠层：以蝶的数量、翼色与樱环呈现印记深度。'] },
-  W: { title: '蝶反 · 樱瓣归身', caption: '蝶反 / 聚散与归来', description: '身体从轮廓开始散成樱瓣与蝶光，短暂隐去，再由花瓣逆向聚合归来。', details: ['消失：花瓣自衣摆向上散开，身影淡出。', '留痕：原地保留微亮返场花印。', '归来：樱瓣回流成形，青白微光沿轮廓散去。'] },
-  E: { title: '踏樱 · 蝶印绽爆', caption: '踏樱 / 落脚花环', description: '落点先亮起樱纹，身影自上空踩落。蝶印汇向脚下，在一瞬间绽出完整花环。', details: ['预兆：落点花纹与一道短促下落光迹。', '引爆：蝶群向内汇聚，樱环向外舒展。', '余韵：花瓣贴地飘散，保留下来的蝶印继续绕身。'] },
+  W: { title: '蝶反 · 樱瓣归身', caption: '蝶反 / 聚散与归来', description: '身体散成樱瓣与蝶光，循固定蝶影聚合；每次踏樱都留下新的出发点，作为下一次蝶反的归处。', details: ['消失：花瓣自衣摆向上散开，身影淡出。', '留痕：唯一蝶影常驻原地，E 起跳时更新，W 返回后继续保留。', '归来：樱瓣回流成形；装备符文后，刚离开的地点绽放蝶影回响。'] },
+  E: { title: '踏樱 · 蝶印绽爆', caption: '踏樱 / 落脚花环', description: '落点先亮起樱纹，身影自上空踩落。蝶印汇向脚下，在一瞬间绽出完整花环。', details: ['预兆：出发点留蝶影，落点花纹与短促下落光迹先行亮起。', '叠印与引爆：落脚先亮起三瓣蝶光，范围 +3 层后蝶群内聚、樱环外舒。', '余韵：花瓣贴地飘散，保留下来的蝶印继续绕身。'] },
   R: { title: '蝶梦 · 五蝶赴阵', caption: '蝶梦 / 五蝶巡游', description: '五只游蝶依次离巢，向敌人散开。每次命中都绽出一小簇樱光，本体隐于蝶梦之中。', details: ['出巢：固定五蝶，依次从肩侧展开。', '巡游：短尾迹描出路径，命中处亮起小花。', '樱隐：本体半透明，青色轮廓保留识别。'] },
   X: { title: '蝶引', caption: '蝶引 / 花开蝶栖', description: '在指定区域唤醒一朵幻樱，连续三次舒展花瓣。花瓣触敌化蝶，停驻身侧，种下蝶印。', details: ['唤花：落点浮现淡粉花苞，细蝶环绕。', '绽放：每隔 0.3 秒舒展一波花瓣，触敌化蝶，每波叠加 2 层。', '蝶栖：三波全部命中共 6 层；花纹随后消散，可接踏樱引爆。'] }
 };
